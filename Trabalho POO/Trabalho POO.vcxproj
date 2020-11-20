@@ -151,7 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Territorio.cpp" />
     <ClCompile Include="Trabalho POO.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Territorio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
