@@ -21,6 +21,7 @@ public:
 	std::string getAsString() const;
 	
 	//getters
+	string getNome()const;
 	int getnProdutos()const;
 	int getnOuro()const;
 	int getpontos()const;

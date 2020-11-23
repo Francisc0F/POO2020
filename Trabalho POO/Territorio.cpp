@@ -19,6 +19,11 @@ Territorio::Territorio(string nome, int resistencia, int nProdutos, int pontos)
 
 
 //getters
+string Territorio::getNome()const {
+	return nome;
+}
+
+
 int Territorio::getnProdutos()const {
 	return nProdutos;
 }

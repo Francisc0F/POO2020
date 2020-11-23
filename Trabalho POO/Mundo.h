@@ -15,8 +15,7 @@ class Territorio;
 
 class Mundo
 {
-	vector<Territorio* > territorios;
-
+	vector<Territorio * > territorios;
 
 public:
 
