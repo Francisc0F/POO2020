@@ -2,11 +2,14 @@
 //
 
 #include <iostream>
+#include <limits>
+#include "menu.h"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
 
+	menu::verMenu();
 
 
 }

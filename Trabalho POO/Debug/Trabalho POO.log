@@ -1,2 +1,2 @@
-﻿  Territorio.cpp
-  Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe
+﻿  menu.cpp
+LINK : fatal error LNK1168: cannot open C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe for writing

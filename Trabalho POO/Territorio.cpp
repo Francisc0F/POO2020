@@ -5,11 +5,10 @@
 using namespace std;
 
 Territorio::Territorio() {
-
 }
 
 Territorio::Territorio(int nome, int resistencia, int nProdutos, int pontos)
-	: nome("nome"), resistencia(0), nProdutos(0), pontos(0) {
+	: nome("Sem nome"), resistencia(0), nProdutos(0), pontos(0) {
 }
 
 
