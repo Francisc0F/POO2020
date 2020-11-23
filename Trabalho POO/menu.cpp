@@ -12,7 +12,7 @@ using namespace std;
 void menu::verMenu() {
 	string cmd;
 	while (1) {
-		cout << "\t\tMENU " <<  endl;
+		cout << "\t\tMENU " << endl;
 		cout << "----------------------------" << endl;
 		cout << "Carrega Territorios ->  carrega <nomeFich>" << endl;
 		cout << "Cria n Territorios ->  cria <tipo> <n>" << endl;
@@ -30,12 +30,37 @@ void menu::verMenu() {
 			back_inserter(comand_tokens));
 
 		vector<string>::iterator ptr;
+
 		// Displaying vector elements using begin() and end() 
-		cout << "The vector elements are : " << endl;
-		for (ptr = comand_tokens.begin(); ptr < comand_tokens.end(); ptr++)
-			cout << "elem: " << *ptr  << endl;
+//		cout << "The vector elements are : " << endl;
+		for (ptr = comand_tokens.begin(); ptr < comand_tokens.end(); ptr++) {
+					//cout << "elem: " << *ptr << endl;
+			if (*ptr == "carrega") {
+				ptr++;
+				if (ptr != comand_tokens.end()) {
+					cout << "ficheiro: " << *ptr << endl;
+					// carregar ficheiro
+				}
+				else {
+					cout << "insira nome do ficheiro." << endl;
+				}
+				break;
+			}
+			else if (*ptr == "cria") {
+				ptr++;
+				if (ptr != comand_tokens.end()) {
+					cout << "numero de territorios: " << *ptr << endl;
+					// cria ptr territorios
+				}
+				else {
+					cout << "insira numero de territorios." << endl;
+				}
+				break;
+			}
+		}
 
 
-		//cout << "comando: " << cmd << endl;
+
+
 	}
 }

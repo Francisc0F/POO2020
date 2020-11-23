@@ -1,0 +1,9 @@
+resistencia nProdutos nOuro nome
+102 720 924 Serra da estrela
+250 180 20 Montanha do ceu
+150 270 34 Cume do evereste
+20 130 20 Terraco do mundo
+150 270 384 Louriceiras de baixo
+230 120 290 Alvorge
+10 260 334 Santo antonio
+220 10 34340 Aire

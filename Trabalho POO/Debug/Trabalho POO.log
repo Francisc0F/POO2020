@@ -1,2 +1,13 @@
 ﻿  menu.cpp
-LINK : fatal error LNK1168: cannot open C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe for writing
+  Mundo.cpp
+  Territorio.cpp
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.h(19,12): error C2061: syntax error: identifier 'string'
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.h(19,12): error C2535: 'Territorio::Territorio(void)': member function already defined or declared
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.h(17): message : see declaration of 'Territorio::Territorio'
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.cpp(17,2): error C2511: 'Territorio::Territorio(std::string,int,int,int)': overloaded member function not found in 'Territorio'
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.h(5): message : see declaration of 'Territorio'
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.cpp(17,62): error C2550: 'Territorio::{ctor}': constructor initializer lists are only allowed on constructor definitions
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.cpp(58,40): error C2511: 'bool Territorio::LerFich(std::string)': overloaded member function not found in 'Territorio'
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.h(5): message : see declaration of 'Territorio'
+  Generating Code...
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(17): error C4716: 'Mundo::pesquisa': must return a value

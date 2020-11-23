@@ -16,7 +16,7 @@ class Territorio
 public:
 	Territorio(); //= delete;
 	
-	Territorio(int nome, int resistencia, int nProdutos, int pontos);
+	Territorio(string nome, int resistencia, int nProdutos, int pontos);
 
 	std::string getAsString() const;
 	
@@ -29,5 +29,9 @@ public:
 	void setnProdutos(int n);
 	void setnOuro(int n);
 	void setpontos(int n);
+
+
+	int LerFich(FILE* fp);
+
 };
 

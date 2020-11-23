@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Territorio.cpp" />
     <ClCompile Include="Trabalho POO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h" />
+    <ClInclude Include="Mundo.h" />
     <ClInclude Include="Territorio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
