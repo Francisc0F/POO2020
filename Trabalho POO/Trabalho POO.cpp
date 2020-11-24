@@ -3,13 +3,43 @@
 
 #include <iostream>
 #include <limits>
-#include "menu.h"
+#include <sstream>
+#include <fstream>
+#include <limits>
+#include <sstream>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <iterator>
+#include "Mundo.h"
+#include "Menu.h"
 using namespace std;
 
 int main()
 {
+	// const string testf = "territorios.txt";
+	Mundo m = Mundo();
+	vector<string> menuValues;
 
-	menu::verMenu();
+	menuOpt opt = Menu::verMenu(menuValues);
+
+	switch (opt)
+	{
+	case menuOpt::CarregaFich:
+		if (m.LerFich(menuValues[0])) {
+			m.listaTerritorios();
+		}
+		else {
+			cout << "erro adiconar locais";
+		}
+		break;
+	case menuOpt::Cria:
+		break;
+	default:
+		break;
+	}
+
+
 
 
 }

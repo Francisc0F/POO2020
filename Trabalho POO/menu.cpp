@@ -1,17 +1,23 @@
-#include "menu.h"
 #include <iostream>
 #include <limits>
 #include <sstream>
 #include <string>
 #include <algorithm>
-#include <string>
 #include <vector>
 #include <iterator>
+#include "menu.h"
 using namespace std;
 
-void menu::verMenu() {
+Menu::Menu() {
+
+}
+
+
+menuOpt Menu::verMenu(vector<string>& values) {
+	values.clear();
+
 	string cmd;
-	while (1) {
+	while (true) {
 		cout << "\t\tMENU " << endl;
 		cout << "----------------------------" << endl;
 		cout << "Carrega Territorios ->  carrega <nomeFich>" << endl;
@@ -32,14 +38,15 @@ void menu::verMenu() {
 		vector<string>::iterator ptr;
 
 		// Displaying vector elements using begin() and end() 
-//		cout << "The vector elements are : " << endl;
+		//	cout << "The vector elements are : " << endl;
 		for (ptr = comand_tokens.begin(); ptr < comand_tokens.end(); ptr++) {
-					//cout << "elem: " << *ptr << endl;
+			//cout << "elem: " << *ptr << endl;
 			if (*ptr == "carrega") {
 				ptr++;
 				if (ptr != comand_tokens.end()) {
 					cout << "ficheiro: " << *ptr << endl;
-					// carregar ficheiro
+					values.push_back(*ptr);
+					return menuOpt::CarregaFich;
 				}
 				else {
 					cout << "insira nome do ficheiro." << endl;
@@ -50,7 +57,8 @@ void menu::verMenu() {
 				ptr++;
 				if (ptr != comand_tokens.end()) {
 					cout << "numero de territorios: " << *ptr << endl;
-					// cria ptr territorios
+					// cria n territorios
+					return menuOpt::Cria;
 				}
 				else {
 					cout << "insira numero de territorios." << endl;

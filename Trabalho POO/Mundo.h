@@ -21,11 +21,17 @@ public:
 
 	Mundo();
 
+	void listaTerritorios();
+
 	bool adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 
-	int pesquisa(string nome);
+	int pesquisaTerritorio(string nome);
+
+	bool LerFich(string nomef);
 
 	~Mundo();
+
+
 
 };
 

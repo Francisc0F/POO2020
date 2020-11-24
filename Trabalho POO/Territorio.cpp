@@ -1,14 +1,13 @@
-#include "Territorio.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <limits>
 #include <sstream>
 #include <algorithm>
-#include <string>
 #include <vector>
 #include <iterator>
-using namespace std;
+#include "Territorio.h"
+
 
 Territorio::Territorio() {
 }
@@ -19,6 +18,15 @@ Territorio::Territorio(string nome, int resistencia, int nProdutos, int pontos)
 
 
 //getters
+string Territorio::getAsString() const {
+	ostringstream oss;
+	oss << " nome: " << nome
+		<< "; resistencia: " << resistencia
+		<< "; nProdutos: " << nProdutos << endl;
+	return oss.str();
+}
+
+
 string Territorio::getNome()const {
 	return nome;
 }
@@ -42,7 +50,6 @@ void Territorio::setnProdutos(int n) {
 	nProdutos = n;
 }
 
-
 void Territorio::setnOuro(int  n) {
 	nOuro = n;
 }
@@ -52,39 +59,6 @@ void Territorio::setpontos(int  n) {
 }
 
 
-string Territorio::getAsString() const {
-	ostringstream oss;
-	oss << " nome: " << nome
-		<< "; resistencia: " << resistencia
-		<< "; nProdutos: " << nProdutos << endl;
-	return oss.str();
-}
 
-bool Territorio::LerFich(string nomef) {
-
-	ifstream dados(nomef);
-	string line;
-
-	string nome, s;
-	int resistencia, nProdutos, nOuro, pontos;
-	// apanhar primeira linha 
-	getline(dados, line);
-
-	while (!dados.eof()) {
-
-		getline(dados, line);
-
-		istringstream iss(s);
-		iss >> resistencia >> nProdutos >> nOuro;
-		getline(iss, nome);
-
-		if (iss) {
-
-		}
-	}
-	dados.close();
-
-	return true;
-}
 
 

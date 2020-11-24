@@ -2,9 +2,12 @@
 
 #include <string>
 #include <iostream>
+
+using namespace std;
+
 class Territorio
 {
-	std::string nome;
+	string nome;
 	int resistencia;
 	
 	int nProdutos;
@@ -18,13 +21,13 @@ public:
 	
 	Territorio(string nome, int resistencia, int nProdutos, int pontos);
 
-	std::string getAsString() const;
 	
 	//getters
 	string getNome()const;
 	int getnProdutos()const;
 	int getnOuro()const;
 	int getpontos()const;
+	string getAsString() const;
 
 	//setters
 	void setnProdutos(int n);
@@ -32,7 +35,6 @@ public:
 	void setpontos(int n);
 
 
-	int LerFich(FILE* fp);
 
 };
 

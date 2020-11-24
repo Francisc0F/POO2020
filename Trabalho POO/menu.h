@@ -1,12 +1,21 @@
 #pragma once
-class menu
-{	
+
+
+
+enum class menuOpt {
+	CarregaFich = 0,
+	Cria = 1,
+	North = 33,
+	South = 44
+};
+class Menu
+{
 
 
 public:
-	menu();
+	Menu();
 	// comandos
-	void static verMenu();
-		
+	menuOpt static verMenu(vector<string> & values);
+
 };
 
