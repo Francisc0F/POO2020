@@ -31,6 +31,9 @@ public:
 
 	bool LerFich(string nomef);
 
+	//getters
+	vector<Territorio*>& getTerritorios();
+
 	~Mundo();
 
 };

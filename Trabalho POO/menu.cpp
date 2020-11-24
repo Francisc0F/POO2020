@@ -18,11 +18,14 @@ menuOpt Menu::verMenu(vector<string> & values) {
 	string cmd;
 	while (true) {
 		cout << "\t\tMENU " << endl;
-		cout << "----------------------------" << endl;
+		cout << "----------------------------------------------------------------------" << endl;
 		cout << "Carrega Territorios ->  carrega <nomeFich>" << endl;
 		cout << "Cria n Territorios ->  cria <tipo> <n>" << endl;
-		cout << "----------------------------" << endl;
-
+		cout << "Conquista Territorio ->  conquista <nomeTerritorio>" << endl;
+		cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
+		cout << "Sair -> x" << endl;
+		cout << "----------------------------------------------------------------------" << endl;
+		cout << "comando: ";
 		// usar para nao apanhar ultimo '\n'
 		// cin.ignore(numeric_limits<streamsize> ::max(), '\n');
 		getline(cin, cmd);
@@ -43,7 +46,10 @@ menuOpt Menu::verMenu(vector<string> & values) {
 
 		for (ptr = comand_tokens.begin(); ptr < comand_tokens.end(); ptr++) {
 			//cout << "elem: " << *ptr << endl;
-			if (*ptr == "carrega") {
+			if (*ptr == "x") {
+				return menuOpt::Terminar;
+			}
+			else if (*ptr == "carrega") {
 				ptr++;
 				if (ptr != comand_tokens.end()) {
 					//cout << "ficheiro: " << *ptr << endl;
@@ -68,6 +74,28 @@ menuOpt Menu::verMenu(vector<string> & values) {
 				}
 				break;
 			}
+			else if (*ptr == "conquista") {
+				ptr++;
+				ostringstream name;
+				if (ptr == comand_tokens.end()) {
+					cout << "insira nome do territorio." << endl;
+					break;
+				}
+				else {
+					// constroi nome
+					while (ptr != comand_tokens.end()) {
+						name << (*ptr) << " ";
+						ptr++;
+					}
+					// cout << "nome do territorio " << name.str() << endl;
+					values.push_back(name.str().substr(0, name.str().size() - 1));
+					return menuOpt::Conquista;
+				}
+				
+				
+			
+			}
+
 		}
 
 

@@ -6,8 +6,10 @@ using namespace std;
 enum class menuOpt {
 	CarregaFich = 0,
 	Cria = 1,
-	North = 33,
-	South = 44
+	Conquista = 2,
+	Passa = 3,
+	Lista = 4,
+	Terminar
 };
 class Menu
 {

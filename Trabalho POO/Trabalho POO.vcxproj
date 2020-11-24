@@ -151,12 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Imperio.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Territorio.cpp" />
     <ClCompile Include="Trabalho POO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Imperio.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Territorio.h" />

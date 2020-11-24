@@ -1,11 +1,18 @@
 #include "Mundo.h"
 #include "Territorio.h"
 
+using namespace std;
+
 Mundo::Mundo() {
 
 }
 Mundo::~Mundo() {
 
+	//todo delete territorios
+}
+
+vector<Territorio*>& Mundo::getTerritorios() {
+	return territorios;
 }
 
 void Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
@@ -22,7 +29,6 @@ void Mundo::addNTerritorios(int n) {
 
 }
 
-
 int Mundo::pesquisaTerritorio(string nome) {
 
 	for (unsigned int i = 0; i < territorios.size(); i++) {
@@ -32,6 +38,7 @@ int Mundo::pesquisaTerritorio(string nome) {
 	}
 	return -1;
 }
+
 void Mundo::listaTerritorios() {
 
 	vector<Territorio* >::iterator ptr;
@@ -39,6 +46,7 @@ void Mundo::listaTerritorios() {
 		cout << (*ptr)->getAsString() << endl;
 	}
 }
+
 bool Mundo::LerFich(string nomef) {
 
 	ifstream dados(nomef);
@@ -62,6 +70,10 @@ bool Mundo::LerFich(string nomef) {
 		iss >> resistencia >> nProdutos >> nOuro >> pontos;
 		getline(iss, nome);
 
+		// remove inicial space
+		 nome = nome.substr(1, nome.size());
+
+		//cout << "\""<< nome <<"\"" << endl;
 		if (iss) {
 			adicionarTerritorio(nome, resistencia, nProdutos, nOuro, pontos);
 		}
