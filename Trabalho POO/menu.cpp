@@ -3,9 +3,9 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
-#include <vector>
 #include <iterator>
-#include "menu.h"
+#include <vector>
+#include "Menu.h"
 using namespace std;
 
 Menu::Menu() {
@@ -13,9 +13,8 @@ Menu::Menu() {
 }
 
 
-menuOpt Menu::verMenu(vector<string>& values) {
+menuOpt Menu::verMenu(vector<string> & values) {
 	values.clear();
-
 	string cmd;
 	while (true) {
 		cout << "\t\tMENU " << endl;
@@ -39,12 +38,15 @@ menuOpt Menu::verMenu(vector<string>& values) {
 
 		// Displaying vector elements using begin() and end() 
 		//	cout << "The vector elements are : " << endl;
+
+		//menuOpt opt = menuOpt::CarregaFich;
+
 		for (ptr = comand_tokens.begin(); ptr < comand_tokens.end(); ptr++) {
 			//cout << "elem: " << *ptr << endl;
 			if (*ptr == "carrega") {
 				ptr++;
 				if (ptr != comand_tokens.end()) {
-					cout << "ficheiro: " << *ptr << endl;
+					//cout << "ficheiro: " << *ptr << endl;
 					values.push_back(*ptr);
 					return menuOpt::CarregaFich;
 				}

@@ -22,15 +22,11 @@ int main()
 	vector<string> menuValues;
 
 	menuOpt opt = Menu::verMenu(menuValues);
-
 	switch (opt)
 	{
 	case menuOpt::CarregaFich:
 		if (m.LerFich(menuValues[0])) {
 			m.listaTerritorios();
-		}
-		else {
-			cout << "erro adiconar locais";
 		}
 		break;
 	case menuOpt::Cria:
@@ -38,7 +34,6 @@ int main()
 	default:
 		break;
 	}
-
 
 
 

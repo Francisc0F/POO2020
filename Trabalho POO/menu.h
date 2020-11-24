@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include <vector>
+using namespace std;
 
 enum class menuOpt {
 	CarregaFich = 0,

@@ -1,6 +1,6 @@
 resistencia nProdutos nOuro pontos nome
-102 720 924 23123 Serra da estrela
-250 180 20 231123213 Montanha do ceu
+102 720 924 231 Serra da estrela
+250 180 20 2311 Montanha do ceu
 150 270 34 674 Cume do evereste
 20 130 20 4 Terraco do mundo
 150 270 384  4545 Louriceiras de baixo

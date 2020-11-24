@@ -4,6 +4,9 @@
 Mundo::Mundo() {
 
 }
+Mundo::~Mundo() {
+
+}
 
 bool Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	
@@ -29,15 +32,19 @@ void Mundo::listaTerritorios() {
 
 	vector<Territorio* >::iterator ptr;
 	for (ptr = territorios.begin(); ptr < territorios.end(); ptr++) {
-		(*ptr)->getAsString();
+		cout << (*ptr)->getAsString() << endl;
 	}
 }
 bool Mundo::LerFich(string nomef) {
 
 	ifstream dados(nomef);
+	if (!dados.is_open()) {
+		cout << "error: abrir ficheiro" << endl;
+		return false;
+	}
 	string line;
 
-	string nome, s;
+	string nome;
 	int resistencia, nProdutos, nOuro, pontos;
 
 	// apanhar primeira linha 
@@ -47,8 +54,8 @@ bool Mundo::LerFich(string nomef) {
 
 		getline(dados, line);
 
-		istringstream iss(s);
-		iss >> resistencia >> nProdutos >> nOuro;
+		istringstream iss(line);
+		iss >> resistencia >> nProdutos >> nOuro >> pontos;
 		getline(iss, nome);
 
 		if (iss) {
@@ -56,6 +63,10 @@ bool Mundo::LerFich(string nomef) {
 				cout << "error: adicionarTerritorio" << endl;
 				return false;
 			}
+		}
+		else {
+			cout << "error: iss leitura" << endl;
+			return false;
 		}
 	}
 	dados.close();

@@ -159,11 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mundo.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Territorio.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Trabalho POO.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

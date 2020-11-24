@@ -1,8 +1,2 @@
-﻿  Menu.cpp
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\menu.h(18,31): error C2061: syntax error: identifier 'vector'
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(16,47): error C2511: 'menuOpt Menu::verMenu(std::vector<std::string,std::allocator<std::string>> &)': overloaded member function not found in 'Menu'
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\menu.h(11): message : see declaration of 'Menu'
-  Mundo.cpp
-  Trabalho POO.cpp
-  Generating Code...
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(55): error C4700: uninitialized local variable 'pontos' used
+﻿  Trabalho POO.cpp
+  Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

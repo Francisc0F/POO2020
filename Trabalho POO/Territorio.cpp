@@ -12,15 +12,15 @@
 Territorio::Territorio() {
 }
 
-Territorio::Territorio(string nome, int resistencia, int nProdutos, int pontos)
-	: nome("Sem nome"), resistencia(0), nProdutos(0), pontos(0) {
+Territorio::Territorio(string nome = "Sem nome", int resistencia = 0, int nProdutos = 0, int pontos = 0 )
+	: nome(nome), resistencia(resistencia), nProdutos(nProdutos), pontos(pontos) {
 }
 
 
 //getters
 string Territorio::getAsString() const {
 	ostringstream oss;
-	oss << " nome: " << nome
+	oss << "nome: " << nome
 		<< "; resistencia: " << resistencia
 		<< "; nProdutos: " << nProdutos << endl;
 	return oss.str();
