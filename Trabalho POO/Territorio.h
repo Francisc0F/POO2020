@@ -9,7 +9,7 @@ class Territorio
 {
 	string nome;
 	int resistencia;
-	
+
 	int nProdutos;
 	int nOuro;
 	int pontos;
@@ -17,11 +17,10 @@ class Territorio
 	static int numTerr;
 
 public:
-	Territorio(); //= delete;
-	
-	Territorio(string nome, int resistencia, int nProdutos, int pontos);
 
-	
+	Territorio(string nome = "Sem nome", int resistencia = 0, int nProdutos = 0, int nOuro = 0, int pontos = 0);
+
+
 	//getters
 	string getNome()const;
 	int getnProdutos()const;

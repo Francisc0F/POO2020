@@ -22,17 +22,29 @@ int main()
 	vector<string> menuValues;
 
 	menuOpt opt = Menu::verMenu(menuValues);
-	switch (opt)
-	{
-	case menuOpt::CarregaFich:
-		if (m.LerFich(menuValues[0])) {
-			m.listaTerritorios();
+	switch (opt) {
+
+		case menuOpt::CarregaFich: {
+			if (m.LerFich(menuValues[0])) {
+				m.listaTerritorios();
+			}
+			break;
 		}
-		break;
-	case menuOpt::Cria:
-		break;
-	default:
-		break;
+
+		case menuOpt::Cria: {
+			int n = stoi(menuValues[0]);
+			cout << n;
+
+			if (n > 0) {
+				m.addNTerritorios(n);
+				m.listaTerritorios();
+			}
+
+			break;
+		}
+		default: {
+			break;
+		}
 	}
 
 

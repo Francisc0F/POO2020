@@ -23,7 +23,9 @@ public:
 
 	void listaTerritorios();
 
-	bool adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
+	void adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
+	
+	void addNTerritorios(int n);
 
 	int pesquisaTerritorio(string nome);
 

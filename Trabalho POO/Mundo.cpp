@@ -8,14 +8,18 @@ Mundo::~Mundo() {
 
 }
 
-bool Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+void Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	
-	if (pesquisaTerritorio(nome) == -1) {
-		territorios.push_back(new Territorio(nome, resistencia, nProdutos, pontos));
-		return true;
+	territorios.push_back(new Territorio(nome, resistencia, nProdutos, pontos));
+
+}
+
+void Mundo::addNTerritorios(int n) {
+	for ( int i = 0; i < n; i++)
+	{
+		territorios.push_back(new Territorio());
 	}
-		
-	return false;
+
 }
 
 
@@ -59,10 +63,7 @@ bool Mundo::LerFich(string nomef) {
 		getline(iss, nome);
 
 		if (iss) {
-			if (adicionarTerritorio(nome, resistencia, nProdutos, nOuro, pontos) == false) {
-				cout << "error: adicionarTerritorio" << endl;
-				return false;
-			}
+			adicionarTerritorio(nome, resistencia, nProdutos, nOuro, pontos);
 		}
 		else {
 			cout << "error: iss leitura" << endl;

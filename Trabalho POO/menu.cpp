@@ -58,8 +58,9 @@ menuOpt Menu::verMenu(vector<string> & values) {
 			else if (*ptr == "cria") {
 				ptr++;
 				if (ptr != comand_tokens.end()) {
-					cout << "numero de territorios: " << *ptr << endl;
-					// cria n territorios
+					//cout << "numero de territorios: " << *ptr << endl;
+					values.push_back(*ptr);
+					//cout << values[0];
 					return menuOpt::Cria;
 				}
 				else {

@@ -9,11 +9,12 @@
 #include "Territorio.h"
 
 
-Territorio::Territorio() {
-}
 
-Territorio::Territorio(string nome = "Sem nome", int resistencia = 0, int nProdutos = 0, int pontos = 0 )
-	: nome(nome), resistencia(resistencia), nProdutos(nProdutos), pontos(pontos) {
+int Territorio::numTerr = 1;
+
+
+Territorio::Territorio(string nome, int resistencia , int nProdutos, int ouro , int pontos)
+	:nome(nome + to_string(numTerr++)), resistencia(resistencia), nProdutos(nProdutos), nOuro(ouro), pontos(pontos) {
 }
 
 
