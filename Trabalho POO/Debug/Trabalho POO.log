@@ -1,2 +1,4 @@
-﻿  Imperio.cpp
+﻿  Menu.cpp
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(139,32): warning C4101: 'e': unreferenced local variable
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(112): warning C4715: 'Menu::ProcessaComando': not all control paths return a value
   Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

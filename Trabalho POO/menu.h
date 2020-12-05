@@ -1,24 +1,29 @@
 #pragma once
 
 #include <vector>
+#include "Mundo.h"
 using namespace std;
 
 enum class menuOpt {
-	CarregaFich = 0,
-	Cria = 1,
-	Conquista = 2,
-	Passa = 3,
-	Lista = 4,
-	Terminar
+	CarregaComand = 0,
+	CarregaFich,
+	Cria,
+	Conquista,
+	Passa, 
+	Lista, 
+	Terminar,
+	Invalido
 };
 class Menu
 {
-
-
 public:
 	Menu();
 	// comandos
 	menuOpt static verMenu(vector<string> & values);
+
+	menuOpt static ProcessaComando(vector<string>& values, vector<string>& comand_tokens);
+
+	void static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I);
 
 };
 

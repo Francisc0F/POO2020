@@ -1,0 +1,3 @@
+http://www.gnu.org/software/make/manual/make.html
+https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
+https://makefiletutorial.com/

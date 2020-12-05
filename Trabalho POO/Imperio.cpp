@@ -25,7 +25,7 @@ void Imperio::conquistaTerritorio(Territorio * t) {
 		cout << "Territorio \"" << t->getNome() <<  "\" conquistado." << endl;
 	}
 	else {
-		cout << "nao foi possivel conquistar territorio" << endl;
+		cout << "Nao foi possivel conquistar territorio." << endl;
 	}
 	
 }

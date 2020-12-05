@@ -1,5 +1,7 @@
 #include "Mundo.h"
 #include "Territorio.h"
+#include "Menu.h"
+#include "Imperio.h"
 
 using namespace std;
 
@@ -11,7 +13,7 @@ Mundo::~Mundo() {
 	//todo delete territorios
 }
 
-vector<Territorio*>& Mundo::getTerritorios() {
+vector<Territorio*> & Mundo::getTerritorios() {
 	return territorios;
 }
 
@@ -21,10 +23,10 @@ void Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int
 
 }
 
-void Mundo::addNTerritorios(int n) {
+void Mundo::addNTerritorios(int n, string nome) {
 	for ( int i = 0; i < n; i++)
 	{
-		territorios.push_back(new Territorio());
+		territorios.push_back(new Territorio(nome));
 	}
 
 }
@@ -85,4 +87,45 @@ bool Mundo::LerFich(string nomef) {
 	dados.close();
 
 	return true;
+}
+
+bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I) {
+	ifstream dados(nomef);
+	if (!dados.is_open()) {
+		cout << "error abrir ficheiro: " << nomef << endl;
+		return false;
+	}
+	string line;
+	string comando;
+
+	// cria planicie 2
+
+	while (!dados.eof()) {
+
+		getline(dados, line);
+		cout << line << endl;
+
+		istringstream iss(line);
+		vector<string> comand_tokens;
+
+
+		if (line == "") {
+			cout << "error leitura: " << nomef;
+			return false;
+		}
+
+		copy(istream_iterator<string>(iss),
+			istream_iterator<string>(),
+			back_inserter(comand_tokens));
+		vector<string> values;
+		values.clear();
+
+		menuOpt opt =  Menu::ProcessaComando(values, comand_tokens);
+		Menu::ExecutaComando(opt, values, m, I);
+
+	}
+	dados.close();
+
+	return true;
+
 }
