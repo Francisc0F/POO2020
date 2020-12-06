@@ -12,14 +12,13 @@ class Territorio
 
 	int nProdutos;
 	int nOuro;
-	int pontos;
 
+	int pontos;
 	static int numTerr;
 
 public:
 
 	Territorio(string nome = "Sem nome", int resistencia = 0, int nProdutos = 0, int nOuro = 0, int pontos = 0);
-
 
 	//getters
 	string getNome()const;

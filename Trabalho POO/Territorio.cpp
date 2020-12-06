@@ -10,11 +10,20 @@
 
 
 
-int Territorio::numTerr = 1;
+int Territorio::numTerr = 0;
 
 
-Territorio::Territorio(string nome, int resistencia , int nProdutos, int ouro , int pontos)
-	:nome(nome + to_string(numTerr++)), resistencia(resistencia), nProdutos(nProdutos), nOuro(ouro), pontos(pontos) {
+Territorio::Territorio(string nomeT, int resistencia , int nProdutos, int ouro , int pontos)
+	:resistencia(resistencia), nProdutos(nProdutos), nOuro(ouro), pontos(pontos) {
+	ostringstream oss;
+	if (numTerr > 0) {
+		oss << nomeT << numTerr;
+	}
+	else {
+		oss << nomeT;
+	}
+	nome = oss.str();
+	numTerr++;
 }
 
 
@@ -45,6 +54,8 @@ int Territorio::getnOuro()const {
 int Territorio::getpontos()const {
 	return pontos;
 }
+
+
 
 //setters
 void Territorio::setnProdutos(int n) {

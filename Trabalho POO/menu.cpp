@@ -111,7 +111,7 @@ menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_
 
 }
 
-void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I) {
+void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, int * turno) {
 
 	switch (opt) {
 
@@ -153,6 +153,10 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		int index = m.pesquisaTerritorio(menuValues[0]);
 		if (index > -1) {
 			I.conquistaTerritorio(m.getTerritorios()[index]);
+			if (turno != nullptr) {
+				(*turno)++;
+			}
+			
 		}
 		else {
 			cout << "error case menuOpt::Conquista: nao encontrou territorio com esse nome" << endl;
@@ -163,6 +167,8 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 	case menuOpt::Lista: {
 		if (menuValues.empty()) {
 			m.listaTerritorios();
+			cout << "\t\t Imperio " << endl;
+			I.listaConquistados();
 		}
 		else {
 			int index = m.pesquisaTerritorio(menuValues[0]);
@@ -178,21 +184,24 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		break;
 	}
 	case menuOpt::Passa: {
-
+		if (turno != nullptr) {
+			(*turno)++;
+		}
 		break;
 	}
 	default: {
+		
 		break;
 	}
 	}
 }
 
 
-menuOpt Menu::verMenu(vector<string> & values) {
+menuOpt Menu::verMenu(vector<string> & values, int  turno) {
 	values.clear();
 	string cmd;
 		cout << "\t\tMENU " << endl;
-		cout << "----------------------------------------------------------------------" << endl;
+		cout << "--------------------  Turno " << turno << "  -------------------------" << endl;
 		cout << "Carrega Ficheiro com Comandos ->  carrega <nomeFich>" << endl;
 		cout << "Carrega Territorios diretamente de ficheiro ->  carregaT <nomeFich>" << endl;
 		cout << "Cria n Territorios ->  cria <tipo> <n>" << endl;
@@ -204,6 +213,7 @@ menuOpt Menu::verMenu(vector<string> & values) {
 
 		// usar para nao apanhar ultimo '\n'
 		// cin.ignore(numeric_limits<streamsize> ::max(), '\n');
+
 		getline(cin, cmd);
 
 		vector<string> comand_tokens;
@@ -215,8 +225,6 @@ menuOpt Menu::verMenu(vector<string> & values) {
 
 		vector<string>::iterator ptr;
 
-		// Displaying vector elements using begin() and end() 
-		//	cout << "The vector elements are : " << endl;
 
 		return Menu::ProcessaComando(values, comand_tokens);
 			

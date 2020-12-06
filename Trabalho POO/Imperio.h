@@ -23,11 +23,13 @@ class Imperio
 	vector<Territorio *> conquistados;
 
 public:
-	Imperio();
+	Imperio(Territorio*);
 
 	void conquistaTerritorio(Territorio * t);
 
-	int pesquisaTerritorio(string nome);
+	void listaConquistados();
+
+	int pesquisaTerritorio(string nome)const;
 
 	~Imperio();
 };

@@ -19,11 +19,11 @@ class Menu
 public:
 	Menu();
 	// comandos
-	menuOpt static verMenu(vector<string> & values);
+	menuOpt static verMenu(vector<string> & values, int turno);
 
 	menuOpt static ProcessaComando(vector<string>& values, vector<string>& comand_tokens);
 
-	void static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I);
+	void static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, int * turno);
 
 };
 

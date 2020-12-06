@@ -9,12 +9,20 @@ Mundo::Mundo() {
 
 }
 Mundo::~Mundo() {
-
-	//todo delete territorios
+	for (int i = 0; i < territorios.size(); i++)
+	{
+		delete territorios[i];
+	}
+	territorios.clear();
 }
 
 vector<Territorio*> & Mundo::getTerritorios() {
 	return territorios;
+}
+
+void Mundo::adicionarTerritorio(Territorio* t) {
+
+	territorios.push_back(t);
 }
 
 void Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
@@ -44,6 +52,10 @@ int Mundo::pesquisaTerritorio(string nome) {
 void Mundo::listaTerritorios() {
 
 	vector<Territorio* >::iterator ptr;
+	if (territorios.size() == 0) {
+		cout << "Nao ha territorios no Mundo." << endl;
+		return;
+	}
 	for (ptr = territorios.begin(); ptr < territorios.end(); ptr++) {
 		cout << (*ptr)->getAsString() << endl;
 	}
@@ -121,7 +133,7 @@ bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I) {
 		values.clear();
 
 		menuOpt opt =  Menu::ProcessaComando(values, comand_tokens);
-		Menu::ExecutaComando(opt, values, m, I);
+		Menu::ExecutaComando(opt, values, m, I, nullptr);
 
 	}
 	dados.close();

@@ -5,11 +5,23 @@ using namespace std;
 
 int Imperio::turnos = 1;
 
-Imperio::Imperio() {
-
+Imperio::Imperio( Territorio * inicial) {
+	conquistados.push_back(inicial);
 }
 
-int Imperio::pesquisaTerritorio(string nome) {
+void Imperio::listaConquistados()  {
+	vector<Territorio* >::iterator ptr;
+	ptr = conquistados.begin();
+	if (conquistados.empty()) {
+		cout << "Ainda nao foram conquistados Territorios." << endl;
+		return;
+	}
+	for (ptr = conquistados.begin(); ptr < conquistados.end(); ptr++) {
+		cout << (*ptr)->getAsString() << endl;
+	}
+}
+
+int Imperio::pesquisaTerritorio(string nome)const {
 
 	for (unsigned int i = 0; i < conquistados.size(); i++) {
 		if (conquistados[i]->getNome() == nome) {
@@ -25,14 +37,13 @@ void Imperio::conquistaTerritorio(Territorio * t) {
 		cout << "Territorio \"" << t->getNome() <<  "\" conquistado." << endl;
 	}
 	else {
-		cout << "Nao foi possivel conquistar territorio." << endl;
+		cout << "Este territorio ja foi conquistado." << endl;
 	}
-	
 }
 
 
 Imperio::~Imperio() {
-
+	conquistados.clear();
 }
 
 

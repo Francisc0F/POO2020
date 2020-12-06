@@ -24,6 +24,8 @@ public:
 
 	void listaTerritorios();
 
+	void adicionarTerritorio(Territorio* t);
+
 	void adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 	
 	void addNTerritorios(int n, string nome);

@@ -13,26 +13,41 @@
 #include <iterator>
 #include "Mundo.h"
 #include "Menu.h"
+#include "Territorio.h"
 #include "Imperio.h"
 using namespace std;
 
 int main()
 {
 	// const string testf = "territorios.txt";
+
 	Mundo m = Mundo();
-	Imperio I = Imperio();
+
+	Territorio* inicial = new Territorio("Pais", 9, 1, 1, 0);
+	m.adicionarTerritorio(inicial);
+
+	Imperio I = Imperio(inicial);
+		
+	
+
+	int turno = 0;
 
 	vector<string> menuValues;
 	
 
 
 	while (1) {
-		menuOpt opt = Menu::verMenu(menuValues);
+		menuOpt opt = Menu::verMenu(menuValues, turno);
 		if (opt == menuOpt::Terminar) {
 			break;
 		}
+		/*if (opt == menuOpt::Invalido) {
+			cout << "apagar territorios" << endl;
+			m.~Mundo();
+			I.~Imperio();
+		}*/
 		if (opt != menuOpt::Invalido) {
-			Menu::ExecutaComando(opt, menuValues, m, I);
+			Menu::ExecutaComando(opt, menuValues, m, I, &turno);
 		}
 	}
 	
