@@ -16,7 +16,7 @@ class Imperio
 {
 	int armazem,capacidadeMaxArmazem;
 	int cofre, capacidadeMaxCofre;
-	int exercito, capacidadeMaxExercito;
+	int forcaMilitar, capacidadeForcaMilitar;
 
 	static int turnos;
 

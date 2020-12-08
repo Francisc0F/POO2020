@@ -1,2 +1,0 @@
-cria Planície 2
-cria Mina 2

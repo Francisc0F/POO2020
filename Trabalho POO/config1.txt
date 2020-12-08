@@ -1,2 +1,0 @@
-carrega config2.txt
-carrega config3.txt

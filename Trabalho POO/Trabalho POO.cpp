@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <time.h>
 #include <limits>
 #include <sstream>
 #include <fstream>
@@ -15,11 +16,17 @@
 #include "Menu.h"
 #include "Territorio.h"
 #include "Imperio.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctime>
+
 using namespace std;
 
-int main()
-{
-	// const string testf = "territorios.txt";
+int main(){
+
+	srand((unsigned)time(0));
+
+
 
 	Mundo m = Mundo();
 

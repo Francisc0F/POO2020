@@ -1,6 +1,0 @@
-cria Planície 1
-cria Mina 43
-cria Montanha 20
-cria Castelo 20
-cria Fortaleza 12
-cria Duna 23

@@ -5,7 +5,8 @@ using namespace std;
 
 int Imperio::turnos = 1;
 
-Imperio::Imperio( Territorio * inicial) {
+Imperio::Imperio( Territorio * inicial)
+	:armazem(0), cofre(0), forcaMilitar(0){
 	conquistados.push_back(inicial);
 }
 
@@ -32,12 +33,24 @@ int Imperio::pesquisaTerritorio(string nome)const {
 }
 
 void Imperio::conquistaTerritorio(Territorio * t) {
-	if (pesquisaTerritorio(t->getNome()) == -1) {
+
+	if (pesquisaTerritorio(t->getNome()) > -1) {
+		cout << "Este territorio ja foi conquistado." << endl;
+		return;
+	}
+
+	int resistencia  = (rand() % 6) + 1;
+	
+	if (forcaMilitar + resistencia > t->getResistencia()) {
 		conquistados.push_back(t);
-		cout << "Territorio \"" << t->getNome() <<  "\" conquistado." << endl;
+		cout << "Territorio \"" << t->getNome() << "\" conquistado." << endl;
 	}
 	else {
-		cout << "Este territorio ja foi conquistado." << endl;
+		cout << "Territorio deu muita luta. Nao foi possivel vencer." << endl;
+
+		if (forcaMilitar > 0) {
+			forcaMilitar--;
+		}
 	}
 }
 
