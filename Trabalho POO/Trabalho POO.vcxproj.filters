@@ -30,6 +30,9 @@
     <ClCompile Include="Imperio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Armazem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Imperio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Armazem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

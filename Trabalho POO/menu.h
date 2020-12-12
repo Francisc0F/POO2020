@@ -12,6 +12,9 @@ enum class menuOpt {
 	Passa, 
 	Lista, 
 	Terminar,
+	MaisProd,
+	MaisOuro,
+	MaisMilitar,
 	Invalido
 };
 class Menu

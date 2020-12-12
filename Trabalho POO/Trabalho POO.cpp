@@ -12,13 +12,13 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include "Armazem.h"
 #include "Mundo.h"
 #include "Menu.h"
 #include "Territorio.h"
 #include "Imperio.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <ctime>
+
 
 using namespace std;
 
@@ -32,16 +32,15 @@ int main(){
 
 	Territorio* inicial = new Territorio("Pais", 9, 1, 1, 0);
 	m.adicionarTerritorio(inicial);
-
-	Imperio I = Imperio(inicial);
-		
 	
-
+	Armazem cofre = Armazem(0);
+	Armazem produtos = Armazem(0);
+	Imperio I = Imperio(inicial, produtos, cofre);
+	
 	int turno = 0;
 
 	vector<string> menuValues;
 	
-
 
 	while (1) {
 		menuOpt opt = Menu::verMenu(menuValues, turno);

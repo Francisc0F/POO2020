@@ -5,9 +5,27 @@ using namespace std;
 
 int Imperio::turnos = 1;
 
-Imperio::Imperio( Territorio * inicial)
-	:armazem(0), cofre(0), forcaMilitar(0){
+Imperio::Imperio( Territorio * inicial, Armazem & Produtos, Armazem & Ouro)
+: Produtos(Produtos), Cofre(Ouro){
 	conquistados.push_back(inicial);
+}
+
+void Imperio::mostraRecursos()const {
+	cout << "\t\t Recursos Materiais" << endl;
+	cout << "Produtos " << endl;
+	cout << Produtos.info();
+	cout << "Cofre " << endl;
+	cout << Cofre.info();
+}
+
+
+
+Armazem& Imperio::getProdutos(){
+	return Produtos;
+}
+
+Armazem& Imperio::getCofre() {
+	return Cofre;
 }
 
 void Imperio::listaConquistados()  {
@@ -53,6 +71,25 @@ void Imperio::conquistaTerritorio(Territorio * t) {
 		}
 	}
 }
+
+bool Imperio::maisOuro() {
+	if (Produtos.getQuantidadeAtual() >= 2) {
+		Produtos.rem(2);
+		Cofre.add(1);
+		return true;
+	}
+	return false;
+}
+
+bool Imperio::maisProdutos() {
+	if (Produtos.getQuantidadeAtual() >= 2) {
+		Cofre.rem(2);
+		Produtos.add(1);
+		return true;
+	}
+	return false;
+}
+
 
 
 Imperio::~Imperio() {

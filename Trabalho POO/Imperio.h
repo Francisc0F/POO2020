@@ -8,14 +8,16 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include "Armazem.h"
 using namespace std;
 
 class Territorio;
 
 class Imperio
 {
-	int armazem,capacidadeMaxArmazem;
-	int cofre, capacidadeMaxCofre;
+	Armazem Produtos;
+	Armazem Cofre;
+
 	int forcaMilitar, capacidadeForcaMilitar;
 
 	static int turnos;
@@ -23,13 +25,23 @@ class Imperio
 	vector<Territorio *> conquistados;
 
 public:
-	Imperio(Territorio*);
+	Imperio(Territorio*, Armazem& Produtos, Armazem& Ouro);
+
+	Armazem& getProdutos();
+
+	Armazem& getCofre();
 
 	void conquistaTerritorio(Territorio * t);
 
 	void listaConquistados();
 
 	int pesquisaTerritorio(string nome)const;
+
+	void mostraRecursos()const;
+
+	bool maisOuro();
+	
+	bool maisProdutos();
 
 	~Imperio();
 };

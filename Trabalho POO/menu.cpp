@@ -102,6 +102,15 @@ menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_
 				return menuOpt::Lista;
 			}
 		}
+		else if (*ptr == "maisprod") {
+			return menuOpt::MaisProd;
+		}
+		else if (*ptr == "maisouro") {
+			return menuOpt::MaisOuro;
+		}
+		else if (*ptr == "maismilitar") {
+			return menuOpt::MaisMilitar;
+		}
 		else {
 			cout << "Comando Invalido." << endl;
 			return menuOpt::Invalido;
@@ -168,6 +177,7 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		if (menuValues.empty()) {
 			m.listaTerritorios();
 			cout << "\t\t Imperio " << endl;
+			I.mostraRecursos();
 			I.listaConquistados();
 		}
 		else {
@@ -183,12 +193,35 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		
 		break;
 	}
+	
 	case menuOpt::Passa: {
 		if (turno != nullptr) {
 			(*turno)++;
 		}
 		break;
+	
 	}
+	
+	case menuOpt::MaisOuro: {
+		if (I.maisOuro()) {
+			cout << "troca feita. Produtos -> " << I.getCofre().getQuantidadeAtual() << endl;
+		}
+		else {
+			cout << "Sem recursos para fazer troca." << endl;
+		}
+		break;
+	}
+
+	case menuOpt::MaisProd: {
+		if (I.maisProdutos()) {
+			cout << "troca feita. Produtos -> " << I.getProdutos().getQuantidadeAtual() << endl;
+		}
+		else {
+			cout << "Sem recursos para fazer troca." << endl;
+		}
+		break;
+	}
+		
 	default: {
 		
 		break;
@@ -204,8 +237,27 @@ menuOpt Menu::verMenu(vector<string> & values, int  turno) {
 		cout << "--------------------  Turno " << turno << "  -------------------------" << endl;
 		cout << "Carrega Ficheiro com Comandos ->  carrega <nomeFich>" << endl;
 		cout << "Carrega Territorios diretamente de ficheiro ->  carregaT <nomeFich>" << endl;
+		
 		cout << "Cria n Territorios ->  cria <tipo> <n>" << endl;
 		cout << "Conquista Territorio ->  conquista <nomeTerritorio>" << endl;
+		cout << "Passar turno ->  passa" << endl;
+
+		// adicionar recursos
+		cout << "Obter mais produtos ->  maisprod" << endl;
+		cout << "Obter mais ouro ->  maisouro" << endl;
+		cout << "Comprar unidade militar ->  maismilitar" << endl;
+		
+		cout << "Adquirir tipo de Tecnologia ->  adquire <tipo>" << endl;
+		
+		cout << "Terminar fase de comandos ->  avanca" << endl;
+		
+		// estado de jogo
+		cout << "Gravar estado de jogo -> grava <nome>" << endl;
+		cout << "Retomar gravacao -> ativa <nome>" << endl;
+		cout << "Apagar gravacao -> apaga <nome>" << endl;
+
+
+
 		cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
 		cout << "Sair -> x" << endl;
 		cout << "----------------------------------------------------------------------" << endl;
