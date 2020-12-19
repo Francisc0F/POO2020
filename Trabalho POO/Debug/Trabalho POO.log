@@ -1,4 +1,6 @@
-﻿  Armazem.cpp
-  Trabalho POO.cpp
+﻿  Mundo.cpp
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(12,20): warning C4018: '<': signed/unsigned mismatch
+  Territorio.cpp
   Generating Code...
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Territorio.cpp(119): warning C4715: 'Territorio::mapper': not all control paths return a value
   Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

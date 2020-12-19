@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -151,19 +151,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="Armazem.cpp" />
+    <ClCompile Include="Castelo.cpp" />
+    <ClCompile Include="Continente.cpp" />
+    <ClCompile Include="Duna.cpp" />
+    <ClCompile Include="Fortaleza.cpp" />
+    <ClCompile Include="Ilha.cpp" />
     <ClCompile Include="Imperio.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Militar.cpp" />
+    <ClCompile Include="Mina.cpp" />
+    <ClCompile Include="Montanha.cpp" />
     <ClCompile Include="Mundo.cpp" />
+    <ClCompile Include="Planicie.cpp" />
     <ClCompile Include="Territorio.cpp" />
+    <ClCompile Include="TerritorioInicial.cpp" />
     <ClCompile Include="Trabalho POO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
     <ClInclude Include="Armazem.h" />
+    <ClInclude Include="Castelo.h" />
+    <ClInclude Include="Continente.h" />
+    <ClInclude Include="Duna.h" />
+    <ClInclude Include="Fortaleza.h" />
+    <ClInclude Include="Ilha.h" />
     <ClInclude Include="Imperio.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Militar.h" />
+    <ClInclude Include="Mina.h" />
+    <ClInclude Include="Montanha.h" />
     <ClInclude Include="Mundo.h" />
+    <ClInclude Include="Planicie.h" />
     <ClInclude Include="Territorio.h" />
+    <ClInclude Include="TerritorioInicial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

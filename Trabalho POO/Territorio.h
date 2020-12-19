@@ -5,8 +5,24 @@
 
 using namespace std;
 
+enum class tipoTerritorio {
+	Planicie,
+	Montanha,
+	Fortaleza,
+	Mina,
+	Duna,
+	Castelo,
+
+	Refugio,
+	Pescaria,
+
+	Invalido
+};
+
+
 class Territorio
 {
+protected :
 	string nome;
 	int resistencia;
 
@@ -18,7 +34,7 @@ class Territorio
 
 public:
 
-	Territorio(string nome = "Sem nome", int resistencia = ((rand() % 6) + 1), int nProdutos = 0, int nOuro = 0, int pontos = 0);
+	//Territorio(string nome = "Sem nome", int resistencia = ((rand() % 6) + 1), int nProdutos = 0, int nOuro = 0, int pontos = 0);
 
 	//getters
 	string getNome()const;
@@ -34,7 +50,8 @@ public:
 	void setnOuro(int n);
 	void setpontos(int n);
 
+	static Territorio* mapper(tipoTerritorio t);
 
-
+	static tipoTerritorio  validaTipoTerritorio(string tipo);
 };
 

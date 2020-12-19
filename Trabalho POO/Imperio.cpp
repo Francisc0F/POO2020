@@ -5,6 +5,9 @@ using namespace std;
 
 int Imperio::turnos = 1;
 
+Imperio::Imperio() {
+}
+
 Imperio::Imperio( Territorio * inicial, Armazem & Produtos, Armazem & Ouro)
 : Produtos(Produtos), Cofre(Ouro){
 	conquistados.push_back(inicial);

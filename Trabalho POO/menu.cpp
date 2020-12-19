@@ -15,6 +15,10 @@ Menu::Menu() {
 
 }
 
+
+
+
+
 menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_tokens) {
 	vector<string>::iterator ptr;
 
@@ -49,6 +53,7 @@ menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_
 		}
 		else if (*ptr == "cria") {
 			ptr++;
+						
 			if (ptr != comand_tokens.end()) {
 				values.push_back(*ptr);
 				ptr++;
@@ -131,15 +136,15 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		break;
 	}
 
-	case menuOpt::CarregaFich: {
+	/*case menuOpt::CarregaFich: {
 		if (m.LerFich(menuValues[0])) {
 			m.listaTerritorios();
 		}
 		break;
-	}
+	}*/
 
 	case menuOpt::Cria: {
-		string nome = menuValues[0];
+		string tipo = menuValues[0];
 		int n;
 		try { 
 			n = stoi(menuValues[1]);
@@ -151,8 +156,14 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 			break;
 		}
 
+		tipoTerritorio t = Territorio::validaTipoTerritorio(tipo);
+		if (t == tipoTerritorio::Invalido) {
+			cout << "tipo Invalido" << endl;
+			break;
+		}
+
 		if (n > 0) {
-			m.addNTerritorios(n, nome);
+			m.addNTerritorios(n, t);
 			//m.listaTerritorios();
 		}
 		break;
@@ -228,7 +239,6 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 	}
 	}
 }
-
 
 menuOpt Menu::verMenu(vector<string> & values, int  turno) {
 	values.clear();

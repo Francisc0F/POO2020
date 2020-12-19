@@ -9,6 +9,7 @@
 #include <vector>
 #include <iterator>
 #include "Imperio.h"
+#include "Territorio.h"
 
 using namespace std;
 
@@ -26,9 +27,9 @@ public:
 
 	void adicionarTerritorio(Territorio* t);
 
-	void adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
+	//void adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 	
-	void addNTerritorios(int n, string nome);
+	void addNTerritorios(int n, tipoTerritorio nome);
 
 	int pesquisaTerritorio(string nome);
 

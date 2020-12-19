@@ -7,24 +7,18 @@
 #include <vector>
 #include <iterator>
 #include "Territorio.h"
+#include "Planicie.h"
+#include "Montanha.h"
+#include "Fortaleza.h"
+#include "Duna.h"
+#include "Mina.h"
+#include "Castelo.h"
 
 
 
-int Territorio::numTerr = 0;
+// int Territorio::numTerr = 0;
 
 
-Territorio::Territorio(string nomeT, int resistencia, int nProdutos, int ouro , int pontos)
-	:resistencia(resistencia), nProdutos(nProdutos), nOuro(ouro), pontos(pontos) {
-	ostringstream oss;
-	if (numTerr > 0) {
-		oss << nomeT << numTerr;
-	}
-	else {
-		oss << nomeT;
-	}
-	nome = oss.str();
-	numTerr++;
-}
 
 
 //getters
@@ -83,3 +77,68 @@ void Territorio::setpontos(int  n) {
 
 
 
+Territorio* Territorio::mapper(tipoTerritorio t) {
+	switch (t)
+	{
+	case tipoTerritorio::Planicie: {
+		return new Planicie();
+		break;
+	}
+
+	case tipoTerritorio::Montanha: {
+		return new Montanha();
+		break;
+	}
+	case tipoTerritorio::Fortaleza: {
+		return new Fortaleza();
+		break;
+	}
+	case tipoTerritorio::Mina: {
+		return new Mina();
+		break;
+	}
+	case tipoTerritorio::Duna: {
+		return new Duna();
+		break;
+	}
+	case tipoTerritorio::Castelo: {
+		return new Castelo();
+		break;
+	}
+								//case tipoTerritorio::Refugio: {
+								//	return new Refugio();
+								//	break;
+								//}
+								//case tipoTerritorio::Pescaria: {
+								//	return new Pescaria();
+								//	break;
+								//}
+	default:
+		break;
+	}
+}
+
+
+tipoTerritorio Territorio::validaTipoTerritorio(string tipo) {
+	if (tipo == "Planície") {
+		return tipoTerritorio::Planicie;
+	}
+	else if (tipo == "Montanha") {
+		return tipoTerritorio::Montanha;
+	}
+	else if (tipo == "Fortaleza") {
+		return tipoTerritorio::Fortaleza;
+	}
+	else if (tipo == "Mina") {
+		return tipoTerritorio::Mina;
+	}
+	else if (tipo == "Duna") {
+		return tipoTerritorio::Duna;
+	}
+	else if (tipo == "Castelo") {
+		return tipoTerritorio::Castelo;
+	}
+	else {
+		return tipoTerritorio::Invalido;
+	}
+}

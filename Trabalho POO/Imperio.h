@@ -25,6 +25,9 @@ class Imperio
 	vector<Territorio *> conquistados;
 
 public:
+
+	Imperio();
+
 	Imperio(Territorio*, Armazem& Produtos, Armazem& Ouro);
 
 	Armazem& getProdutos();

@@ -33,6 +33,39 @@
     <ClCompile Include="Armazem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Militar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritorioInicial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Continente.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ilha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Planicie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Montanha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fortaleza.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mina.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Duna.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Castelo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -48,6 +81,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Armazem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Militar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritorioInicial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Continente.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ilha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Planicie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Montanha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fortaleza.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mina.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Duna.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Castelo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
