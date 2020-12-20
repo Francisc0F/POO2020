@@ -93,8 +93,14 @@ bool Imperio::maisProdutos() {
 	return false;
 }
 
-
 void Imperio::RecolherRecursos() {
+
+	for (size_t i = 0; i < conquistados.size(); i++)
+	{
+		Produtos.add(conquistados[i]->getnOuro());
+		Cofre.add(conquistados[i]->getnOuro());
+
+	}
 
 }
 

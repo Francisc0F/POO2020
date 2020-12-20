@@ -15,18 +15,31 @@ enum class menuOpt {
 	MaisProd,
 	MaisOuro,
 	MaisMilitar,
+	Avancar,
 	Invalido
 };
+
+enum class faseTurno {
+	Config,
+	Conquistar,
+	Recolha,
+	Comprar,
+	Eventos
+};
+
 class Menu
 {
 public:
 	Menu();
 	// comandos
-	menuOpt static verMenu(vector<string> & values, int turno);
+	menuOpt static RecebeComandosJogo(vector<string> & values, faseTurno fase,  int turno);
 
-	menuOpt static ProcessaComando(vector<string>& values, vector<string>& comand_tokens);
+	menuOpt static ProcessaComando(vector<string>& values, faseTurno fase, vector<string>& comand_tokens);
 
 	void static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, int * turno);
 
+	menuOpt static ComandosConfig(vector<string>& values);
+
+	bool static isDebugComand(menuOpt cmd);
 };
 

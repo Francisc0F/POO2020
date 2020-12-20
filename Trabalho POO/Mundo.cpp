@@ -133,7 +133,7 @@ bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I) {
 		vector<string> values;
 		values.clear();
 
-		menuOpt opt =  Menu::ProcessaComando(values, comand_tokens);
+		menuOpt opt =  Menu::ProcessaComando(values, faseTurno::Config,  comand_tokens);
 		Menu::ExecutaComando(opt, values, m, I, nullptr);
 
 	}

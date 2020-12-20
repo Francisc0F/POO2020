@@ -5,6 +5,7 @@
 #include <time.h>
 #include <limits>
 #include <sstream>
+#include <ctime>
 #include <fstream>
 #include <limits>
 #include <sstream>
@@ -18,15 +19,16 @@
 #include "Territorio.h"
 #include "Imperio.h"
 #include "App.h"
-#include <ctime>
+
 
 
 using namespace std;
 
 int main(){
 	App jogo = App();
-	jogo.test("config3.txt");
-	jogo.MostraMenu();
+	jogo.Carrega("config3.txt");
+	jogo.ConfigMundo();
+	jogo.Jogo();
 
 
 }

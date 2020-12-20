@@ -7,6 +7,7 @@
 class App
 {
 	static int turnos;
+	faseTurno faseAtual;
 	Menu menu;
 	Mundo mundo;
 	Imperio imperio;
@@ -16,10 +17,14 @@ public :
 
 	App(Mundo& m, Imperio& I, Menu & menu);
 
-	void MostraMenu();
+	void Jogo();
 
-	void FaseRecolha();
+	menuOpt FaseRecolha(vector<string>& values, int  turno);
 
-	void test(string fich);
+	void RecolherRecursoDoImperio();
+
+	void ConfigMundo();
+
+	void Carrega(string fich);
 };
 

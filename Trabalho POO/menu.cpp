@@ -15,11 +15,7 @@ Menu::Menu() {
 
 }
 
-
-
-
-
-menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_tokens) {
+menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<string>& comand_tokens) {
 	vector<string>::iterator ptr;
 
 	for (ptr = comand_tokens.begin(); ptr < comand_tokens.end(); ptr++) {
@@ -27,72 +23,96 @@ menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_
 		if (*ptr == "x") {
 			return menuOpt::Terminar;
 		}
-		else if (*ptr == "carrega") {
-			ptr++;
-			if (ptr != comand_tokens.end()) {
-				//cout << "ficheiro: " << *ptr << endl;
-				values.push_back(*ptr);
-				return menuOpt::CarregaComand;
+		switch (fase)
+		{
+		case faseTurno::Config: {
+			if (*ptr == "carrega") {
+				ptr++;
+				if (ptr != comand_tokens.end()) {
+					//cout << "ficheiro: " << *ptr << endl;
+					values.push_back(*ptr);
+					return menuOpt::CarregaComand;
+				}
+				else {
+					cout << "comando carrega precisa do nome do ficheiro." << endl;
+				}
+				break;
 			}
-			else {
-				cout << "comando carrega precisa do nome do ficheiro." << endl;
-			}
-			break;
-		}
-		else if (*ptr == "carregaT") {
-			ptr++;
-			if (ptr != comand_tokens.end()) {
-				//cout << "ficheiro: " << *ptr << endl;
-				values.push_back(*ptr);
-				return menuOpt::CarregaFich;
-			}
-			else {
-				cout << "comando carregaT nome do ficheiro." << endl;
-			}
-			break;
-		}
-		else if (*ptr == "cria") {
-			ptr++;
-						
-			if (ptr != comand_tokens.end()) {
-				values.push_back(*ptr);
+			else if (*ptr == "cria") {
 				ptr++;
 
 				if (ptr != comand_tokens.end()) {
-
 					values.push_back(*ptr);
-					return menuOpt::Cria;
+					ptr++;
+
+					if (ptr != comand_tokens.end()) {
+
+						values.push_back(*ptr);
+						return menuOpt::Cria;
+					}
+					else {
+						cout << "insira o numero valido de territorios." << endl;
+						return menuOpt::Invalido;
+					}
 				}
 				else {
-					cout << "insira o numero valido de territorios." << endl;
+					cout << "insira o tipo valido de territorio." << endl;
 					return menuOpt::Invalido;
 				}
+
 			}
-			else {
-				cout << "insira o tipo valido de territorio." << endl;
-				return menuOpt::Invalido;
-			}
-		
+			break;
 		}
-		else if (*ptr == "conquista") {
-			ptr++;
-			ostringstream name;
-			if (ptr == comand_tokens.end()) {
-				cout << "insira nome do territorio." << endl;
-				return menuOpt::Invalido;
-			}
-			else {
-				// constroi nome
-				while (ptr != comand_tokens.end()) {
-					name << (*ptr) << " ";
-					ptr++;
+
+		case faseTurno::Conquistar: {
+			if (*ptr == "conquista") {
+				ptr++;
+				ostringstream name;
+				if (ptr == comand_tokens.end()) {
+					cout << "insira nome do territorio." << endl;
+					return menuOpt::Invalido;
 				}
-				// cout << "nome do territorio " << name.str() << endl;
-				values.push_back(name.str().substr(0, name.str().size() - 1));
-				return menuOpt::Conquista;
+				else {
+					// constroi nome
+					while (ptr != comand_tokens.end()) {
+						name << (*ptr) << " ";
+						ptr++;
+					}
+					// cout << "nome do territorio " << name.str() << endl;
+					values.push_back(name.str().substr(0, name.str().size() - 1));
+					return menuOpt::Conquista;
+				}
 			}
+			else if (*ptr == "passa") {
+						return menuOpt::Passa;
+			}
+
+			break;
 		}
-		else if (*ptr == "lista") {
+
+		case faseTurno::Recolha: {
+			if (*ptr == "maisprod") {
+				return menuOpt::MaisProd;
+			}
+			else if (*ptr == "maisouro") {
+				return menuOpt::MaisOuro;
+			}
+			else if (*ptr == "maismilitar") {
+				return menuOpt::MaisMilitar;
+			}
+			break;
+
+		}
+
+		case faseTurno::Comprar:
+			break;
+		case faseTurno::Eventos:
+			break;
+		default:
+			break;
+		}
+
+		if (*ptr == "lista") {
 			ptr++;
 			ostringstream name;
 			if (ptr == comand_tokens.end()) {
@@ -107,14 +127,8 @@ menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_
 				return menuOpt::Lista;
 			}
 		}
-		else if (*ptr == "maisprod") {
-			return menuOpt::MaisProd;
-		}
-		else if (*ptr == "maisouro") {
-			return menuOpt::MaisOuro;
-		}
-		else if (*ptr == "maismilitar") {
-			return menuOpt::MaisMilitar;
+		else if (*ptr == "avanca") {
+			return menuOpt::Avancar;
 		}
 		else {
 			cout << "Comando Invalido." << endl;
@@ -125,7 +139,7 @@ menuOpt Menu::ProcessaComando(vector<string> & values,  vector<string> & comand_
 
 }
 
-void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, int * turno) {
+void Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imperio& I, int* turno) {
 
 	switch (opt) {
 
@@ -136,19 +150,12 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		break;
 	}
 
-	/*case menuOpt::CarregaFich: {
-		if (m.LerFich(menuValues[0])) {
-			m.listaTerritorios();
-		}
-		break;
-	}*/
-
 	case menuOpt::Cria: {
 		string tipo = menuValues[0];
 		int n;
-		try { 
+		try {
 			n = stoi(menuValues[1]);
-				
+
 		}
 		catch (const std::exception& e) {
 			//cout << e.what();
@@ -173,10 +180,6 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		int index = m.pesquisaTerritorio(menuValues[0]);
 		if (index > -1) {
 			I.conquistaTerritorio(m.getTerritorios()[index]);
-			if (turno != nullptr) {
-				(*turno)++;
-			}
-			
 		}
 		else {
 			cout << "error case menuOpt::Conquista: nao encontrou territorio com esse nome" << endl;
@@ -199,20 +202,16 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 			else {
 				cout << "Nao existe territorio." << endl;
 			}
-			
+
 		}
+
+		break;
+	}
 		
-		break;
-	}
-	
 	case menuOpt::Passa: {
-		if (turno != nullptr) {
-			(*turno)++;
-		}
 		break;
-	
 	}
-	
+
 	case menuOpt::MaisOuro: {
 		if (I.maisOuro()) {
 			cout << "troca feita. Produtos -> " << I.getCofre().getQuantidadeAtual() << endl;
@@ -232,62 +231,102 @@ void Menu::ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, I
 		}
 		break;
 	}
-		
+
 	default: {
-		
+
 		break;
 	}
 	}
 }
 
-menuOpt Menu::verMenu(vector<string> & values, int  turno) {
+
+menuOpt Menu::ComandosConfig(vector<string>& values) {
 	values.clear();
 	string cmd;
-		cout << "\t\tMENU " << endl;
-		cout << "--------------------  Turno " << turno << "  -------------------------" << endl;
-		cout << "Carrega Ficheiro com Comandos ->  carrega <nomeFich>" << endl;
-		cout << "Carrega Territorios diretamente de ficheiro ->  carregaT <nomeFich>" << endl;
-		
-		cout << "Cria n Territorios ->  cria <tipo> <n>" << endl;
-		cout << "Conquista Territorio ->  conquista <nomeTerritorio>" << endl;
-		cout << "Passar turno ->  passa" << endl;
+	cout << "Fase configuracao do Mundo:" << endl;
+	cout << "Carrega Ficheiro com Comandos ->  carrega <nomeFich>" << endl;
+	cout << "Cria n Territorios ->  cria <tipo> <n>" << endl;
+	cout << "Terminar config -> seguir" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
+	cout << "comando: ";
+	
+	getline(cin, cmd);
 
+	vector<string> comand_tokens;
+	istringstream iss(cmd);
+
+	copy(istream_iterator<string>(iss),
+		istream_iterator<string>(),
+		back_inserter(comand_tokens));
+
+	vector<string>::iterator ptr;
+	ptr = comand_tokens.begin();
+	if (*ptr == "seguir") {
+		return menuOpt::Terminar;
+	}
+
+	return Menu::ProcessaComando(values, faseTurno::Config, comand_tokens);
+}
+
+bool Menu::isDebugComand(menuOpt opt) {
+	return opt == menuOpt::Lista;
+}
+
+menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, int  turno) {
+	values.clear();
+	string cmd;
+	cout << "\t\Comandos Jogo " << endl;
+	cout << "--------------------  Turno " << turno << " --- Fase " << (int)fase << "  -------------------------" << endl;
+
+	switch (fase)
+	{
+	case faseTurno::Conquistar:
+		cout << "Conquista Territorio ->  conquista <nomeTerritorio>" << endl;
+		cout << "Passar ->  passa" << endl;
+		break;
+	case faseTurno::Recolha:
 		// adicionar recursos
 		cout << "Obter mais produtos ->  maisprod" << endl;
 		cout << "Obter mais ouro ->  maisouro" << endl;
+		break;
+	case faseTurno::Comprar:
 		cout << "Comprar unidade militar ->  maismilitar" << endl;
-		
 		cout << "Adquirir tipo de Tecnologia ->  adquire <tipo>" << endl;
-		
-		cout << "Terminar fase de comandos ->  avanca" << endl;
-		
-		// estado de jogo
-		cout << "Gravar estado de jogo -> grava <nome>" << endl;
-		cout << "Retomar gravacao -> ativa <nome>" << endl;
-		cout << "Apagar gravacao -> apaga <nome>" << endl;
+		break;
+	case faseTurno::Eventos:
+		break;
+	default:
+		break;
+	}
+	cout << "--------------------------------------------" << endl;
+	// estado de jogo
+	cout << "Gravar estado de jogo -> grava <nome>" << endl;
+	cout << "Retomar gravacao -> ativa <nome>" << endl;
+	cout << "Apagar gravacao -> apaga <nome>" << endl;
 
 
+	cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
 
-		cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
-		cout << "Sair -> x" << endl;
-		cout << "----------------------------------------------------------------------" << endl;
-		cout << "comando: ";
+	cout << "Terminar fase de comandos ->  avanca" << endl;
+	cout << "Sair -> x" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
+	cout << "comando: ";
 
-		// usar para nao apanhar ultimo '\n'
-		// cin.ignore(numeric_limits<streamsize> ::max(), '\n');
+	// usar para nao apanhar ultimo '\n'
+	// cin.ignore(numeric_limits<streamsize> ::max(), '\n');
 
-		getline(cin, cmd);
+	getline(cin, cmd);
 
-		vector<string> comand_tokens;
-		istringstream iss(cmd);
+	vector<string> comand_tokens;
+	istringstream iss(cmd);
 
-		copy(istream_iterator<string>(iss),
-			istream_iterator<string>(),
-			back_inserter(comand_tokens));
+	copy(istream_iterator<string>(iss),
+		istream_iterator<string>(),
+		back_inserter(comand_tokens));
 
-		vector<string>::iterator ptr;
+	vector<string>::iterator ptr;
 
 
-		return Menu::ProcessaComando(values, comand_tokens);
-			
+	return Menu::ProcessaComando(values, fase, comand_tokens);
+
 }
