@@ -24,13 +24,14 @@ class Territorio
 {
 protected :
 	string nome;
+
 	int resistencia;
 
 	int nProdutos;
+
 	int nOuro;
 
 	int pontos;
-	static int numTerr;
 
 public:
 

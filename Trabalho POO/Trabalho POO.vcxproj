@@ -164,7 +164,9 @@
     <ClCompile Include="Mina.cpp" />
     <ClCompile Include="Montanha.cpp" />
     <ClCompile Include="Mundo.cpp" />
+    <ClCompile Include="Pescaria.cpp" />
     <ClCompile Include="Planicie.cpp" />
+    <ClCompile Include="Refugio.cpp" />
     <ClCompile Include="Territorio.cpp" />
     <ClCompile Include="TerritorioInicial.cpp" />
     <ClCompile Include="Trabalho POO.cpp" />
@@ -183,7 +185,9 @@
     <ClInclude Include="Mina.h" />
     <ClInclude Include="Montanha.h" />
     <ClInclude Include="Mundo.h" />
+    <ClInclude Include="Pescaria.h" />
     <ClInclude Include="Planicie.h" />
+    <ClInclude Include="Refugio.h" />
     <ClInclude Include="Territorio.h" />
     <ClInclude Include="TerritorioInicial.h" />
   </ItemGroup>

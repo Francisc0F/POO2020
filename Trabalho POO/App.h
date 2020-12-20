@@ -18,6 +18,8 @@ public :
 
 	void MostraMenu();
 
-	Mundo& getMundo();
+	void FaseRecolha();
+
+	void test(string fich);
 };
 

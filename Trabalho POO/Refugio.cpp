@@ -1,15 +1,15 @@
+#include "Refugio.h"
 #include <sstream>
 #include <iostream>
-#include "Mina.h"
 
+int Refugio::numTerr = 1;
 
-int Mina::numTerr = 1;
-Mina::Mina() {
+Refugio::Refugio() {
 	ostringstream oss;
-	oss << "Mina" << numTerr;
+	oss << "Refugio" << numTerr;
 	nome = oss.str();
-	
-	resistencia = 5;
+
+	resistencia = 9;
 	nProdutos = 0;
 	nOuro = 1;
 	numTerr++;

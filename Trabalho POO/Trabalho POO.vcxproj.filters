@@ -66,6 +66,12 @@
     <ClCompile Include="Castelo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Refugio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pescaria.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -114,6 +120,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Castelo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Refugio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pescaria.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

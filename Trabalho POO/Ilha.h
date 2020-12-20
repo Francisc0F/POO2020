@@ -3,5 +3,7 @@
 class Ilha : public Territorio
 {
 
+public :
+	Ilha();
 };
 

@@ -42,5 +42,15 @@ void App::MostraMenu() {
 	}
 }
 
+void App::FaseRecolha() {
+	imperio.RecolherRecursos();
+}
+
+void App::test(string fich) {
+	vector<string> v;
+	v.push_back(fich);
+	Menu::ExecutaComando(menuOpt::CarregaComand, v, mundo, imperio, &turnos);
+}
+
 
 

@@ -25,5 +25,8 @@ using namespace std;
 
 int main(){
 	App jogo = App();
+	jogo.test("config3.txt");
 	jogo.MostraMenu();
+
+
 }

@@ -13,6 +13,8 @@
 #include "Duna.h"
 #include "Mina.h"
 #include "Castelo.h"
+#include "Refugio.h"
+#include "Pescaria.h"
 
 
 
@@ -26,7 +28,8 @@ string Territorio::getAsString() const {
 	ostringstream oss;
 	oss << "nome: " << nome
 		<< "; resistencia: " << resistencia
-		<< "; nProdutos: " << nProdutos << endl;
+		<< "; nProdutos: " << nProdutos <<
+		"; pontos: " << pontos << endl;
 	return oss.str();
 }
 
@@ -74,9 +77,6 @@ void Territorio::setpontos(int  n) {
 }
 
 
-
-
-
 Territorio* Territorio::mapper(tipoTerritorio t) {
 	switch (t)
 	{
@@ -105,14 +105,14 @@ Territorio* Territorio::mapper(tipoTerritorio t) {
 		return new Castelo();
 		break;
 	}
-								//case tipoTerritorio::Refugio: {
-								//	return new Refugio();
-								//	break;
-								//}
-								//case tipoTerritorio::Pescaria: {
-								//	return new Pescaria();
-								//	break;
-								//}
+	case tipoTerritorio::Refugio: {
+		return new Refugio();
+		break;
+	}
+	case tipoTerritorio::Pescaria: {
+		return new Pescaria();
+		break;
+	}
 	default:
 		break;
 	}
@@ -137,6 +137,12 @@ tipoTerritorio Territorio::validaTipoTerritorio(string tipo) {
 	}
 	else if (tipo == "Castelo") {
 		return tipoTerritorio::Castelo;
+	}
+	else if (tipo == "Refugio") {
+		return tipoTerritorio::Refugio;
+	}
+	else if (tipo == "Pescaria") {
+		return tipoTerritorio::Pescaria;
 	}
 	else {
 		return tipoTerritorio::Invalido;

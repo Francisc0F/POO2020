@@ -5,4 +5,5 @@ TerritorioInicial::TerritorioInicial() {
 	resistencia = 9;
 	nProdutos = 1;
 	nOuro = 1;
+	pontos = 0;
 }

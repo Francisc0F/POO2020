@@ -6,9 +6,9 @@
 int Planicie::numTerr = 1;
 Planicie::Planicie() {
 	ostringstream oss;
-	if (numTerr > 0) {
-		oss << nome << numTerr;
-	}
+	oss << "Planicie" << numTerr;
+	nome = oss.str();
+
 	resistencia = 5;
 	nProdutos = 1;
 	nOuro = 1;

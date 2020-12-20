@@ -3,8 +3,9 @@
 #pragma once
 class Continente : public Territorio
 {
+	
 	 
 public: 
-
+	Continente();
 };
 

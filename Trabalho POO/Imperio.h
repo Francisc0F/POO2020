@@ -46,6 +46,8 @@ public:
 	
 	bool maisProdutos();
 
+	void RecolherRecursos();
+
 	~Imperio();
 };
 

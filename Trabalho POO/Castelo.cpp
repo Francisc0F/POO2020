@@ -5,9 +5,9 @@
 int Castelo::numTerr = 1;
 Castelo::Castelo() {
 	ostringstream oss;
-	if (numTerr > 0) {
-		oss << nome << numTerr;
-	}
+	oss << "Castelo" << numTerr;
+	nome = oss.str();
+
 	resistencia = 7;
 	nProdutos = 1;
 	nOuro = 1;

@@ -94,6 +94,9 @@ bool Imperio::maisProdutos() {
 }
 
 
+void Imperio::RecolherRecursos() {
+
+}
 
 Imperio::~Imperio() {
 	conquistados.clear();
