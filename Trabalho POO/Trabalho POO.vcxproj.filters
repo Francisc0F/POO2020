@@ -72,6 +72,24 @@
     <ClCompile Include="Pescaria.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tecnologias.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DronesMilitares.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MisseisTeleguiados.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefesasTerritoriais.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BolsaDeValores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BancoCentral.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -126,6 +144,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pescaria.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tecnologias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DronesMilitares.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MisseisTeleguiados.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefesasTerritoriais.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BolsaDeValores.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BancoCentral.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

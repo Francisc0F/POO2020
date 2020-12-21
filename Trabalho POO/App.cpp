@@ -10,6 +10,7 @@ int App::turnos = 1;
 App::App() {
 	mundo = Mundo();
 	menu = Menu();
+	vector<Tecnologias> tecnologias = vector<Tecnologias>();
 
 	faseAtual = faseTurno::Config;
 
@@ -60,6 +61,11 @@ menuOpt App::FaseRecolha(vector<string>& values, int  turno) {
 	return Menu::ProcessaComando(values, faseTurno::Recolha, comand_tokens);
 }
 
+void App::FaseSeguinte(int* fase) {
+	(*fase)++;
+	faseAtual = (faseTurno)(*fase);
+}
+
 void App::Jogo() {
 	vector<string> menuValues;
 	int fase = 1;
@@ -68,55 +74,78 @@ void App::Jogo() {
 
 
 	while (1) {
-		menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, turnos);
-		if (opt == menuOpt::Terminar) {
-			break;
-		}
 
-		if (opt != menuOpt::Invalido && opt != menuOpt::Avancar) {
-			Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos);
-		}
-
-		if (opt != menuOpt::Avancar) {
-			switch (faseAtual)
-			{
-			case faseTurno::Recolha: {
-		/*		if (recolhaFeita == 0) {
-					FaseRecolha();
-					recolhaFeita = 1;
-				}*/
+		while (faseAtual == faseTurno::Conquistar) {
+			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos);
+			if (opt == menuOpt::Terminar) {
 				break;
 			}
-			case faseTurno::Comprar:
-				break;
-			case faseTurno::Eventos:
-				break;
-			default:
-				break;
-			}
-
-			if (!Menu::isDebugComand(opt)) {
-				fase++;
-				if (fase > 3) {
-					turnos++;
-					fase = 1;
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
+				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos)) {
+					FaseSeguinte(&fase);
 				}
-				faseAtual = (faseTurno)fase;
 			}
-		}
-		else {
-			if (recolhaFeita == 0) {
-				RecolherRecursoDoImperio();
-				recolhaFeita = 1;
-			}
-			turnos++;
-			fase = 1;
-			faseAtual = (faseTurno)fase;
-			recolhaFeita = 0;
+
 		}
 
+		while (faseAtual == faseTurno::Recolha) {
+			if (!imperio.temTec("Bolsa de Valores")) {
+			
+				break;
+			}
+
+			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos);
+			if (opt == menuOpt::Terminar) {
+				break;
+			}
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
+				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos)) {
+
+				}
+			}
+		}
+		imperio.RecolherRecursos();
+		FaseSeguinte(&fase);
+
+		int nComprasMaisMilitar = 0;
+		int nComprasTec = 0;
+		while (faseAtual == faseTurno::Comprar) {
+
+			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos);
+	
+			if (opt == menuOpt::AvancarFase) {
+				FaseSeguinte(&fase);
+				break;
+			}
+
+			if (nComprasMaisMilitar > 0 && opt == menuOpt::MaisMilitar) {
+				cout << "Comando ja feito neste Turno." << endl;
+				continue;
+			}
+			if (nComprasTec > 0 && opt == menuOpt::AdquireTec) {
+				cout << "Comando ja feito neste Turno." << endl;
+				continue;
+			}
+
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
+				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos)) {
+					if (opt == menuOpt::MaisMilitar) {
+						nComprasMaisMilitar++;
+					}
+
+					if (opt == menuOpt::AdquireTec) {
+						nComprasTec++;
+					}
+				}
+			}
+		}
+		// fase eventos
+		
 
 
+		fase = 0;
+		FaseSeguinte(&fase);
+		turnos++;
 	}
 	/*if (opt == menuOpt::Invalido) {
 		cout << "apagar territorios" << endl;

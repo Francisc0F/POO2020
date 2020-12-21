@@ -15,7 +15,9 @@ enum class menuOpt {
 	MaisProd,
 	MaisOuro,
 	MaisMilitar,
-	Avancar,
+	AdquireTec,
+	AvancarTurno,
+	AvancarFase,
 	Invalido
 };
 
@@ -32,11 +34,11 @@ class Menu
 public:
 	Menu();
 	// comandos
-	menuOpt static RecebeComandosJogo(vector<string> & values, faseTurno fase,  int turno);
+	menuOpt static RecebeComandosJogo(vector<string> & values, faseTurno fase,Imperio I,  int turno);
 
 	menuOpt static ProcessaComando(vector<string>& values, faseTurno fase, vector<string>& comand_tokens);
 
-	void static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, int * turno);
+	bool static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, int * turno);
 
 	menuOpt static ComandosConfig(vector<string>& values);
 

@@ -13,11 +13,6 @@
 #include <string>
 #include <vector>
 #include <iterator>
-#include "Armazem.h"
-#include "Mundo.h"
-#include "Menu.h"
-#include "Territorio.h"
-#include "Imperio.h"
 #include "App.h"
 
 

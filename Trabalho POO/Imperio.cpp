@@ -9,7 +9,7 @@ Imperio::Imperio() {
 }
 
 Imperio::Imperio( Territorio * inicial, Armazem & Produtos, Armazem & Ouro)
-: Produtos(Produtos), Cofre(Ouro){
+: Produtos(Produtos), Cofre(Ouro), forcaMilitar(0), capacidadeForcaMilitar(3) {
 	conquistados.push_back(inicial);
 }
 
@@ -61,14 +61,13 @@ void Imperio::conquistaTerritorio(Territorio * t) {
 	}
 
 	int resistencia  = (rand() % 6) + 1;
-	
-	if (forcaMilitar + resistencia > t->getResistencia()) {
+	cout << "fator sorte: " << resistencia << "t->getResistencia() : " << t->getResistencia() << endl;
+	if ((forcaMilitar + resistencia) >= t->getResistencia()) {
 		conquistados.push_back(t);
 		cout << "Territorio \"" << t->getNome() << "\" conquistado." << endl;
 	}
 	else {
 		cout << "Territorio deu muita luta. Nao foi possivel vencer." << endl;
-
 		if (forcaMilitar > 0) {
 			forcaMilitar--;
 		}
@@ -92,6 +91,29 @@ bool Imperio::maisProdutos() {
 	}
 	return false;
 }
+
+bool Imperio::maisMilitar() {
+
+	if ((forcaMilitar + 1) > capacidadeForcaMilitar) {
+		return false;
+	}
+	else if(Cofre.getQuantidadeAtual() > 0 && Produtos.getQuantidadeAtual() > 0){
+		Cofre.rem(1);
+		Produtos.rem(1);
+		forcaMilitar++;
+		return true;
+	}
+	return false;
+}
+bool Imperio::adquirirTec(){
+	return true;
+}
+
+bool Imperio::temTec(string n) {
+	return false;
+}
+
+
 
 void Imperio::RecolherRecursos() {
 

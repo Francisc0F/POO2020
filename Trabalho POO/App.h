@@ -25,6 +25,8 @@ public :
 
 	void ConfigMundo();
 
+	void FaseSeguinte(int * fase);
+
 	void Carrega(string fich);
 };
 

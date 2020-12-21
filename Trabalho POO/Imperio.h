@@ -9,6 +9,7 @@
 #include <vector>
 #include <iterator>
 #include "Armazem.h"
+#include "Tecnologias.h"
 using namespace std;
 
 class Territorio;
@@ -23,6 +24,8 @@ class Imperio
 	static int turnos;
 
 	vector<Territorio *> conquistados;
+
+	vector<Tecnologias * > tecnologias;
 
 public:
 
@@ -45,6 +48,12 @@ public:
 	bool maisOuro();
 	
 	bool maisProdutos();
+
+	bool maisMilitar();
+	
+	bool adquirirTec();
+
+	bool temTec(string n);
 
 	void RecolherRecursos();
 

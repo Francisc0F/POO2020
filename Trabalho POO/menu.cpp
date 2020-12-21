@@ -97,15 +97,27 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 			else if (*ptr == "maisouro") {
 				return menuOpt::MaisOuro;
 			}
-			else if (*ptr == "maismilitar") {
-				return menuOpt::MaisMilitar;
-			}
+	
 			break;
 
 		}
 
-		case faseTurno::Comprar:
+		case faseTurno::Comprar: {
+			if (*ptr == "maismilitar") {
+				return menuOpt::MaisMilitar;
+			}
+			else if (*ptr == "adquire") {
+				ptr++;
+				if (ptr != comand_tokens.end()) {
+					values.push_back(*ptr);
+					return menuOpt::AdquireTec;
+				}
+				else {
+					return menuOpt::Invalido;
+				}
+			}
 			break;
+		}
 		case faseTurno::Eventos:
 			break;
 		default:
@@ -127,8 +139,11 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 				return menuOpt::Lista;
 			}
 		}
+		else if (*ptr == "avancaFase") {
+			return menuOpt::AvancarFase;
+		}
 		else if (*ptr == "avanca") {
-			return menuOpt::Avancar;
+			return menuOpt::AvancarTurno;
 		}
 		else {
 			cout << "Comando Invalido." << endl;
@@ -139,13 +154,13 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 
 }
 
-void Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imperio& I, int* turno) {
+bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imperio& I, int* turno) {
 
 	switch (opt) {
 
 	case menuOpt::CarregaComand: {
 		if (m.LerComandosFich(menuValues[0], m, I)) {
-			// cout << "lidos";
+			return true;
 		}
 		break;
 	}
@@ -160,18 +175,21 @@ void Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		catch (const std::exception& e) {
 			//cout << e.what();
 			cout << "segundo arg nao e uma valor numerico" << endl;
+			return false;
 			break;
 		}
 
 		tipoTerritorio t = Territorio::validaTipoTerritorio(tipo);
 		if (t == tipoTerritorio::Invalido) {
 			cout << "tipo Invalido" << endl;
+			return false;
 			break;
 		}
 
 		if (n > 0) {
 			m.addNTerritorios(n, t);
 			//m.listaTerritorios();
+			return true;
 		}
 		break;
 	}
@@ -180,9 +198,11 @@ void Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		int index = m.pesquisaTerritorio(menuValues[0]);
 		if (index > -1) {
 			I.conquistaTerritorio(m.getTerritorios()[index]);
+			return true;
 		}
 		else {
-			cout << "error case menuOpt::Conquista: nao encontrou territorio com esse nome" << endl;
+			cout << "Nao encontrou territorio com esse nome." << endl;
+			return false;
 		}
 		break;
 	}
@@ -198,9 +218,11 @@ void Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 			int index = m.pesquisaTerritorio(menuValues[0]);
 			if (index > -1) {
 				cout << m.getTerritorios()[index]->getAsString();
+				return true;
 			}
 			else {
 				cout << "Nao existe territorio." << endl;
+				return false;
 			}
 
 		}
@@ -209,6 +231,7 @@ void Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 	}
 		
 	case menuOpt::Passa: {
+		return true;
 		break;
 	}
 
@@ -231,7 +254,20 @@ void Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		}
 		break;
 	}
+	
+	case menuOpt::MaisMilitar: {
+		if (I.maisMilitar()) {
+			cout << "Adicionada unidade de forca militar." << endl;
+		}
+		else {
+			cout << "Nao foi possivel adicionar unidade militar." << endl;
+		}
+		break;
+	}
+	case menuOpt::AdquireTec: {
 
+		break;
+	}
 	default: {
 
 		break;
@@ -272,7 +308,7 @@ bool Menu::isDebugComand(menuOpt opt) {
 	return opt == menuOpt::Lista;
 }
 
-menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, int  turno) {
+menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio I,  int  turno) {
 	values.clear();
 	string cmd;
 	cout << "\t\Comandos Jogo " << endl;
@@ -286,8 +322,13 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, int  tu
 		break;
 	case faseTurno::Recolha:
 		// adicionar recursos
-		cout << "Obter mais produtos ->  maisprod" << endl;
-		cout << "Obter mais ouro ->  maisouro" << endl;
+		if (I.temTec("Bolsa Valores")) {
+			cout << "Obter mais produtos ->  maisprod" << endl;
+			cout << "Obter mais ouro ->  maisouro" << endl;
+		}
+		else {
+			cout << "Compre bolsa de Valores para Obter mais opcoes." << endl;
+		}
 		break;
 	case faseTurno::Comprar:
 		cout << "Comprar unidade militar ->  maismilitar" << endl;
@@ -307,7 +348,9 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, int  tu
 
 	cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
 
-	cout << "Terminar fase de comandos ->  avanca" << endl;
+	cout << "Terminar fase de comandos ->  avancaFase" << endl;
+	cout << "Turno seguinte ->  avancarTurno" << endl;
+
 	cout << "Sair -> x" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
 	cout << "comando: ";
