@@ -14,3 +14,7 @@ Fortaleza::Fortaleza() {
 	nOuro = 0;
 	numTerr++;
 }
+
+tipoTerritorio Fortaleza::getType()const {
+	return tipoTerritorio::Fortaleza;
+}

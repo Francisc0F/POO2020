@@ -10,5 +10,11 @@ class Duna : public Continente
 public:
 	Duna();
 
+
+	// get
+	int getnProdutos();
+	int getnOuro();
+
+	tipoTerritorio getType()const;
 };
 

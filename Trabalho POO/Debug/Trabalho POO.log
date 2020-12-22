@@ -1,4 +1,9 @@
 ﻿  App.cpp
+  BancoCentral.cpp
+  BolsaDeValores.cpp
+  DefesasTerritoriais.cpp
+  DronesMilitares.cpp
+  MisseisTeleguiados.cpp
   Trabalho POO.cpp
   Generating Code...
   Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

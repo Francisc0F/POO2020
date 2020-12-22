@@ -6,6 +6,8 @@
 using namespace std;
 
 enum class tipoTerritorio {
+	Inicial,
+
 	Planicie,
 	Montanha,
 	Fortaleza,
@@ -22,7 +24,7 @@ enum class tipoTerritorio {
 
 class Territorio
 {
-protected :
+protected:
 	string nome;
 
 	int resistencia;
@@ -41,6 +43,8 @@ public:
 	string getNome()const;
 	int getnProdutos()const;
 	int getnOuro()const;
+	virtual tipoTerritorio getType()const = 0;
+
 	int getpontos()const;
 	int getResistencia()const;
 	string getAsString() const;

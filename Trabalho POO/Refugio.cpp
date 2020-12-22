@@ -1,6 +1,8 @@
-#include "Refugio.h"
 #include <sstream>
 #include <iostream>
+#include "Refugio.h"
+#include "App.h"
+
 
 int Refugio::numTerr = 1;
 
@@ -13,4 +15,10 @@ Refugio::Refugio() {
 	nProdutos = 0;
 	nOuro = 1;
 	numTerr++;
+}
+
+
+
+tipoTerritorio Refugio::getType()const {
+	return tipoTerritorio::Refugio;
 }

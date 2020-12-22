@@ -10,5 +10,6 @@ class Castelo : public Continente
 public:
 	Castelo();
 
+	tipoTerritorio getType()const;
 };
 

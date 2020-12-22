@@ -8,3 +8,9 @@ Continente::Continente() {
 }
 
 
+int Continente::getnProdutos() {
+	return nProdutos;
+}
+int Continente::getnOuro() {
+	return nOuro;
+}

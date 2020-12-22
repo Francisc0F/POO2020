@@ -4,5 +4,7 @@ class BolsaDeValores : public Tecnologias
 {
 public:
 	BolsaDeValores();
+
+	string getType() const;
 };
 

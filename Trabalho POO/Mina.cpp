@@ -1,6 +1,7 @@
 #include <sstream>
 #include <iostream>
 #include "Mina.h"
+#include "App.h"
 
 
 int Mina::numTerr = 1;
@@ -13,4 +14,8 @@ Mina::Mina() {
 	nProdutos = 0;
 	nOuro = 1;
 	numTerr++;
+}
+
+tipoTerritorio Mina::getType()const {
+	return tipoTerritorio::Mina;
 }

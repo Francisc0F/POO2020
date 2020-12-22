@@ -2,3 +2,8 @@
 BolsaDeValores::BolsaDeValores() {
 	custo = 2;
 }
+
+
+string BolsaDeValores::getType()const {
+	return "BolsaDeValores";
+}

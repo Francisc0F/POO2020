@@ -10,5 +10,6 @@ class Mina : public Continente
 public:
 	Mina();
 
+	tipoTerritorio getType()const;
 };
 

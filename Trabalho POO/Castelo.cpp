@@ -13,3 +13,7 @@ Castelo::Castelo() {
 	nOuro = 1;
 	numTerr++;
 }
+
+tipoTerritorio Castelo::getType()const {
+	return tipoTerritorio::Castelo;
+}

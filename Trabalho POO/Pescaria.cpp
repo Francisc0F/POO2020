@@ -1,4 +1,5 @@
 #include "Pescaria.h"
+#include "App.h"
 #include <sstream>
 #include <iostream>
 
@@ -13,4 +14,8 @@ Pescaria::Pescaria() {
 	nProdutos = 2;
 	nOuro = 0;
 	numTerr++;
+}
+
+tipoTerritorio Pescaria::getType()const {
+	return tipoTerritorio::Refugio;
 }

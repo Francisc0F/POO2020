@@ -4,5 +4,7 @@ class TerritorioInicial : public Territorio
 {
 public:
 	TerritorioInicial();
+
+	tipoTerritorio getType()const;
 };
 

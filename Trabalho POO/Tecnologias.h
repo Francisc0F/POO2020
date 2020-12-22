@@ -1,10 +1,11 @@
 #pragma once
+#include <string>
 using namespace std;
 class Tecnologias
 {
 protected:
 	int custo;
 public:
-//	Tecnologias();
+	virtual string getType()const = 0;
 };
 

@@ -12,4 +12,15 @@ Montanha::Montanha() {
 	nProdutos = 0;
 	nOuro = 0;
 	numTerr++;
+
+	turnosAposConquista = 0;
+}
+
+
+void Montanha::addTurno() {
+	turnosAposConquista++;
+}
+
+tipoTerritorio Montanha::getType()const {
+	return tipoTerritorio::Montanha;
 }

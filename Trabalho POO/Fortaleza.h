@@ -9,5 +9,10 @@ class Fortaleza : public Continente
 
 public:
 	Fortaleza();
+	int getnProdutos()const;
+	int getnOuro()const;
+
+
+	tipoTerritorio getType()const;
 };
 

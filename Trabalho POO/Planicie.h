@@ -9,5 +9,9 @@ class Planicie : public Continente
 public:
 	Planicie();
 
+	int getnProdutos();
+	int getnOuro();
+
+	tipoTerritorio getType()const;
 };
 

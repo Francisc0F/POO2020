@@ -1,17 +1,30 @@
 #include "App.h"
 #include "Mundo.h"
 #include "Imperio.h"
+
 #include "Territorio.h"
+#include "Montanha.h"
 #include "TerritorioInicial.h"
+
+#include "MisseisTeleguiados.h"
+#include "BolsaDeValores.h"
+#include "DefesasTerritoriais.h"
+#include "DronesMilitares.h"
+#include "BancoCentral.h"
+
+
 #include "Menu.h"
 
 int App::turnos = 1;
+int App::anos = 1;
+
+
+
 
 App::App() {
 	mundo = Mundo();
 	menu = Menu();
-	vector<Tecnologias> tecnologias = vector<Tecnologias>();
-
+	
 	faseAtual = faseTurno::Config;
 
 	srand((unsigned)time(0));
@@ -24,6 +37,11 @@ App::App() {
 
 	imperio = Imperio(inicial, produtos, cofre);
 
+	tecnologias.push_back(new MisseisTeleguiados());
+	tecnologias.push_back(new DronesMilitares());
+	tecnologias.push_back(new DefesasTerritoriais());
+	tecnologias.push_back(new BolsaDeValores());
+	tecnologias.push_back(new BancoCentral());
 }
 
 
@@ -38,27 +56,6 @@ void App::ConfigMundo() {
 			Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos);
 		}
 	}
-}
-
-menuOpt App::FaseRecolha(vector<string>& values, int  turno) {
-	values.clear();
-	string cmd;
-	cout << "Obter mais produtos ->  maisprod" << endl;
-	cout << "Obter mais ouro ->  maisouro" << endl;
-
-	getline(cin, cmd);
-
-	vector<string> comand_tokens;
-	istringstream iss(cmd);
-
-	copy(istream_iterator<string>(iss),
-		istream_iterator<string>(),
-		back_inserter(comand_tokens));
-
-	vector<string>::iterator ptr;
-
-
-	return Menu::ProcessaComando(values, faseTurno::Recolha, comand_tokens);
 }
 
 void App::FaseSeguinte(int* fase) {
@@ -109,6 +106,7 @@ void App::Jogo() {
 
 		int nComprasMaisMilitar = 0;
 		int nComprasTec = 0;
+
 		while (faseAtual == faseTurno::Comprar) {
 
 			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos);
@@ -152,6 +150,51 @@ void App::Jogo() {
 		m.~Mundo();
 		I.~Imperio();
 	}*/
+}
+
+void App::AtualizarProducoes(){
+	vector<Territorio*> t = mundo.getTerritorios();
+
+	for (vector<Territorio*>::iterator it = t.begin(); it != t.end(); ++it) {
+		switch ((*it)->getType())
+		{
+		case tipoTerritorio::Planicie:
+			if (anos > 1) {
+				(*it)->setnProdutos(2);
+			}
+			break;
+
+		case tipoTerritorio::Montanha:
+		/*	if (imperio.pesquisaTerritorio((*it)->getNome()) > -1) {
+				Montanha* m = (*it);
+				
+			}*/
+
+			break;
+		case tipoTerritorio::Castelo:
+			if (turnos <= 2) {
+				(*it)->setnProdutos(2);
+			}
+			break;
+		//case tipoTerritorio::Duna:
+		////case tipoTerritorio::Fortaleza:
+		//	break;
+		//case tipoTerritorio::Pescaria:
+		//	break;
+		//case tipoTerritorio::Refugio:
+		//	break;
+		case tipoTerritorio::Mina:
+			if (turnos <= 3) {
+				(*it)->setnOuro(1);
+			}
+			else {
+				(*it)->setnOuro(2);
+			}
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void App::RecolherRecursoDoImperio() {

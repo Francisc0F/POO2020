@@ -7,8 +7,13 @@ class Montanha : public Continente
 
 	static int numTerr;
 
+	int turnosAposConquista;
+
 public:
 	Montanha();
 
+	tipoTerritorio getType()const;
+
+	void addTurno();
 };
 

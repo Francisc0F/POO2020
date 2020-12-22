@@ -264,14 +264,19 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		}
 		break;
 	}
+	
 	case menuOpt::AdquireTec: {
+		/*menuValues[0]
+		if () {
+
+		*/
 
 		break;
 	}
-	default: {
+	default: 
 
 		break;
-	}
+	
 	}
 }
 

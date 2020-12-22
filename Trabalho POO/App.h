@@ -7,10 +7,12 @@
 class App
 {
 	static int turnos;
+	static int anos;
 	faseTurno faseAtual;
 	Menu menu;
 	Mundo mundo;
 	Imperio imperio;
+	vector<Tecnologias* > tecnologias;
 
 public :
 	App();
@@ -23,10 +25,16 @@ public :
 
 	void RecolherRecursoDoImperio();
 
+	void AtualizarProducoes();
+
 	void ConfigMundo();
 
 	void FaseSeguinte(int * fase);
 
 	void Carrega(string fich);
+
+	static int getTurno();
+
+	static int getAno();
 };
 

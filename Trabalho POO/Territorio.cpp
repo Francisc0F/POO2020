@@ -17,19 +17,14 @@
 #include "Pescaria.h"
 
 
-
-// int Territorio::numTerr = 0;
-
-
-
-
 //getters
 string Territorio::getAsString() const {
 	ostringstream oss;
 	oss << "nome: " << nome
-		<< "; resistencia: " << resistencia
-		<< "; nProdutos: " << nProdutos <<
-		"; pontos: " << pontos << endl;
+		//<< "; resistencia: " << resistencia
+		<< "; nProdutos: " << nProdutos 
+		<< "; nOuro: " << nOuro <<
+		"; pontos: " << pontos;
 	return oss.str();
 }
 
@@ -120,7 +115,7 @@ Territorio* Territorio::mapper(tipoTerritorio t) {
 
 
 tipoTerritorio Territorio::validaTipoTerritorio(string tipo) {
-	if (tipo == "Planície") {
+	if (tipo == "Planicie") {
 		return tipoTerritorio::Planicie;
 	}
 	else if (tipo == "Montanha") {

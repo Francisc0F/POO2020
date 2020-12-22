@@ -7,5 +7,9 @@ class Pescaria : public Ilha
 public:
 
 	Pescaria();
+
+	int getnProdutos();
+
+	tipoTerritorio getType()const;
 };
 
