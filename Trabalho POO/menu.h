@@ -38,7 +38,7 @@ public:
 
 	menuOpt static ProcessaComando(vector<string>& values, faseTurno fase, vector<string>& comand_tokens);
 
-	bool static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, int * turno);
+	bool static ExecutaComando(menuOpt opt, vector<string> & menuValues, Mundo & m, Imperio & I, vector<Tecnologias* >& tecnologias);
 
 	menuOpt static ComandosConfig(vector<string>& values);
 

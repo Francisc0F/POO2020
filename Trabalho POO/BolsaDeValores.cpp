@@ -4,6 +4,6 @@ BolsaDeValores::BolsaDeValores() {
 }
 
 
-string BolsaDeValores::getType()const {
-	return "BolsaDeValores";
+tec BolsaDeValores::getType()const {
+	return tec::BolsaDeValores;
 }

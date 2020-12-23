@@ -4,6 +4,6 @@ BancoCentral::BancoCentral() {
 }
 
 
-string BancoCentral::getType()const {
-	return "BancoCentral";
+tec BancoCentral::getType()const {
+	return tec::BancoCentral;
 }

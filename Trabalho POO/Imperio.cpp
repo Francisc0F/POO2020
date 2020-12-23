@@ -3,7 +3,6 @@
 
 using namespace std;
 
-int Imperio::turnos = 1;
 
 Imperio::Imperio() {
 }
@@ -15,13 +14,19 @@ Imperio::Imperio( Territorio * inicial, Armazem & Produtos, Armazem & Ouro)
 
 void Imperio::mostraRecursos()const {
 	cout << "\t\t Recursos Materiais" << endl;
-	cout << "Produtos " << endl;
-	cout << Produtos.info();
-	cout << "Cofre " << endl;
-	cout << Cofre.info();
+	cout << "Produtos: " << Produtos.info() << endl;
+	cout << "Cofre: " << Cofre.info()  << endl;
 }
 
+void Imperio::verTecnologias()const {
 
+}
+
+string Imperio::getForcaMilitar()const {
+	ostringstream oss;
+	oss << "forcaMilitar: " << forcaMilitar << "; max:" << capacidadeForcaMilitar;
+	return oss.str();
+}
 
 Armazem& Imperio::getProdutos(){
 	return Produtos;
@@ -31,6 +36,7 @@ Armazem& Imperio::getCofre() {
 	return Cofre;
 }
 
+
 void Imperio::listaConquistados()  {
 	vector<Territorio* >::iterator ptr;
 	ptr = conquistados.begin();
@@ -39,7 +45,7 @@ void Imperio::listaConquistados()  {
 		return;
 	}
 	for (ptr = conquistados.begin(); ptr < conquistados.end(); ptr++) {
-		cout << (*ptr)->getAsString() << endl;
+		cout << endl <<(*ptr)->getAsString() << endl;
 	}
 }
 
@@ -105,8 +111,20 @@ bool Imperio::maisMilitar() {
 	}
 	return false;
 }
-bool Imperio::adquirirTec(){
-	return true;
+bool Imperio::adquirirTec(tec t, Tecnologias* pt){
+	for (size_t i = 0; i < tecnologias.size(); i++)
+	{
+		if (tecnologias[i]->getType() == t) {
+			return false;
+		}
+	}
+	int c = pt->getCusto();
+	if (c <= Cofre.getQuantidadeAtual()) {
+		Cofre.rem(c);
+		tecnologias.push_back(pt);
+		return true;
+	}
+	return false;
 }
 
 bool Imperio::temTec(string n) {

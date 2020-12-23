@@ -5,5 +5,5 @@ class BancoCentral : public Tecnologias
 public:
 	BancoCentral();
 
-	string getType()const;
+	tec getType()const;
 };

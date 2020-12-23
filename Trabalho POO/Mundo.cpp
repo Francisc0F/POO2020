@@ -102,7 +102,7 @@ void Mundo::listaTerritorios() {
 //	return true;
 //}
 
-bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I) {
+bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I,  vector<Tecnologias* > & tecnologias) {
 	ifstream dados(nomef);
 	if (!dados.is_open()) {
 		cout << "error abrir ficheiro: " << nomef << endl;
@@ -134,7 +134,7 @@ bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I) {
 		values.clear();
 
 		menuOpt opt =  Menu::ProcessaComando(values, faseTurno::Config,  comand_tokens);
-		Menu::ExecutaComando(opt, values, m, I, nullptr);
+		Menu::ExecutaComando(opt, values, m, I, tecnologias);
 
 	}
 	dados.close();

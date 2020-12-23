@@ -12,13 +12,25 @@
 #include "DronesMilitares.h"
 #include "BancoCentral.h"
 
+#include "Tecnologias.h"
+
 
 #include "Menu.h"
 
 int App::turnos = 1;
 int App::anos = 1;
 
-
+vector<Tecnologias*> App::CreateTecnoList()
+{
+	vector<Tecnologias*> v;
+	v.push_back(new MisseisTeleguiados());
+	v.push_back(new DronesMilitares());
+	v.push_back(new DefesasTerritoriais());
+	v.push_back(new BolsaDeValores());
+	v.push_back(new BancoCentral());
+	return v;
+}
+vector<Tecnologias* > App::tecnologias = CreateTecnoList();
 
 
 App::App() {
@@ -37,12 +49,19 @@ App::App() {
 
 	imperio = Imperio(inicial, produtos, cofre);
 
-	tecnologias.push_back(new MisseisTeleguiados());
-	tecnologias.push_back(new DronesMilitares());
-	tecnologias.push_back(new DefesasTerritoriais());
-	tecnologias.push_back(new BolsaDeValores());
-	tecnologias.push_back(new BancoCentral());
+	
 }
+
+Tecnologias* App::getTec(tec t) {
+	for (size_t i = 0; i < tecnologias.size(); i++)
+	{
+		if (tecnologias[i]->getType() == t) {
+			return tecnologias[i];
+		}
+	}
+	return nullptr;
+}
+
 
 
 void App::ConfigMundo() {
@@ -53,7 +72,7 @@ void App::ConfigMundo() {
 			break;
 		}
 		if (opt != menuOpt::Invalido) {
-			Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos);
+			Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias);
 		}
 	}
 }
@@ -77,8 +96,8 @@ void App::Jogo() {
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
-				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos)) {
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno && opt != menuOpt::Lista) {
+				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
 					FaseSeguinte(&fase);
 				}
 			}
@@ -95,8 +114,8 @@ void App::Jogo() {
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
-				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos)) {
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno && opt != menuOpt::Lista) {
+				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
 
 				}
 			}
@@ -125,8 +144,9 @@ void App::Jogo() {
 				continue;
 			}
 
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
-				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, &turnos)) {
+	
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno && opt != menuOpt::Lista) {
+				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
 					if (opt == menuOpt::MaisMilitar) {
 						nComprasMaisMilitar++;
 					}
@@ -204,8 +224,5 @@ void App::RecolherRecursoDoImperio() {
 void App::Carrega(string fich) {
 	vector<string> v;
 	v.push_back(fich);
-	Menu::ExecutaComando(menuOpt::CarregaComand, v, mundo, imperio, &turnos);
+	Menu::ExecutaComando(menuOpt::CarregaComand, v, mundo, imperio, tecnologias);
 }
-
-
-

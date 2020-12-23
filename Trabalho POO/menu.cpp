@@ -9,6 +9,7 @@
 #include "Mundo.h"
 #include "Imperio.h"
 #include "Territorio.h"
+#include "App.h"
 using namespace std;
 
 Menu::Menu() {
@@ -154,12 +155,12 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 
 }
 
-bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imperio& I, int* turno) {
+bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imperio& I, vector<Tecnologias* > & tecnologias) {
 
 	switch (opt) {
 
 	case menuOpt::CarregaComand: {
-		if (m.LerComandosFich(menuValues[0], m, I)) {
+		if (m.LerComandosFich(menuValues[0], m, I, tecnologias)) {
 			return true;
 		}
 		break;
@@ -209,10 +210,11 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 
 	case menuOpt::Lista: {
 		if (menuValues.empty()) {
-			m.listaTerritorios();
+			//m.listaTerritorios();
 			cout << "\t\t Imperio " << endl;
 			I.mostraRecursos();
-			I.listaConquistados();
+			cout << I.getForcaMilitar() << endl;
+			//I.listaConquistados();
 		}
 		else {
 			int index = m.pesquisaTerritorio(menuValues[0]);
@@ -266,11 +268,24 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 	}
 	
 	case menuOpt::AdquireTec: {
-		/*menuValues[0]
-		if () {
 
-		*/
+		tec tecno = Tecnologias::tecValida(menuValues[0]);
+		if (tecno != tec::Invalida) {
+			Tecnologias* t= App::getTec(tecno);
+			if (t  != nullptr) {
+				if (I.adquirirTec(tecno, t)) {
+					return true;
+				}
+				else {
+					cout << "Nao foi Possivel obter a tecnologia." << endl;
+					return false;
+				}
+			}
 
+		}
+		else {
+			return false;
+		}
 		break;
 	}
 	default: 

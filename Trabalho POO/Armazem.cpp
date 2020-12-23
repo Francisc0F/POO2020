@@ -17,8 +17,8 @@ int Armazem::getQuantidadeMax() const {
 
 string Armazem::info() const {
 	ostringstream oss;
-	oss << "quantidade : " << quantidadeAtual
-		<< "; max: " << quantidadeMax << endl;
+	oss << quantidadeAtual
+		<< "; max: " << quantidadeMax;
 	return oss.str();
 }
 

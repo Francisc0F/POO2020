@@ -21,21 +21,23 @@ class Imperio
 
 	int forcaMilitar, capacidadeForcaMilitar;
 
-	static int turnos;
-
 	vector<Territorio *> conquistados;
 
-	vector<Tecnologias * > tecnologias;
+	vector<Tecnologias* > tecnologias;
+
 
 public:
 
 	Imperio();
+
 
 	Imperio(Territorio*, Armazem& Produtos, Armazem& Ouro);
 
 	Armazem& getProdutos();
 
 	Armazem& getCofre();
+
+	string getForcaMilitar()const;
 
 	void conquistaTerritorio(Territorio * t);
 
@@ -45,13 +47,15 @@ public:
 
 	void mostraRecursos()const;
 
+	void verTecnologias()const;
+
 	bool maisOuro();
 	
 	bool maisProdutos();
 
 	bool maisMilitar();
 	
-	bool adquirirTec();
+	bool adquirirTec(tec t, Tecnologias* pt);
 
 	bool temTec(string n);
 

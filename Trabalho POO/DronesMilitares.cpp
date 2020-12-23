@@ -6,6 +6,6 @@ DronesMilitares::DronesMilitares() {
 }
 
 
-string DronesMilitares::getType()const {
-	return "DronesMilitares";
+tec DronesMilitares::getType()const {
+	return tec::DronesMilitares;
 }

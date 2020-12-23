@@ -3,6 +3,6 @@ MisseisTeleguiados::MisseisTeleguiados() {
 	custo = 4;
 }
 
-string MisseisTeleguiados::getType()const {
-	return "MisseisTeleguiados";
+tec MisseisTeleguiados::getType()const {
+	return tec::MisseisTeleguiados;
 }

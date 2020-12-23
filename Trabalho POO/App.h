@@ -8,12 +8,14 @@ class App
 {
 	static int turnos;
 	static int anos;
+
+	static vector<Tecnologias*> CreateTecnoList();
+	static vector<Tecnologias* > tecnologias;
+
 	faseTurno faseAtual;
 	Menu menu;
 	Mundo mundo;
 	Imperio imperio;
-	vector<Tecnologias* > tecnologias;
-
 public :
 	App();
 
@@ -32,6 +34,9 @@ public :
 	void FaseSeguinte(int * fase);
 
 	void Carrega(string fich);
+
+	static Tecnologias* getTec(tec t);
+
 
 	static int getTurno();
 
