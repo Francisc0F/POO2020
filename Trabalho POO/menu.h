@@ -16,6 +16,12 @@ enum class menuOpt {
 	MaisOuro,
 	MaisMilitar,
 	AdquireTec,
+	
+	TomaTerr,
+	TomaTec,
+	ModificaOuro,
+	ModificaProd,
+
 	AvancarTurno,
 	AvancarFase,
 	Invalido

@@ -4,19 +4,19 @@
 //}
 
 tec Tecnologias::tecValida(string n) {
-	if (n == "MisseisTeleguiados") {
+	if (n == "missil") {
 		return tec::MisseisTeleguiados;
 	}
-	else if (n == "DronesMilitares") {
+	else if (n == "drone") {
 		return tec::DronesMilitares;
 	}
-	else if (n == "DefesasTerritoriais") {
+	else if (n == "defesas") {
 		return tec::DefesasTerritoriais;
 	}
-	else if (n == "BolsaDeValores") {
+	else if (n == "bolsa") {
 		return tec::BolsaDeValores;
 	}
-	else if (n == "BancoCentral") {
+	else if (n == "banco") {
 		return tec::BancoCentral;
 	}
 	return tec::Invalida;

@@ -9,6 +9,8 @@ class App
 	static int turnos;
 	static int anos;
 
+	static bool debugMode;
+
 	static vector<Tecnologias*> CreateTecnoList();
 	static vector<Tecnologias* > tecnologias;
 

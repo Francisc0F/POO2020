@@ -88,7 +88,6 @@ void App::Jogo() {
 	faseAtual = faseTurno::Conquistar;
 	int recolhaFeita = 0;
 
-
 	while (1) {
 
 		while (faseAtual == faseTurno::Conquistar) {
@@ -96,17 +95,23 @@ void App::Jogo() {
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno && opt != menuOpt::Lista) {
-				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
-					FaseSeguinte(&fase);
+			if (opt == menuOpt::Invalido) {
+				cout << "Comando Invalido." << endl;
+			}
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno ) {
+				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) { 
+					// se comando foi executado com sucesso
+					if (!Menu::isDebugComand(opt)) {
+						FaseSeguinte(&fase);
+					}
 				}
 			}
 
 		}
+		imperio.RecolherRecursos();
 
 		while (faseAtual == faseTurno::Recolha) {
-			if (!imperio.temTec("Bolsa de Valores")) {
-			
+			if (!imperio.temTec(tec::BolsaDeValores)) {
 				break;
 			}
 
@@ -114,13 +119,13 @@ void App::Jogo() {
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno && opt != menuOpt::Lista) {
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
 				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
-
+					
 				}
 			}
 		}
-		imperio.RecolherRecursos();
+		
 		FaseSeguinte(&fase);
 
 		int nComprasMaisMilitar = 0;
@@ -135,25 +140,28 @@ void App::Jogo() {
 				break;
 			}
 
-			if (nComprasMaisMilitar > 0 && opt == menuOpt::MaisMilitar) {
-				cout << "Comando ja feito neste Turno." << endl;
-				continue;
-			}
-			if (nComprasTec > 0 && opt == menuOpt::AdquireTec) {
+			if (nComprasMaisMilitar > 0 && opt == menuOpt::MaisMilitar 
+				|| nComprasTec > 0 && opt == menuOpt::AdquireTec) {
 				cout << "Comando ja feito neste Turno." << endl;
 				continue;
 			}
 
 	
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno && opt != menuOpt::Lista) {
+			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
 				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
 					if (opt == menuOpt::MaisMilitar) {
 						nComprasMaisMilitar++;
-					}
-
-					if (opt == menuOpt::AdquireTec) {
+					}else if (opt == menuOpt::AdquireTec) {
 						nComprasTec++;
 					}
+					else if (opt == menuOpt::Lista) {
+					}
+					else {
+
+					}
+				}
+				else {
+
 				}
 			}
 		}

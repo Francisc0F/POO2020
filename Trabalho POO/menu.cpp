@@ -85,7 +85,7 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 				}
 			}
 			else if (*ptr == "passa") {
-						return menuOpt::Passa;
+				return menuOpt::Passa;
 			}
 
 			break;
@@ -98,7 +98,7 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 			else if (*ptr == "maisouro") {
 				return menuOpt::MaisOuro;
 			}
-	
+
 			break;
 
 		}
@@ -119,12 +119,14 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 			}
 			break;
 		}
+
 		case faseTurno::Eventos:
 			break;
 		default:
 			break;
 		}
 
+		// debug
 		if (*ptr == "lista") {
 			ptr++;
 			ostringstream name;
@@ -146,6 +148,69 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 		else if (*ptr == "avanca") {
 			return menuOpt::AvancarTurno;
 		}
+		else if (*ptr == "toma") {
+			ptr++;
+			if (ptr == comand_tokens.end()) {
+				return menuOpt::Invalido;
+			}
+			else {
+				if (*ptr == "terr") {
+					ptr++;
+					if (ptr == comand_tokens.end()) {
+						return menuOpt::Invalido;
+					}
+					else {
+						values.push_back(*ptr);
+						return menuOpt::TomaTerr;
+					}
+
+				}
+				else if (*ptr == "tec") {
+					ptr++;
+					if (ptr == comand_tokens.end()) {
+						return menuOpt::Invalido;
+					}
+					else {
+						values.push_back(*ptr);
+						return menuOpt::TomaTec;
+					}
+
+				}
+			}
+
+			return menuOpt::Invalido;
+		}
+		else if (*ptr == "modifica") {
+			ptr++;
+			if (ptr == comand_tokens.end()) {
+				return menuOpt::Invalido;
+			}
+			else {
+				if (*ptr == "ouro") {
+					ptr++;
+					if (ptr == comand_tokens.end()) {
+						return menuOpt::Invalido;
+					}
+					else {
+						values.push_back(*ptr);
+						return menuOpt::ModificaOuro;
+					}
+
+				}
+				else if (*ptr == "prod") {
+					ptr++;
+					if (ptr == comand_tokens.end()) {
+						return menuOpt::Invalido;
+					}
+					else {
+						values.push_back(*ptr);
+						return menuOpt::ModificaProd;
+					}
+
+				}
+			}
+			return menuOpt::Invalido;
+		}
 		else {
 			cout << "Comando Invalido." << endl;
 			return menuOpt::Invalido;
@@ -155,7 +220,7 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 
 }
 
-bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imperio& I, vector<Tecnologias* > & tecnologias) {
+bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imperio& I, vector<Tecnologias* >& tecnologias) {
 
 	switch (opt) {
 
@@ -231,7 +296,7 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 
 		break;
 	}
-		
+
 	case menuOpt::Passa: {
 		return true;
 		break;
@@ -256,7 +321,7 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		}
 		break;
 	}
-	
+
 	case menuOpt::MaisMilitar: {
 		if (I.maisMilitar()) {
 			cout << "Adicionada unidade de forca militar." << endl;
@@ -266,13 +331,13 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		}
 		break;
 	}
-	
+
 	case menuOpt::AdquireTec: {
 
 		tec tecno = Tecnologias::tecValida(menuValues[0]);
 		if (tecno != tec::Invalida) {
-			Tecnologias* t= App::getTec(tecno);
-			if (t  != nullptr) {
+			Tecnologias* t = App::getTec(tecno);
+			if (t != nullptr) {
 				if (I.adquirirTec(tecno, t)) {
 					return true;
 				}
@@ -288,10 +353,50 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		}
 		break;
 	}
-	default: 
+
+	case menuOpt::TomaTec: {
+		tec t = Tecnologias::tecValida(menuValues[0]);
+		if (t != tec::Invalida) {
+			return I.forceAdquirirTec(App::getTec(t));
+		}
+		return false;
+		break;
+	}
+
+	case menuOpt::TomaTerr: {
+		int i = m.pesquisaTerritorio(menuValues[0]);
+		if (i > -1) {
+			return I.forceConquistaTerritorio(m.getTerritorios()[i]);
+		}
+		return false;
+		break;
+	}
+
+	case menuOpt::ModificaOuro: 
+	case menuOpt::ModificaProd: 
+		int n;
+		try {
+			n = stoi(menuValues[0]);
+
+		}
+		catch (const std::exception& e) {
+			//cout << e.what();
+			cout << "arg nao e uma valor numerico" << endl;
+			return false;
+			break;
+		}
+		if (opt == menuOpt::ModificaOuro) {
+			I.getCofre().setQuantidadeAtual(n);
+			return true;
+		}
+		I.getProdutos().setQuantidadeAtual(n);
+		return true;
+		break;
+
+	default:
 
 		break;
-	
+
 	}
 }
 
@@ -305,7 +410,7 @@ menuOpt Menu::ComandosConfig(vector<string>& values) {
 	cout << "Terminar config -> seguir" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
 	cout << "comando: ";
-	
+
 	getline(cin, cmd);
 
 	vector<string> comand_tokens;
@@ -325,10 +430,12 @@ menuOpt Menu::ComandosConfig(vector<string>& values) {
 }
 
 bool Menu::isDebugComand(menuOpt opt) {
-	return opt == menuOpt::Lista;
+	return opt == menuOpt::Lista || opt == menuOpt::ModificaOuro || 
+		opt == menuOpt::ModificaProd || opt == menuOpt::TomaTec || 
+		opt == menuOpt::TomaTerr;
 }
 
-menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio I,  int  turno) {
+menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio I, int  turno) {
 	values.clear();
 	string cmd;
 	cout << "\t\Comandos Jogo " << endl;
@@ -342,7 +449,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		break;
 	case faseTurno::Recolha:
 		// adicionar recursos
-		if (I.temTec("Bolsa Valores")) {
+		if (I.temTec(tec::BolsaDeValores)) {
 			cout << "Obter mais produtos ->  maisprod" << endl;
 			cout << "Obter mais ouro ->  maisouro" << endl;
 		}
@@ -365,8 +472,11 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 	cout << "Retomar gravacao -> ativa <nome>" << endl;
 	cout << "Apagar gravacao -> apaga <nome>" << endl;
 
-
+	cout << "--------------------------------------------" << endl;
 	cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
+	cout << "Toma de assalto tec ou terr -> toma <qual> <nome> " << endl;
+	cout << "Alterar valores -> modifica <ouro|prod> N " << endl;
+	cout << "--------------------------------------------" << endl;
 
 	cout << "Terminar fase de comandos ->  avancaFase" << endl;
 	cout << "Turno seguinte ->  avancarTurno" << endl;

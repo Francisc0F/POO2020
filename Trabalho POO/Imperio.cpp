@@ -79,6 +79,18 @@ void Imperio::conquistaTerritorio(Territorio * t) {
 		}
 	}
 }
+bool Imperio::forceConquistaTerritorio(Territorio* t) {
+	if (t == nullptr) {
+		return false;
+	}
+	if (pesquisaTerritorio(t->getNome()) > -1) {
+		cout << "Este territorio ja foi conquistado." << endl;
+		return false;
+	}
+	conquistados.push_back(t);
+	return true;
+}
+
 
 bool Imperio::maisOuro() {
 	if (Produtos.getQuantidadeAtual() >= 2) {
@@ -111,6 +123,7 @@ bool Imperio::maisMilitar() {
 	}
 	return false;
 }
+
 bool Imperio::adquirirTec(tec t, Tecnologias* pt){
 	for (size_t i = 0; i < tecnologias.size(); i++)
 	{
@@ -127,17 +140,29 @@ bool Imperio::adquirirTec(tec t, Tecnologias* pt){
 	return false;
 }
 
-bool Imperio::temTec(string n) {
+bool Imperio::forceAdquirirTec(Tecnologias* pt) {
+	if (pt != nullptr) {
+		tecnologias.push_back(pt);
+		return true;
+	}
 	return false;
 }
 
-
+bool Imperio::temTec(tec t) {
+	for (size_t i = 0; i < tecnologias.size(); i++)
+	{
+		if (tecnologias[i]->getType() == t) {
+			return true;
+		}
+	}
+	return false;
+}
 
 void Imperio::RecolherRecursos() {
 
 	for (size_t i = 0; i < conquistados.size(); i++)
 	{
-		Produtos.add(conquistados[i]->getnOuro());
+		Produtos.add(conquistados[i]->getnProdutos());
 		Cofre.add(conquistados[i]->getnOuro());
 
 	}

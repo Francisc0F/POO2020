@@ -30,7 +30,6 @@ public:
 
 	Imperio();
 
-
 	Imperio(Territorio*, Armazem& Produtos, Armazem& Ouro);
 
 	Armazem& getProdutos();
@@ -40,6 +39,8 @@ public:
 	string getForcaMilitar()const;
 
 	void conquistaTerritorio(Territorio * t);
+
+	bool forceConquistaTerritorio(Territorio * t);
 
 	void listaConquistados();
 
@@ -57,9 +58,11 @@ public:
 	
 	bool adquirirTec(tec t, Tecnologias* pt);
 
-	bool temTec(string n);
+	bool temTec(tec n);
 
 	void RecolherRecursos();
+	
+	bool forceAdquirirTec(Tecnologias* pt);
 
 	~Imperio();
 };
