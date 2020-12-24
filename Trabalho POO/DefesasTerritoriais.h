@@ -6,5 +6,7 @@ public:
 	DefesasTerritoriais();
 
 	tec getType()const;
+
+	string getDescricao()const;
 };
 

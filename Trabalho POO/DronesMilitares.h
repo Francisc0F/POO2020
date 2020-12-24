@@ -7,5 +7,7 @@ public:
 	DronesMilitares();
 
 	tec getType()const;
+
+	string getDescricao()const;
 };
 

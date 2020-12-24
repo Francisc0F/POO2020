@@ -277,8 +277,12 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		if (menuValues.empty()) {
 			//m.listaTerritorios();
 			cout << "\t\t Imperio " << endl;
+
 			I.mostraRecursos();
 			cout << I.getForcaMilitar() << endl;
+			
+			I.verTecnologias();
+		
 			//I.listaConquistados();
 		}
 		else {
@@ -338,7 +342,7 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		if (tecno != tec::Invalida) {
 			Tecnologias* t = App::getTec(tecno);
 			if (t != nullptr) {
-				if (I.adquirirTec(tecno, t)) {
+				if (I.comprarTec(tecno, t)) {
 					return true;
 				}
 				else {
@@ -358,6 +362,10 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		tec t = Tecnologias::tecValida(menuValues[0]);
 		if (t != tec::Invalida) {
 			return I.forceAdquirirTec(App::getTec(t));
+		}
+		else {
+			cout << "Tec: Nome errado." << endl;
+			return false;
 		}
 		return false;
 		break;
@@ -486,7 +494,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 	cout << "comando: ";
 
 	// usar para nao apanhar ultimo '\n'
-	// cin.ignore(numeric_limits<streamsize> ::max(), '\n');
+	//cin.ignore(numeric_limits<streamsize> ::max(), '\n');
 
 	getline(cin, cmd);
 

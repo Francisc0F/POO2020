@@ -3,11 +3,12 @@
 //
 //}
 
+
 tec Tecnologias::tecValida(string n) {
 	if (n == "missil") {
 		return tec::MisseisTeleguiados;
 	}
-	else if (n == "drone") {
+	else if (n == "drones") {
 		return tec::DronesMilitares;
 	}
 	else if (n == "defesas") {
@@ -25,6 +26,8 @@ tec Tecnologias::tecValida(string n) {
 int Tecnologias::getCusto()const {
 	return custo;
 }
-void Tecnologias::mostraTec()const {
-	
+string Tecnologias::getCustoAsString()const {
+		ostringstream oss;
+		oss << "custo :" << custo << endl;
+		return oss.str();
 }

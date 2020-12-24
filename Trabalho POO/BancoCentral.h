@@ -6,4 +6,6 @@ public:
 	BancoCentral();
 
 	tec getType()const;
+
+	string getDescricao()const;
 };

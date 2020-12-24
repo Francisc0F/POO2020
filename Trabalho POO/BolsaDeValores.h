@@ -6,5 +6,6 @@ public:
 	BolsaDeValores();
 
 	tec getType() const;
+	string getDescricao()const;
 };
 

@@ -1,9 +1,2 @@
-﻿  App.cpp
-  Menu.cpp
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(241,32): warning C4101: 'e': unreferenced local variable
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(381,32): warning C4101: 'e': unreferenced local variable
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(440,10): warning C4129: 'C': unrecognized character escape sequence
-  Generating Code...
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(400): warning C4715: 'Menu::ExecutaComando': not all control paths return a value
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(221): warning C4715: 'Menu::ProcessaComando': not all control paths return a value
+﻿  Imperio.cpp
   Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

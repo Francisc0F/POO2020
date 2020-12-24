@@ -48,7 +48,6 @@ App::App() {
 	Armazem produtos = Armazem(0);
 
 	imperio = Imperio(inicial, produtos, cofre);
-
 	
 }
 

@@ -8,7 +8,8 @@ Imperio::Imperio() {
 }
 
 Imperio::Imperio( Territorio * inicial, Armazem & Produtos, Armazem & Ouro)
-: Produtos(Produtos), Cofre(Ouro), forcaMilitar(0), capacidadeForcaMilitar(3) {
+: Produtos(Produtos), Cofre(Ouro), forcaMilitar(0),
+capacidadeForcaMilitar(3), podeConquistarIlhas(false), defesasTerritoriais(false){
 	conquistados.push_back(inicial);
 }
 
@@ -19,6 +20,16 @@ void Imperio::mostraRecursos()const {
 }
 
 void Imperio::verTecnologias()const {
+	
+	cout << "\t\t Tecnologias" << endl;
+	if (tecnologias.size() == 0) {
+		cout << "Sem tecnologias." << endl;
+	}
+	for (size_t i = 0; i < tecnologias.size(); i++)
+	{
+		 cout << tecnologias[i]->getDescricao() << endl;
+		 cout << tecnologias[i]->getCustoAsString();
+	}
 
 }
 
@@ -36,6 +47,15 @@ Armazem& Imperio::getCofre() {
 	return Cofre;
 }
 
+void Imperio::setCapacidadeForcaMilitar(int v) {
+	if (v < 0) {
+		capacidadeForcaMilitar = 0;
+	}
+	else {
+		capacidadeForcaMilitar = v;
+	}
+
+}
 
 void Imperio::listaConquistados()  {
 	vector<Territorio* >::iterator ptr;
@@ -59,11 +79,11 @@ int Imperio::pesquisaTerritorio(string nome)const {
 	return -1;
 }
 
-void Imperio::conquistaTerritorio(Territorio * t) {
+bool Imperio::conquistaTerritorio(Territorio * t) {
 
 	if (pesquisaTerritorio(t->getNome()) > -1) {
 		cout << "Este territorio ja foi conquistado." << endl;
-		return;
+		return false;
 	}
 
 	int resistencia  = (rand() % 6) + 1;
@@ -71,14 +91,17 @@ void Imperio::conquistaTerritorio(Territorio * t) {
 	if ((forcaMilitar + resistencia) >= t->getResistencia()) {
 		conquistados.push_back(t);
 		cout << "Territorio \"" << t->getNome() << "\" conquistado." << endl;
+		return true;
 	}
 	else {
 		cout << "Territorio deu muita luta. Nao foi possivel vencer." << endl;
 		if (forcaMilitar > 0) {
 			forcaMilitar--;
 		}
+		return true;
 	}
 }
+
 bool Imperio::forceConquistaTerritorio(Territorio* t) {
 	if (t == nullptr) {
 		return false;
@@ -124,7 +147,7 @@ bool Imperio::maisMilitar() {
 	return false;
 }
 
-bool Imperio::adquirirTec(tec t, Tecnologias* pt){
+bool Imperio::comprarTec(tec t, Tecnologias* pt){
 	for (size_t i = 0; i < tecnologias.size(); i++)
 	{
 		if (tecnologias[i]->getType() == t) {
@@ -134,17 +157,46 @@ bool Imperio::adquirirTec(tec t, Tecnologias* pt){
 	int c = pt->getCusto();
 	if (c <= Cofre.getQuantidadeAtual()) {
 		Cofre.rem(c);
-		tecnologias.push_back(pt);
+		addTec(pt);
 		return true;
 	}
 	return false;
 }
 
+void Imperio::addTec(Tecnologias* pt) {
+	tecnologias.push_back(pt);
+
+	switch (pt->getType())
+	{
+	case tec::BancoCentral:
+		armazensAumentados = true;
+		Cofre.setQuantidadeMax(5);
+		Produtos.setQuantidadeMax(5);
+		break;
+	case tec::BolsaDeValores:
+		trocasComerciais = true;
+		break;
+	case tec::DefesasTerritoriais:
+		defesasTerritoriais = true;
+		break;
+	case tec::MisseisTeleguiados:
+		podeConquistarIlhas = true;
+		break;
+	case tec::DronesMilitares:
+		setCapacidadeForcaMilitar(5);
+		break;
+	default:
+		break;
+	}
+	
+}
+
 bool Imperio::forceAdquirirTec(Tecnologias* pt) {
 	if (pt != nullptr) {
-		tecnologias.push_back(pt);
+		addTec(pt);
 		return true;
 	}
+	//cout << "nao foi possivel adicionar tec" << endl;
 	return false;
 }
 

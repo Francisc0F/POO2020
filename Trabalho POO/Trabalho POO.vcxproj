@@ -161,6 +161,7 @@
     <ClCompile Include="DronesMilitares.cpp" />
     <ClCompile Include="Duna.cpp" />
     <ClCompile Include="Fortaleza.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Ilha.cpp" />
     <ClCompile Include="Imperio.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="DronesMilitares.h" />
     <ClInclude Include="Duna.h" />
     <ClInclude Include="Fortaleza.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Ilha.h" />
     <ClInclude Include="Imperio.h" />
     <ClInclude Include="Menu.h" />

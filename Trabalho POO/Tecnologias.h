@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <sstream>
 using namespace std;
 
 enum class tec {
@@ -17,12 +18,13 @@ protected:
 	int custo;
 public:
 	virtual tec getType()const = 0;
+	virtual string getDescricao()const = 0;
 
 	tec static tecValida(string n);
 
 	int getCusto()const;
 
-	void mostraTec()const;
+	string getCustoAsString()const;
 
 };
 

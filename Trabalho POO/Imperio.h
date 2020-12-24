@@ -21,6 +21,14 @@ class Imperio
 
 	int forcaMilitar, capacidadeForcaMilitar;
 
+	bool podeConquistarIlhas;
+
+	bool armazensAumentados;
+
+	bool defesasTerritoriais;
+
+	bool trocasComerciais;
+
 	vector<Territorio *> conquistados;
 
 	vector<Tecnologias* > tecnologias;
@@ -38,7 +46,9 @@ public:
 
 	string getForcaMilitar()const;
 
-	void conquistaTerritorio(Territorio * t);
+	void setCapacidadeForcaMilitar(int v);
+
+	bool conquistaTerritorio(Territorio * t);
 
 	bool forceConquistaTerritorio(Territorio * t);
 
@@ -56,7 +66,9 @@ public:
 
 	bool maisMilitar();
 	
-	bool adquirirTec(tec t, Tecnologias* pt);
+	bool comprarTec(tec t, Tecnologias* pt);
+
+	void addTec(Tecnologias* pt);
 
 	bool temTec(tec n);
 
