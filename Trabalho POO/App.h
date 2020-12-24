@@ -18,10 +18,11 @@ class App
 	Menu menu;
 	Mundo mundo;
 	Imperio imperio;
-public :
-	App();
 
-	App(Mundo& m, Imperio& I, Menu & menu);
+public:
+	App(string mode);
+
+	App(Mundo& m, Imperio& I, Menu& menu);
 
 	void Jogo();
 
@@ -33,7 +34,9 @@ public :
 
 	void ConfigMundo();
 
-	void FaseSeguinte(int * fase);
+	void FaseSeguinte(int* fase);
+
+	void  TurnoSeguinte();
 
 	void Carrega(string fich);
 

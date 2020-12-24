@@ -5,11 +5,6 @@ Ilha::Ilha() {
 }
 
 
-int Ilha::getnOuro() {
-	return nOuro;
-}
-
-
-int Ilha::getnProdutos() {
-	return nProdutos;
+categoria Ilha::getCategoria()const {
+	return categoria::Ilha;
 }

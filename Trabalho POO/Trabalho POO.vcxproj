@@ -160,6 +160,7 @@
     <ClCompile Include="DefesasTerritoriais.cpp" />
     <ClCompile Include="DronesMilitares.cpp" />
     <ClCompile Include="Duna.cpp" />
+    <ClCompile Include="Eventos.cpp" />
     <ClCompile Include="Fortaleza.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Ilha.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="DefesasTerritoriais.h" />
     <ClInclude Include="DronesMilitares.h" />
     <ClInclude Include="Duna.h" />
+    <ClInclude Include="Eventos.h" />
     <ClInclude Include="Fortaleza.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Ilha.h" />

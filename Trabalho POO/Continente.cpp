@@ -8,9 +8,6 @@ Continente::Continente() {
 }
 
 
-int Continente::getnProdutos() {
-	return nProdutos;
-}
-int Continente::getnOuro() {
-	return nOuro;
+categoria Continente::getCategoria()const {
+	return categoria::Continente;
 }

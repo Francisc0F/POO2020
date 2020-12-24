@@ -12,8 +12,17 @@
 #include "App.h"
 using namespace std;
 
+string Menu::mode;
+
 Menu::Menu() {
 
+}
+Menu::Menu(string mode) {
+	Menu::mode =  mode;
+}
+
+bool Menu::isModeTest() {
+	return Menu::mode == "test";
 }
 
 menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<string>& comand_tokens) {
@@ -263,8 +272,7 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 	case menuOpt::Conquista: {
 		int index = m.pesquisaTerritorio(menuValues[0]);
 		if (index > -1) {
-			I.conquistaTerritorio(m.getTerritorios()[index]);
-			return true;
+			return I.conquistaTerritorio(m.getTerritorios()[index]);;
 		}
 		else {
 			cout << "Nao encontrou territorio com esse nome." << endl;
@@ -279,11 +287,12 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 			cout << "\t\t Imperio " << endl;
 
 			I.mostraRecursos();
-			cout << I.getForcaMilitar() << endl;
 			
-			I.verTecnologias();
+			//cout << I.getForcaMilitar() << endl;
+			
+			//I.verTecnologias();
 		
-			//I.listaConquistados();
+			I.listaConquistados();
 		}
 		else {
 			int index = m.pesquisaTerritorio(menuValues[0]);
@@ -408,7 +417,6 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 	}
 }
 
-
 menuOpt Menu::ComandosConfig(vector<string>& values) {
 	values.clear();
 	string cmd;
@@ -443,31 +451,52 @@ bool Menu::isDebugComand(menuOpt opt) {
 		opt == menuOpt::TomaTerr;
 }
 
-menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio I, int  turno) {
+menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio I, int  turno, int ano) {
 	values.clear();
 	string cmd;
-	cout << "\t\Comandos Jogo " << endl;
-	cout << "--------------------  Turno " << turno << " --- Fase " << (int)fase << "  -------------------------" << endl;
+	cout << "-------------------- Ano "<< ano << " Turno " << turno << " --- Fase " << (int)fase << "  -------------------------" << endl;
 
 	switch (fase)
 	{
 	case faseTurno::Conquistar:
-		cout << "Conquista Territorio ->  conquista <nomeTerritorio>" << endl;
-		cout << "Passar ->  passa" << endl;
+		if (Menu::isModeTest()) {
+			cout << "conquista <nomeTerritorio>" << endl;
+			cout << "passa" << endl;
+		}
+		else {
+			cout << "Conquista Territorio ->  conquista <nomeTerritorio>" << endl;
+			cout << "Passar ->  passa" << endl;
+		}
 		break;
 	case faseTurno::Recolha:
 		// adicionar recursos
-		if (I.temTec(tec::BolsaDeValores)) {
-			cout << "Obter mais produtos ->  maisprod" << endl;
-			cout << "Obter mais ouro ->  maisouro" << endl;
+		if (Menu::isModeTest()) {
+			if (I.getTemtrocasComerciais()) {
+				cout << "maisprod" << endl;
+				cout << "maisouro" << endl;
+			}
+			
 		}
 		else {
-			cout << "Compre bolsa de Valores para Obter mais opcoes." << endl;
+			if (I.getTemtrocasComerciais()) {
+				cout << "Obter mais produtos ->  maisprod" << endl;
+				cout << "Obter mais ouro ->  maisouro" << endl;
+			}
+			else {
+				cout << "Compre bolsa de Valores para Obter mais opcoes." << endl;
+			}
 		}
+	
 		break;
 	case faseTurno::Comprar:
-		cout << "Comprar unidade militar ->  maismilitar" << endl;
-		cout << "Adquirir tipo de Tecnologia ->  adquire <tipo>" << endl;
+		if (Menu::isModeTest()) {
+				cout << "maismilitar" << endl;
+				cout << "adquire <tipo>" << endl;
+		}
+		else {
+			cout << "Comprar unidade militar ->  maismilitar" << endl;
+			cout << "Adquirir tipo de Tecnologia ->  adquire <tipo>" << endl;
+		}
 		break;
 	case faseTurno::Eventos:
 		break;
@@ -475,24 +504,39 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		break;
 	}
 	cout << "--------------------------------------------" << endl;
-	// estado de jogo
-	cout << "Gravar estado de jogo -> grava <nome>" << endl;
-	cout << "Retomar gravacao -> ativa <nome>" << endl;
-	cout << "Apagar gravacao -> apaga <nome>" << endl;
+	if (Menu::isModeTest()) {
+		cout << "grava <nome>" << endl;
+		cout << "ativa <nome>" << endl;
+		cout << "apaga <nome>" << endl;
+		cout << "lista " << endl;
+		cout << "toma <qual> <nome> " << endl;
+		cout << "modifica <ouro|prod> N " << endl;
+		cout << "avancaFase" << endl;
+		cout << "avancarTurno" << endl;
+		cout << "comando: ";
+	}
+	else {
+	
+		// estado de jogo
+		cout << "Gravar estado de jogo -> grava <nome>" << endl;
+		cout << "Retomar gravacao -> ativa <nome>" << endl;
+		cout << "Apagar gravacao -> apaga <nome>" << endl;
 
-	cout << "--------------------------------------------" << endl;
-	cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
-	cout << "Toma de assalto tec ou terr -> toma <qual> <nome> " << endl;
-	cout << "Alterar valores -> modifica <ouro|prod> N " << endl;
-	cout << "--------------------------------------------" << endl;
+		cout << "--------------------------------------------" << endl;
+		cout << "Listar informacao, lista ou lista <nomeTerritorio> ->  lista " << endl;
+		cout << "Toma de assalto tec ou terr -> toma <qual> <nome> " << endl;
+		cout << "Alterar valores -> modifica <ouro|prod> N " << endl;
+		cout << "--------------------------------------------" << endl;
 
-	cout << "Terminar fase de comandos ->  avancaFase" << endl;
-	cout << "Turno seguinte ->  avancarTurno" << endl;
+		cout << "Terminar fase de comandos ->  avancaFase" << endl;
+		cout << "Turno seguinte ->  avancarTurno" << endl;
 
-	cout << "Sair -> x" << endl;
-	cout << "----------------------------------------------------------------------" << endl;
-	cout << "comando: ";
+		cout << "Sair -> x" << endl;
+		cout << "----------------------------------------------------------------------" << endl;
+		cout << "comando: ";
 
+	}
+	
 	// usar para nao apanhar ultimo '\n'
 	//cin.ignore(numeric_limits<streamsize> ::max(), '\n');
 

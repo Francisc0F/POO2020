@@ -11,3 +11,7 @@ TerritorioInicial::TerritorioInicial() {
 tipoTerritorio TerritorioInicial::getType()const {
 	return tipoTerritorio::Inicial;
 }
+
+categoria TerritorioInicial::getCategoria()const {
+	return categoria::Inicial;
+}

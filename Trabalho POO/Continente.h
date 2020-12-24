@@ -8,7 +8,6 @@ class Continente : public Territorio
 public: 
 	Continente();
 
-	 int getnProdutos();
-	 int getnOuro();
+	categoria getCategoria()const;
 };
 

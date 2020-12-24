@@ -37,10 +37,15 @@ enum class faseTurno {
 
 class Menu
 {
+	static string mode;
 public:
 	Menu();
+
+	Menu(string mode);
 	// comandos
-	menuOpt static RecebeComandosJogo(vector<string> & values, faseTurno fase,Imperio I,  int turno);
+	bool static isModeTest();
+
+	menuOpt static RecebeComandosJogo(vector<string> & values, faseTurno fase,Imperio I,  int turno, int ano);
 
 	menuOpt static ProcessaComando(vector<string>& values, faseTurno fase, vector<string>& comand_tokens);
 

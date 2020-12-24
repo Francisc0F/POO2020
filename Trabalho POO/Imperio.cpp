@@ -13,6 +13,10 @@ capacidadeForcaMilitar(3), podeConquistarIlhas(false), defesasTerritoriais(false
 	conquistados.push_back(inicial);
 }
 
+bool Imperio::getTemtrocasComerciais() {
+	return trocasComerciais;
+}
+
 void Imperio::mostraRecursos()const {
 	cout << "\t\t Recursos Materiais" << endl;
 	cout << "Produtos: " << Produtos.info() << endl;
@@ -58,8 +62,11 @@ void Imperio::setCapacidadeForcaMilitar(int v) {
 }
 
 void Imperio::listaConquistados()  {
+	cout << "\t\t Conquistados " << endl;
+
 	vector<Territorio* >::iterator ptr;
 	ptr = conquistados.begin();
+
 	if (conquistados.empty()) {
 		cout << "Ainda nao foram conquistados Territorios." << endl;
 		return;
@@ -80,11 +87,16 @@ int Imperio::pesquisaTerritorio(string nome)const {
 }
 
 bool Imperio::conquistaTerritorio(Territorio * t) {
-
+	
+	if (t->getCategoria() == categoria::Ilha && !podeConquistarIlhas) {
+		cout << "Necessita tec Misseis para conquistar este territorio." << endl;
+		return false;
+	}
 	if (pesquisaTerritorio(t->getNome()) > -1) {
 		cout << "Este territorio ja foi conquistado." << endl;
 		return false;
 	}
+
 
 	int resistencia  = (rand() % 6) + 1;
 	cout << "fator sorte: " << resistencia << "t->getResistencia() : " << t->getResistencia() << endl;

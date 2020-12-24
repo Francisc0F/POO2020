@@ -1,6 +1,6 @@
 #include "BancoCentral.h"
 BancoCentral::BancoCentral() {
-	custo = 4;
+	custo = 2;
 }
 
 string BancoCentral::getDescricao()const {

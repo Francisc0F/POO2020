@@ -20,10 +20,9 @@
 using namespace std;
 
 int main(){
-	App jogo = App();
+	App jogo = App("test");
 	jogo.Carrega("config3.txt");
 	jogo.ConfigMundo();
 	jogo.Jogo();
-
 
 }

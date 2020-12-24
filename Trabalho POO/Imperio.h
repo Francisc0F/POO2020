@@ -73,6 +73,8 @@ public:
 	bool temTec(tec n);
 
 	void RecolherRecursos();
+
+	bool getTemtrocasComerciais();
 	
 	bool forceAdquirirTec(Tecnologias* pt);
 

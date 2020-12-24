@@ -33,9 +33,9 @@ vector<Tecnologias*> App::CreateTecnoList()
 vector<Tecnologias* > App::tecnologias = CreateTecnoList();
 
 
-App::App() {
+App::App(string mode) {
 	mundo = Mundo();
-	menu = Menu();
+	menu = Menu(mode);
 	
 	faseAtual = faseTurno::Config;
 
@@ -81,6 +81,17 @@ void App::FaseSeguinte(int* fase) {
 	faseAtual = (faseTurno)(*fase);
 }
 
+void App::TurnoSeguinte() {
+	if ((turnos + 1) > 6) {
+		turnos = 1;
+		anos++;
+	}
+	else {
+		turnos++;
+	}
+}
+
+
 void App::Jogo() {
 	vector<string> menuValues;
 	int fase = 1;
@@ -90,7 +101,7 @@ void App::Jogo() {
 	while (1) {
 
 		while (faseAtual == faseTurno::Conquistar) {
-			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos);
+			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos, anos);
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
@@ -114,7 +125,7 @@ void App::Jogo() {
 				break;
 			}
 
-			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos);
+			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos, anos);
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
@@ -132,7 +143,7 @@ void App::Jogo() {
 
 		while (faseAtual == faseTurno::Comprar) {
 
-			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos);
+			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos, anos);
 	
 			if (opt == menuOpt::AvancarFase) {
 				FaseSeguinte(&fase);
@@ -170,7 +181,7 @@ void App::Jogo() {
 
 		fase = 0;
 		FaseSeguinte(&fase);
-		turnos++;
+		TurnoSeguinte();
 	}
 	/*if (opt == menuOpt::Invalido) {
 		cout << "apagar territorios" << endl;
@@ -232,4 +243,5 @@ void App::Carrega(string fich) {
 	vector<string> v;
 	v.push_back(fich);
 	Menu::ExecutaComando(menuOpt::CarregaComand, v, mundo, imperio, tecnologias);
+	cout << "-------------------------------------------" << endl;
 }

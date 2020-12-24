@@ -21,6 +21,12 @@ enum class tipoTerritorio {
 	Invalido
 };
 
+enum class categoria {
+	Ilha,
+	Continente,
+	Inicial
+};
+
 
 class Territorio
 {
@@ -44,6 +50,8 @@ public:
 	int getnProdutos()const;
 	int getnOuro()const;
 	virtual tipoTerritorio getType()const = 0;
+
+	virtual categoria getCategoria()const = 0;
 
 	int getpontos()const;
 	int getResistencia()const;

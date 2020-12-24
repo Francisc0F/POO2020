@@ -6,5 +6,7 @@ public:
 	TerritorioInicial();
 
 	tipoTerritorio getType()const;
+
+	categoria getCategoria()const;
 };
 

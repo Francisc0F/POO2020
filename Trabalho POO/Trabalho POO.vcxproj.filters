@@ -90,6 +90,12 @@
     <ClCompile Include="BancoCentral.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Eventos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -162,6 +168,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BancoCentral.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Eventos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
