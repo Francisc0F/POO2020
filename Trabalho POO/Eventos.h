@@ -5,13 +5,16 @@ enum class tipoEvento {
 	RecursoAbandonado,
 	Invasao,
 	Alianca,
-	Nenhum
+	Nenhum,
+	Invalido
 };
 
 class Eventos
 {
 public:
 	virtual tipoEvento getType()const = 0;
+
+	static tipoEvento validaEvento(string n);
 
 	virtual string getDescricao()const = 0;
 };

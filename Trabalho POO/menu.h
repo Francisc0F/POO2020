@@ -22,6 +22,8 @@ enum class menuOpt {
 	ModificaOuro,
 	ModificaProd,
 
+	ForcaEvento,
+
 	AvancarTurno,
 	AvancarFase,
 	Invalido

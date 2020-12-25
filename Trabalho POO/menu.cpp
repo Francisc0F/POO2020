@@ -220,6 +220,14 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 			}
 			return menuOpt::Invalido;
 		}
+		else if (*ptr == "fevento") {
+			ptr++;
+			if (ptr == comand_tokens.end()) {
+				return menuOpt::Invalido;
+			}
+			values.push_back(*ptr);
+			return menuOpt::ForcaEvento;
+		}
 		else {
 			cout << "Comando Invalido." << endl;
 			return menuOpt::Invalido;
@@ -409,7 +417,27 @@ bool Menu::ExecutaComando(menuOpt opt, vector<string>& menuValues, Mundo& m, Imp
 		I.getProdutos().setQuantidadeAtual(n);
 		return true;
 		break;
+	case menuOpt::ForcaEvento:
+		tipoEvento e = Eventos::validaEvento(menuValues[0]);
+		if (e != tipoEvento::Invalido) {
+			switch (e)
+			{
+			case tipoEvento::RecursoAbandonado:
 
+				break;
+			case tipoEvento::Invasao:
+				break;
+			case tipoEvento::Alianca:
+				break;
+			default:
+				break;
+			}
+		}
+		else {
+			cout << "nome evento Invalido, tente -> alianca, invasao, recurso" << endl;
+			return false;
+		}
+		break;
 	default:
 
 		break;
@@ -511,6 +539,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "lista " << endl;
 		cout << "toma <qual> <nome> " << endl;
 		cout << "modifica <ouro|prod> N " << endl;
+		cout << "fevento <nome-evento>" << endl;
 		cout << "avancaFase" << endl;
 		cout << "avancarTurno" << endl;
 		cout << "comando: ";
@@ -530,6 +559,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 
 		cout << "Terminar fase de comandos ->  avancaFase" << endl;
 		cout << "Turno seguinte ->  avancarTurno" << endl;
+		cout << "fevento <nome-evento>" << endl;
 
 		cout << "Sair -> x" << endl;
 		cout << "----------------------------------------------------------------------" << endl;

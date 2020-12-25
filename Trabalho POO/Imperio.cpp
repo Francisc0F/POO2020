@@ -17,6 +17,11 @@ bool Imperio::getTemtrocasComerciais() {
 	return trocasComerciais;
 }
 
+bool Imperio::getTemDefesasTerritoriais() {
+	return defesasTerritoriais;
+}
+
+
 void Imperio::mostraRecursos()const {
 	cout << "\t\t Recursos Materiais" << endl;
 	cout << "Produtos: " << Produtos.info() << endl;
@@ -52,7 +57,11 @@ Armazem& Imperio::getCofre() {
 }
 
 Territorio* Imperio::getUltimoConquistado() {
-	return conquistados[conquistados.size()];
+	return conquistados[conquistados.size() - 1];
+}
+
+void Imperio::RemoveUltimoConquistado() {
+	 conquistados.pop_back();
 }
 
 void Imperio::setCapacidadeForcaMilitar(int v) {
@@ -63,6 +72,17 @@ void Imperio::setCapacidadeForcaMilitar(int v) {
 		capacidadeForcaMilitar = v;
 	}
 
+}
+void Imperio::setForcaMilitar(int v) {
+	if (v > capacidadeForcaMilitar) {
+		forcaMilitar = capacidadeForcaMilitar;
+	}
+	else {
+		forcaMilitar = v < 0 ? 0 : v;
+	}
+}
+void Imperio::addForcaMilitar(int v) {
+	setForcaMilitar(forcaMilitar + v);
 }
 
 void Imperio::listaConquistados()  {

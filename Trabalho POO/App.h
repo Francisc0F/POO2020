@@ -9,6 +9,7 @@ class App
 {
 	static int turnos;
 	static int anos;
+	static bool jogoTerminou;
 
 	static bool debugMode;
 
@@ -44,12 +45,22 @@ public:
 
 	void Carrega(string fich);
 
-	void GerarEvento();
+	void GerarEvento(string & evento);
 
 	static Tecnologias* getTec(tec t);
 
 	static int getTurno();
 
 	static int getAno();
+
+	bool ExecutaComando(menuOpt opt, vector<string>& menuValues);
+
+	// eventos
+	void EventoAlianca();
+	
+	void EventoInvasao(string& info);
+
+	void EventoRecursoAbandonado();
+
 };
 

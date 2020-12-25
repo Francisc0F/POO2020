@@ -24,6 +24,7 @@
 
 int App::turnos = 1;
 int App::anos = 1;
+bool App::jogoTerminou = false;
 
 vector<Tecnologias*> App::CreateTecnoList()
 {
@@ -141,9 +142,14 @@ void App::Jogo() {
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
+			if (opt == menuOpt::AvancarFase) {
+				FaseSeguinte(&fase);
+				break;
+			}
 			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
 				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
-					
+					FaseSeguinte(&fase);
+					break;
 				}
 			}
 		}
@@ -189,7 +195,12 @@ void App::Jogo() {
 		}
 		// fase eventos
 
-
+		string acontecimento;
+		GerarEvento(acontecimento);
+		if (acontecimento == "InicialConquistado") {
+			cout << "Terreno inicial conquista numa invasao. Perdeu " << endl;
+			break;
+		}
 		fase = 0;
 		FaseSeguinte(&fase);
 
@@ -202,34 +213,70 @@ void App::Jogo() {
 	}*/
 }
 
-void App::GerarEvento() {
+void App::EventoAlianca() {
+	imperio.addForcaMilitar(1);
+}
+
+void App::EventoInvasao( string & evento) {
+	Territorio* t = imperio.getUltimoConquistado();
+
+	int ataque = (rand() % 6) + 1;
+	int forcaAtaque = anos == 1 ? 2 : 3;
+
+	bool temDefesas = imperio.getTemDefesasTerritoriais();
+
+	int resistencia = temDefesas ? t->getResistencia() + 1 : t->getResistencia();
+
+	cout << "ataque : " << (ataque + forcaAtaque) << " defesa: " << resistencia << endl;
+
+	if ((ataque + forcaAtaque) >= resistencia) {
+		imperio.RemoveUltimoConquistado();
+		evento = "Conquistado";
+		if (t->getType() == tipoTerritorio::Inicial) {
+			evento = "InicialConquistado";
+		}
+	}
+	else {
+		evento = "NadaConquistado";
+	}
+}
+
+void App::EventoRecursoAbandonado() {
+	if (anos == 1) {
+		imperio.getProdutos().add(1);
+	}
+	else {
+		imperio.getCofre().add(1);
+	}
+}
+
+void App::GerarEvento(string & evento) {
 	int random = (rand() % 4) + 1;
 
-	if (random == 4) {
+	random--;
+	if (random == 3) {
 		cout << "Sem eventos." << endl;
+		evento = "sem Evento";
 		return;
 	}
 	else {
-		cout << "Evento Escolhido: " << endl;
-		cout << eventos[random]->getDescricao();
+		cout << "Evento Escolhido: " << random << endl;
+		cout << App::eventos[random]->getDescricao() << endl;
 
-		switch (eventos[random]->getType())
+		switch (App::eventos[random]->getType())
 		{
 		case tipoEvento::Alianca:
-			
+			EventoAlianca();
+			evento = "alianca";
 			break;
 		case tipoEvento::Invasao: {
-			Territorio* t = imperio.getUltimoConquistado();
+			EventoInvasao(evento);
 			break;
 
 		}
 		case tipoEvento::RecursoAbandonado: 
-			if (anos == 1) {
-				imperio.getProdutos().add(1);
-			}
-			else {
-				imperio.getCofre().add(1);
-			}
+			EventoRecursoAbandonado();
+			evento = "Recurso Abandonado";
 			break;
 		}
 	}
@@ -283,6 +330,215 @@ void App::AtualizarProducoes(){
 void App::RecolherRecursoDoImperio() {
 	imperio.RecolherRecursos();
 }
+
+bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
+
+	switch (opt) {
+
+	case menuOpt::CarregaComand: {
+		if (mundo.LerComandosFich(menuValues[0], mundo, imperio, tecnologias)) {
+			return true;
+		}
+		break;
+	}
+
+	case menuOpt::Cria: {
+		string tipo = menuValues[0];
+		int n;
+		try {
+			n = stoi(menuValues[1]);
+
+		}
+		catch (const std::exception& e) {
+			//cout << e.what();
+			cout << "segundo arg nao e uma valor numerico" << endl;
+			return false;
+			break;
+		}
+
+		tipoTerritorio t = Territorio::validaTipoTerritorio(tipo);
+		if (t == tipoTerritorio::Invalido) {
+			cout << "tipo Invalido" << endl;
+			return false;
+			break;
+		}
+
+		if (n > 0) {
+			m.addNTerritorios(n, t);
+			//m.listaTerritorios();
+			return true;
+		}
+		break;
+	}
+
+	case menuOpt::Conquista: {
+		int index = mundo.pesquisaTerritorio(menuValues[0]);
+		if (index > -1) {
+			return imperio.conquistaTerritorio(mundo.getTerritorios()[index]);;
+		}
+		else {
+			cout << "Nao encontrou territorio com esse nome." << endl;
+			return false;
+		}
+		break;
+	}
+
+	case menuOpt::Lista: {
+		if (menuValues.empty()) {
+			//m.listaTerritorios();
+			cout << "\t\t Imperio " << endl;
+
+			imperio.mostraRecursos();
+
+			//cout << I.getForcaMilitar() << endl;
+
+			//I.verTecnologias();
+
+			imperio.listaConquistados();
+		}
+		else {
+			int index = mundo.pesquisaTerritorio(menuValues[0]);
+			if (index > -1) {
+				cout << mundo.getTerritorios()[index]->getAsString();
+				return true;
+			}
+			else {
+				cout << "Nao existe territorio." << endl;
+				return false;
+			}
+
+		}
+
+		break;
+	}
+
+	case menuOpt::Passa: {
+		return true;
+		break;
+	}
+
+	case menuOpt::MaisOuro: {
+		if (imperio.maisOuro()) {
+			cout << "troca feita. Produtos -> " << imperio.getCofre().getQuantidadeAtual() << endl;
+		}
+		else {
+			cout << "Sem recursos para fazer troca." << endl;
+		}
+		break;
+	}
+
+	case menuOpt::MaisProd: {
+		if (imperio.maisProdutos()) {
+			cout << "troca feita. Produtos -> " << imperio.getProdutos().getQuantidadeAtual() << endl;
+		}
+		else {
+			cout << "Sem recursos para fazer troca." << endl;
+		}
+		break;
+	}
+
+	case menuOpt::MaisMilitar: {
+		if (imperio.maisMilitar()) {
+			cout << "Adicionada unidade de forca militar." << endl;
+		}
+		else {
+			cout << "Nao foi possivel adicionar unidade militar." << endl;
+		}
+		break;
+	}
+
+	case menuOpt::AdquireTec: {
+
+		tec tecno = Tecnologias::tecValida(menuValues[0]);
+		if (tecno != tec::Invalida) {
+			Tecnologias* t = App::getTec(tecno);
+			if (t != nullptr) {
+				if (imperio.comprarTec(tecno, t)) {
+					return true;
+				}
+				else {
+					cout << "Nao foi Possivel obter a tecnologia." << endl;
+					return false;
+				}
+			}
+
+		}
+		else {
+			return false;
+		}
+		break;
+	}
+
+	case menuOpt::TomaTec: {
+		tec t = Tecnologias::tecValida(menuValues[0]);
+		if (t != tec::Invalida) {
+			return imperio.forceAdquirirTec(App::getTec(t));
+		}
+		else {
+			cout << "Tec: Nome errado." << endl;
+			return false;
+		}
+		return false;
+		break;
+	}
+
+	case menuOpt::TomaTerr: {
+		int i = mundo.pesquisaTerritorio(menuValues[0]);
+		if (i > -1) {
+			return imperio.forceConquistaTerritorio(mundo.getTerritorios()[i]);
+		}
+		return false;
+		break;
+	}
+
+	case menuOpt::ModificaOuro:
+	case menuOpt::ModificaProd:
+		int n;
+		try {
+			n = stoi(menuValues[0]);
+
+		}
+		catch (const std::exception& e) {
+			//cout << e.what();
+			cout << "arg nao e uma valor numerico" << endl;
+			return false;
+			break;
+		}
+		if (opt == menuOpt::ModificaOuro) {
+			imperio.getCofre().setQuantidadeAtual(n);
+			return true;
+		}
+		imperio.getProdutos().setQuantidadeAtual(n);
+		return true;
+		break;
+	case menuOpt::ForcaEvento:
+		tipoEvento e = Eventos::validaEvento(menuValues[0]);
+		if (e != tipoEvento::Invalido) {
+			switch (e)
+			{
+			case tipoEvento::RecursoAbandonado:
+
+				break;
+			case tipoEvento::Invasao:
+				break;
+			case tipoEvento::Alianca:
+				break;
+			default:
+				break;
+			}
+		}
+		else {
+			cout << "nome evento Invalido, tente -> alianca, invasao, recurso" << endl;
+			return false;
+		}
+		break;
+	default:
+
+		break;
+
+	}
+}
+
 
 void App::Carrega(string fich) {
 	vector<string> v;

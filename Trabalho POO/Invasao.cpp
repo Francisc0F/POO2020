@@ -15,8 +15,7 @@ tipoEvento Invasao::getType()const {
 
 string Invasao::getDescricao()const {
 	ostringstream oss;
-	oss << "um recurso abandonado foi encontrado e fornece ao império" <<
-		"uma unidade de produtos ou de ouro conforme for encontrado no primeiro ano do" <<
-		"jogo(produto) ou no segundo(ouro). ";
+	oss << "um qualquer outro império concorrente, do qual nem sequer existe qualquer" << endl 
+		<<  "registo, está a tentar conquistar um dos territórios do jogador.";
 	return oss.str();
 }

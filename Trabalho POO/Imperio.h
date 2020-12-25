@@ -34,8 +34,6 @@ class Imperio
 
 	vector<Tecnologias* > tecnologias;
 
-	vector<Eventos* > eventosGerados;
-
 
 public:
 
@@ -51,11 +49,17 @@ public:
 
 	void setCapacidadeForcaMilitar(int v);
 
+	void setForcaMilitar(int v);
+
+	void addForcaMilitar(int v);
+
 	bool conquistaTerritorio(Territorio * t);
 
 	bool forceConquistaTerritorio(Territorio * t);
 
 	Territorio* getUltimoConquistado();
+
+	void RemoveUltimoConquistado();
 
 	void listaConquistados();
 
@@ -76,6 +80,8 @@ public:
 	void addTec(Tecnologias* pt);
 
 	bool temTec(tec n);
+
+	bool getTemDefesasTerritoriais();
 
 	void RecolherRecursos();
 
