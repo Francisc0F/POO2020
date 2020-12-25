@@ -10,6 +10,7 @@
 #include <iterator>
 #include "Armazem.h"
 #include "Tecnologias.h"
+#include "Eventos.h"
 using namespace std;
 
 class Territorio;
@@ -33,6 +34,8 @@ class Imperio
 
 	vector<Tecnologias* > tecnologias;
 
+	vector<Eventos* > eventosGerados;
+
 
 public:
 
@@ -51,6 +54,8 @@ public:
 	bool conquistaTerritorio(Territorio * t);
 
 	bool forceConquistaTerritorio(Territorio * t);
+
+	Territorio* getUltimoConquistado();
 
 	void listaConquistados();
 

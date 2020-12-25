@@ -96,6 +96,15 @@
     <ClCompile Include="Eventos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RecursoAbandonado.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Invasao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AliancaDiplomatica.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -174,6 +183,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Eventos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RecursoAbandonado.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Invasao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AliancaDiplomatica.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,6 +13,11 @@
 #include "BancoCentral.h"
 
 #include "Tecnologias.h"
+#include "Eventos.h"
+
+#include "RecursoAbandonado.h"
+#include "Invasao.h"
+#include "AliancaDiplomatica.h"
 
 
 #include "Menu.h"
@@ -31,6 +36,16 @@ vector<Tecnologias*> App::CreateTecnoList()
 	return v;
 }
 vector<Tecnologias* > App::tecnologias = CreateTecnoList();
+
+vector<Eventos*> App::CreateEventosList()
+{
+	vector<Eventos*> v;
+	v.push_back(new RecursoAbandonado());
+	v.push_back(new Invasao());
+	v.push_back(new AliancaDiplomatica());
+	return v;	
+}
+vector<Eventos* > App::eventos = CreateEventosList();
 
 
 App::App(string mode) {
@@ -61,8 +76,6 @@ Tecnologias* App::getTec(tec t) {
 	return nullptr;
 }
 
-
-
 void App::ConfigMundo() {
 	vector<string> menuValues;
 	while (1) {
@@ -90,7 +103,6 @@ void App::TurnoSeguinte() {
 		turnos++;
 	}
 }
-
 
 void App::Jogo() {
 	vector<string> menuValues;
@@ -176,11 +188,11 @@ void App::Jogo() {
 			}
 		}
 		// fase eventos
-		
 
 
 		fase = 0;
 		FaseSeguinte(&fase);
+
 		TurnoSeguinte();
 	}
 	/*if (opt == menuOpt::Invalido) {
@@ -188,6 +200,39 @@ void App::Jogo() {
 		m.~Mundo();
 		I.~Imperio();
 	}*/
+}
+
+void App::GerarEvento() {
+	int random = (rand() % 4) + 1;
+
+	if (random == 4) {
+		cout << "Sem eventos." << endl;
+		return;
+	}
+	else {
+		cout << "Evento Escolhido: " << endl;
+		cout << eventos[random]->getDescricao();
+
+		switch (eventos[random]->getType())
+		{
+		case tipoEvento::Alianca:
+			
+			break;
+		case tipoEvento::Invasao: {
+			Territorio* t = imperio.getUltimoConquistado();
+			break;
+
+		}
+		case tipoEvento::RecursoAbandonado: 
+			if (anos == 1) {
+				imperio.getProdutos().add(1);
+			}
+			else {
+				imperio.getCofre().add(1);
+			}
+			break;
+		}
+	}
 }
 
 void App::AtualizarProducoes(){

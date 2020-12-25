@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AliancaDiplomatica.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Armazem.cpp" />
     <ClCompile Include="BancoCentral.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Ilha.cpp" />
     <ClCompile Include="Imperio.cpp" />
+    <ClCompile Include="Invasao.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Militar.cpp" />
     <ClCompile Include="Mina.cpp" />
@@ -173,6 +175,7 @@
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Pescaria.cpp" />
     <ClCompile Include="Planicie.cpp" />
+    <ClCompile Include="RecursoAbandonado.cpp" />
     <ClCompile Include="Refugio.cpp" />
     <ClCompile Include="Tecnologias.cpp" />
     <ClCompile Include="Territorio.cpp" />
@@ -180,6 +183,7 @@
     <ClCompile Include="Trabalho POO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AliancaDiplomatica.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Armazem.h" />
     <ClInclude Include="BancoCentral.h" />
@@ -194,6 +198,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Ilha.h" />
     <ClInclude Include="Imperio.h" />
+    <ClInclude Include="Invasao.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Militar.h" />
     <ClInclude Include="Mina.h" />
@@ -202,6 +207,7 @@
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Pescaria.h" />
     <ClInclude Include="Planicie.h" />
+    <ClInclude Include="RecursoAbandonado.h" />
     <ClInclude Include="Refugio.h" />
     <ClInclude Include="Tecnologias.h" />
     <ClInclude Include="Territorio.h" />

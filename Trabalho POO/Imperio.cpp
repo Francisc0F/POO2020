@@ -51,6 +51,10 @@ Armazem& Imperio::getCofre() {
 	return Cofre;
 }
 
+Territorio* Imperio::getUltimoConquistado() {
+	return conquistados[conquistados.size()];
+}
+
 void Imperio::setCapacidadeForcaMilitar(int v) {
 	if (v < 0) {
 		capacidadeForcaMilitar = 0;
@@ -99,7 +103,7 @@ bool Imperio::conquistaTerritorio(Territorio * t) {
 
 
 	int resistencia  = (rand() % 6) + 1;
-	cout << "fator sorte: " << resistencia << "t->getResistencia() : " << t->getResistencia() << endl;
+	cout << "fator sorte: " << resistencia << " t->getResistencia : " << t->getResistencia() << endl;
 	if ((forcaMilitar + resistencia) >= t->getResistencia()) {
 		conquistados.push_back(t);
 		cout << "Territorio \"" << t->getNome() << "\" conquistado." << endl;
