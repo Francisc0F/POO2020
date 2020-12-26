@@ -102,43 +102,43 @@ void Mundo::listaTerritorios() {
 //	return true;
 //}
 
-bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I,  vector<Tecnologias* > & tecnologias) {
-	ifstream dados(nomef);
-	if (!dados.is_open()) {
-		cout << "error abrir ficheiro: " << nomef << endl;
-		return false;
-	}
-	string line;
-	string comando;
-
-	// cria planicie 2
-
-	while (!dados.eof()) {
-
-		getline(dados, line);
-		cout << line << endl;
-
-		istringstream iss(line);
-		vector<string> comand_tokens;
-
-
-		if (line == "") {
-			cout << "error leitura: " << nomef;
-			return false;
-		}
-
-		copy(istream_iterator<string>(iss),
-			istream_iterator<string>(),
-			back_inserter(comand_tokens));
-		vector<string> values;
-		values.clear();
-
-		menuOpt opt =  Menu::ProcessaComando(values, faseTurno::Config,  comand_tokens);
-		Menu::ExecutaComando(opt, values, m, I, tecnologias);
-
-	}
-	dados.close();
-
-	return true;
-
-}
+//bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I,  vector<Tecnologias* > & tecnologias) {
+//	ifstream dados(nomef);
+//	if (!dados.is_open()) {
+//		cout << "error abrir ficheiro: " << nomef << endl;
+//		return false;
+//	}
+//	string line;
+//	string comando;
+//
+//	// cria planicie 2
+//
+//	while (!dados.eof()) {
+//
+//		getline(dados, line);
+//		cout << line << endl;
+//
+//		istringstream iss(line);
+//		vector<string> comand_tokens;
+//
+//
+//		if (line == "") {
+//			cout << "error leitura: " << nomef;
+//			return false;
+//		}
+//
+//		copy(istream_iterator<string>(iss),
+//			istream_iterator<string>(),
+//			back_inserter(comand_tokens));
+//		vector<string> values;
+//		values.clear();
+//
+//		menuOpt opt =  Menu::ProcessaComando(values, faseTurno::Config,  comand_tokens);
+//		Menu::ExecutaComando(opt, values, m, I, tecnologias);
+//
+//	}
+//	dados.close();
+//
+//	return true;
+//
+//}

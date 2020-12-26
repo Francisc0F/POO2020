@@ -55,12 +55,15 @@ public:
 
 	bool ExecutaComando(menuOpt opt, vector<string>& menuValues);
 
+	bool LerComandosFich(string nomef);
 	// eventos
 	void EventoAlianca();
 	
 	void EventoInvasao(string& info);
 
 	void EventoRecursoAbandonado();
+
+	void RelatorioFinal(bool ganhou);
 
 };
 

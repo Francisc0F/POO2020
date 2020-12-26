@@ -35,7 +35,7 @@ public:
 
 	bool LerFich(string nomef);
 	
-	bool LerComandosFich(string nomef, Mundo & m, Imperio & I, vector<Tecnologias* >& tecnologias);
+//	bool LerComandosFich(string nomef, Mundo & m, Imperio & I, vector<Tecnologias* >& tecnologias);
 
 	//getters
 	vector<Territorio*>& getTerritorios();

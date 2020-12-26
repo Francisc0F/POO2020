@@ -85,7 +85,7 @@ void App::ConfigMundo() {
 			break;
 		}
 		if (opt != menuOpt::Invalido) {
-			Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias);
+			ExecutaComando(opt, menuValues);
 		}
 	}
 }
@@ -122,7 +122,7 @@ void App::Jogo() {
 				cout << "Comando Invalido." << endl;
 			}
 			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno ) {
-				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) { 
+				if (ExecutaComando(opt, menuValues)) { 
 					// se comando foi executado com sucesso
 					if (!Menu::isDebugComand(opt)) {
 						FaseSeguinte(&fase);
@@ -147,7 +147,7 @@ void App::Jogo() {
 				break;
 			}
 			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
-				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
+				if (ExecutaComando(opt, menuValues)) {
 					FaseSeguinte(&fase);
 					break;
 				}
@@ -176,7 +176,7 @@ void App::Jogo() {
 
 	
 			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
-				if (Menu::ExecutaComando(opt, menuValues, mundo, imperio, tecnologias)) {
+				if (ExecutaComando(opt, menuValues)) {
 					if (opt == menuOpt::MaisMilitar) {
 						nComprasMaisMilitar++;
 					}else if (opt == menuOpt::AdquireTec) {
@@ -331,12 +331,53 @@ void App::RecolherRecursoDoImperio() {
 	imperio.RecolherRecursos();
 }
 
+bool App::LerComandosFich(string nomef) {
+	ifstream dados(nomef);
+	if (!dados.is_open()) {
+		cout << "error abrir ficheiro: " << nomef << endl;
+		return false;
+	}
+	string line;
+	string comando;
+
+	// cria planicie 2
+
+	while (!dados.eof()) {
+
+		getline(dados, line);
+		cout << line << endl;
+
+		istringstream iss(line);
+		vector<string> comand_tokens;
+
+
+		if (line == "") {
+			cout << "error leitura: " << nomef;
+			return false;
+		}
+
+		copy(istream_iterator<string>(iss),
+			istream_iterator<string>(),
+			back_inserter(comand_tokens));
+		vector<string> values;
+		values.clear();
+
+		menuOpt opt = Menu::ProcessaComando(values, faseTurno::Config, comand_tokens);
+		ExecutaComando(opt, values);
+
+	}
+	dados.close();
+
+	return true;
+
+}
+
 bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 
 	switch (opt) {
 
 	case menuOpt::CarregaComand: {
-		if (mundo.LerComandosFich(menuValues[0], mundo, imperio, tecnologias)) {
+		if (LerComandosFich(menuValues[0])) {
 			return true;
 		}
 		break;
@@ -364,7 +405,7 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		}
 
 		if (n > 0) {
-			m.addNTerritorios(n, t);
+			mundo.addNTerritorios(n, t);
 			//m.listaTerritorios();
 			return true;
 		}
@@ -511,27 +552,35 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		imperio.getProdutos().setQuantidadeAtual(n);
 		return true;
 		break;
-	case menuOpt::ForcaEvento:
+	case menuOpt::ForcaEvento: {
+
 		tipoEvento e = Eventos::validaEvento(menuValues[0]);
 		if (e != tipoEvento::Invalido) {
 			switch (e)
 			{
 			case tipoEvento::RecursoAbandonado:
-
+				EventoRecursoAbandonado();
 				break;
-			case tipoEvento::Invasao:
+			case tipoEvento::Invasao: {
+				string info;
+				EventoInvasao(info);
+				cout << info << endl;
 				break;
+			}
 			case tipoEvento::Alianca:
+				EventoAlianca();
 				break;
 			default:
 				break;
 			}
+			return true;
 		}
 		else {
 			cout << "nome evento Invalido, tente -> alianca, invasao, recurso" << endl;
 			return false;
 		}
 		break;
+	}
 	default:
 
 		break;
@@ -539,10 +588,21 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 	}
 }
 
-
 void App::Carrega(string fich) {
 	vector<string> v;
 	v.push_back(fich);
-	Menu::ExecutaComando(menuOpt::CarregaComand, v, mundo, imperio, tecnologias);
+	ExecutaComando(menuOpt::CarregaComand, v);
 	cout << "-------------------------------------------" << endl;
+}
+
+void App::RelatorioFinal(bool ganhou) {
+	int pontos = 0;
+	if (ganhou) {
+		cout << "\t\tGANHOU! " << endl;
+	}
+	else {
+		cout << "\t\tPERDEU! " << endl;
+	}
+	cout << "Pontos: " << pontos << endl;
+
 }
