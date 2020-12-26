@@ -19,7 +19,6 @@
 #include "Invasao.h"
 #include "AliancaDiplomatica.h"
 
-
 #include "Menu.h"
 
 int App::turnos = 1;
@@ -502,7 +501,6 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 					return false;
 				}
 			}
-
 		}
 		else {
 			return false;
@@ -581,11 +579,49 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		}
 		break;
 	}
-	default:
-
+	case menuOpt::Ativa: {
+		string nome = menuValues[0];
+		int index = ValidaGravacao(nome);
+		if (index > -1) {
+			saves[index].getNome();
+		//load
+		}
+		else {
+			return false;
+		}
 		break;
-
 	}
+	case menuOpt::Apaga:{
+		string nome = menuValues[0];
+		int index = ValidaGravacao(nome);
+		if (index > -1) {
+			saves[index].getNome();
+			//apaga
+		}
+		
+		break;
+	}
+	case menuOpt::Grava: {
+		string nome = menuValues[0];
+		int index = ValidaGravacao(nome);
+		if (index > -1) {
+		}
+		else {
+			return false;
+		}
+		break;
+	}
+	}
+}
+
+int App::ValidaGravacao(string nome) {
+	for (size_t i = 0; i < saves.size(); i++)
+	{
+		if (nome == saves[i].getNome()) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 void App::Carrega(string fich) {
@@ -604,5 +640,4 @@ void App::RelatorioFinal(bool ganhou) {
 		cout << "\t\tPERDEU! " << endl;
 	}
 	cout << "Pontos: " << pontos << endl;
-
 }

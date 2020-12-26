@@ -18,7 +18,7 @@ Menu::Menu() {
 
 }
 Menu::Menu(string mode) {
-	Menu::mode =  mode;
+	Menu::mode = mode;
 }
 
 bool Menu::isModeTest() {
@@ -228,6 +228,31 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 			values.push_back(*ptr);
 			return menuOpt::ForcaEvento;
 		}
+		else if (*ptr == "grava") {
+			ptr++;
+			if (ptr == comand_tokens.end()) {
+				return menuOpt::Invalido;
+			}
+			values.push_back(*ptr);
+			return menuOpt::Grava;
+
+		}
+		else if (*ptr == "ativa") {
+			ptr++;
+			if (ptr == comand_tokens.end()) {
+				return menuOpt::Invalido;
+			}
+			values.push_back(*ptr);
+			return menuOpt::Ativa;
+		}
+		else if (*ptr == "apaga") {
+			ptr++;
+			if (ptr == comand_tokens.end()) {
+				return menuOpt::Invalido;
+			}
+			values.push_back(*ptr);
+			return menuOpt::Apaga;
+		}
 		else {
 			cout << "Comando Invalido." << endl;
 			return menuOpt::Invalido;
@@ -266,15 +291,15 @@ menuOpt Menu::ComandosConfig(vector<string>& values) {
 }
 
 bool Menu::isDebugComand(menuOpt opt) {
-	return opt == menuOpt::Lista || opt == menuOpt::ModificaOuro || 
-		opt == menuOpt::ModificaProd || opt == menuOpt::TomaTec || 
+	return opt == menuOpt::Lista || opt == menuOpt::ModificaOuro ||
+		opt == menuOpt::ModificaProd || opt == menuOpt::TomaTec ||
 		opt == menuOpt::TomaTerr;
 }
 
 menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio I, int  turno, int ano) {
 	values.clear();
 	string cmd;
-	cout << "-------------------- Ano "<< ano << " Turno " << turno << " --- Fase " << (int)fase << "  -------------------------" << endl;
+	cout << "-------------------- Ano " << ano << " Turno " << turno << " --- Fase " << (int)fase << "  -------------------------" << endl;
 
 	switch (fase)
 	{
@@ -295,7 +320,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 				cout << "maisprod" << endl;
 				cout << "maisouro" << endl;
 			}
-			
+
 		}
 		else {
 			if (I.getTemtrocasComerciais()) {
@@ -306,12 +331,12 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 				cout << "Compre bolsa de Valores para Obter mais opcoes." << endl;
 			}
 		}
-	
+
 		break;
 	case faseTurno::Comprar:
 		if (Menu::isModeTest()) {
-				cout << "maismilitar" << endl;
-				cout << "adquire <tipo>" << endl;
+			cout << "maismilitar" << endl;
+			cout << "adquire <tipo>" << endl;
 		}
 		else {
 			cout << "Comprar unidade militar ->  maismilitar" << endl;
@@ -337,7 +362,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "comando: ";
 	}
 	else {
-	
+
 		// estado de jogo
 		cout << "Gravar estado de jogo -> grava <nome>" << endl;
 		cout << "Retomar gravacao -> ativa <nome>" << endl;
@@ -358,7 +383,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "comando: ";
 
 	}
-	
+
 	// usar para nao apanhar ultimo '\n'
 	//cin.ignore(numeric_limits<streamsize> ::max(), '\n');
 

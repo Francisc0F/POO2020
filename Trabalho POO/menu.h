@@ -24,6 +24,10 @@ enum class menuOpt {
 
 	ForcaEvento,
 
+	Grava,
+	Ativa,
+	Apaga,
+
 	AvancarTurno,
 	AvancarFase,
 	Invalido

@@ -3,6 +3,7 @@
 #include "Mundo.h"
 #include "Imperio.h"
 #include "Territorio.h"
+#include "GameState.h"
 #include "Eventos.h"
 #include "Menu.h"
 class App
@@ -18,6 +19,8 @@ class App
 
 	static vector<Eventos*> CreateEventosList();
 	static vector<Eventos* > eventos;
+
+	vector<GameState> saves;
 
 	faseTurno faseAtual;
 	Menu menu;
@@ -63,7 +66,8 @@ public:
 
 	void EventoRecursoAbandonado();
 
-	void RelatorioFinal(bool ganhou);
+	int ValidaGravacao(string nome);
 
+	void RelatorioFinal(bool ganhou);
 };
 
