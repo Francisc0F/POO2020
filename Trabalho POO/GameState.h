@@ -14,7 +14,7 @@ class GameState
 
 
 public:
-	GameState();
+	GameState(string nome, faseTurno fase, int anos, int turnos, Mundo mundo, Imperio imperio);
 	//getters
 	string getNome();
 };

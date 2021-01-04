@@ -35,6 +35,8 @@ public:
 
 	bool LerFich(string nomef);
 	
+	static Territorio* copiaTerritorio(Territorio* t);
+
 //	bool LerComandosFich(string nomef, Mundo & m, Imperio & I, vector<Tecnologias* >& tecnologias);
 
 	//getters

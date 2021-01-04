@@ -16,6 +16,14 @@ Mina::Mina() {
 	numTerr++;
 }
 
+Mina::Mina(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+	this->nome = nome;
+	this->resistencia = resistencia;
+	this->nProdutos = nProdutos;
+	this->nOuro = nOuro;
+	this->pontos = pontos;
+}
+
 tipoTerritorio Mina::getType()const {
 	return tipoTerritorio::Mina;
 }

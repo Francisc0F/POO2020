@@ -8,9 +8,8 @@ class Planicie : public Continente
 
 public:
 	Planicie();
+	Planicie(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 
-	int getnProdutos();
-	int getnOuro();
 
 	tipoTerritorio getType()const;
 };

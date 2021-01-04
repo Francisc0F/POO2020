@@ -9,7 +9,8 @@ class Duna : public Continente
 
 public:
 	Duna();
-
+	
+	Duna(string nome , int resistencia, int nProdutos , int nOuro , int pontos );
 
 	// get
 	int getnProdutos();

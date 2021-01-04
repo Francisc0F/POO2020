@@ -9,6 +9,7 @@ class Mina : public Continente
 
 public:
 	Mina();
+	Mina(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 
 	tipoTerritorio getType()const;
 };

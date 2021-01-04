@@ -86,6 +86,8 @@ public:
 	void RecolherRecursos();
 
 	bool getTemtrocasComerciais();
+
+	vector<Territorio*>& getConquistados();
 	
 	bool forceAdquirirTec(Tecnologias* pt);
 

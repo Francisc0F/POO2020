@@ -8,6 +8,14 @@ TerritorioInicial::TerritorioInicial() {
 	pontos = 0;
 }
 
+TerritorioInicial::TerritorioInicial(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+	this->nome = nome;
+	this->resistencia = resistencia;
+	this->nProdutos = nProdutos;
+	this->nOuro = nOuro;
+	this->pontos = pontos;
+}
+
 tipoTerritorio TerritorioInicial::getType()const {
 	return tipoTerritorio::Inicial;
 }

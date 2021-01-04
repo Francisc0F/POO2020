@@ -43,11 +43,11 @@ protected:
 
 public:
 
-	//Territorio(string nome = "Sem nome", int resistencia = ((rand() % 6) + 1), int nProdutos = 0, int nOuro = 0, int pontos = 0);
+	
 
 	//getters
 	string getNome()const;
-	int getnProdutos()const;
+	int getnProdutos()const; 
 	int getnOuro()const;
 	virtual tipoTerritorio getType()const = 0;
 

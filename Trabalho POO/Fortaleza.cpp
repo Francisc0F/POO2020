@@ -15,6 +15,14 @@ Fortaleza::Fortaleza() {
 	numTerr++;
 }
 
+Fortaleza::Fortaleza(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+	this->nome = nome;
+	this->resistencia = resistencia;
+	this->nProdutos = nProdutos;
+	this->nOuro = nOuro;
+	this->pontos = pontos;
+}
+
 tipoTerritorio Fortaleza::getType()const {
 	return tipoTerritorio::Fortaleza;
 }

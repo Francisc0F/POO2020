@@ -16,6 +16,14 @@ Planicie::Planicie() {
 	numTerr++;
 }
 
+Planicie::Planicie(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+	this->nome = nome;
+	this->resistencia = resistencia;
+	this->nProdutos = nProdutos;
+	this->nOuro = nOuro;
+	this->pontos = pontos;
+}
+
 
 
 tipoTerritorio Planicie::getType()const {

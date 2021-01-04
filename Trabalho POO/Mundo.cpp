@@ -2,6 +2,15 @@
 #include "Territorio.h"
 #include "Menu.h"
 #include "Imperio.h"
+#include "Duna.h"
+#include "Castelo.h"
+#include "Fortaleza.h"
+#include "Mina.h"
+#include "Montanha.h"
+#include "Pescaria.h"
+#include "Planicie.h"
+#include "Refugio.h"
+#include "TerritorioInicial.h"
 
 using namespace std;
 
@@ -23,6 +32,47 @@ vector<Territorio*> & Mundo::getTerritorios() {
 void Mundo::adicionarTerritorio(Territorio* t) {
 
 	territorios.push_back(t);
+}
+
+Territorio*  Mundo::copiaTerritorio(Territorio* t) {
+	switch (t->getType())
+	{
+	case tipoTerritorio::Duna: {
+		return new Duna(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+	}
+	case tipoTerritorio::Castelo: {
+		return new Castelo(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+	}
+	case tipoTerritorio::Fortaleza: {
+		return new Fortaleza(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+	}
+	case tipoTerritorio::Inicial: {
+		return new TerritorioInicial(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+	}
+	case tipoTerritorio::Mina: {
+		return new Mina(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+	}
+	case tipoTerritorio::Montanha: {
+		return new Montanha(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+	}
+	case tipoTerritorio::Pescaria: {
+		return new Pescaria(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+		break;
+	}
+	case tipoTerritorio::Planicie: {
+		return new Planicie(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+		break;
+	}
+	case tipoTerritorio::Refugio: {
+		return new Refugio(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
+		break;
+	}
+	default:
+		break;
+	}
+	
+
+
 }
 
 //void Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {

@@ -9,6 +9,7 @@ class Fortaleza : public Continente
 
 public:
 	Fortaleza();
+	Fortaleza(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 	int getnProdutos()const;
 	int getnOuro()const;
 

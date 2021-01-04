@@ -604,7 +604,8 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 	case menuOpt::Grava: {
 		string nome = menuValues[0];
 		int index = ValidaGravacao(nome);
-		if (index > -1) {
+		if (index == -1) {
+			GameState a = GameState(nome, faseAtual, anos, turnos, mundo, imperio);
 		}
 		else {
 			return false;

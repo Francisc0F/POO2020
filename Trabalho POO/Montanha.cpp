@@ -16,6 +16,13 @@ Montanha::Montanha() {
 	turnosAposConquista = 0;
 }
 
+Montanha::Montanha(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+	this->nome = nome;
+	this->resistencia = resistencia;
+	this->nProdutos = nProdutos;
+	this->nOuro = nOuro;
+	this->pontos = pontos;
+}
 
 void Montanha::addTurno() {
 	turnosAposConquista++;

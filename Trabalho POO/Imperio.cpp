@@ -22,6 +22,10 @@ bool Imperio::getTemDefesasTerritoriais() {
 }
 
 
+vector<Territorio*>& Imperio::getConquistados() {
+	return conquistados;
+}
+
 void Imperio::mostraRecursos()const {
 	cout << "\t\t Recursos Materiais" << endl;
 	cout << "Produtos: " << Produtos.info() << endl;

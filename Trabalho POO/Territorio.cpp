@@ -17,6 +17,7 @@
 #include "Pescaria.h"
 
 
+
 //getters
 string Territorio::getAsString() const {
 	ostringstream oss;
