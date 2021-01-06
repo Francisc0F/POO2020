@@ -8,9 +8,9 @@
 #include "Menu.h"
 class App
 {
-	static int turnos;
-	static int anos;
-	static bool jogoTerminou;
+	int turnos;
+	int anos;
+	bool jogoTerminou;
 
 	static bool debugMode;
 
@@ -34,6 +34,8 @@ public:
 
 	void Jogo();
 
+	void LoadGameState(GameState& state);
+
 	menuOpt FaseRecolha(vector<string>& values, int  turno);
 
 	void RecolherRecursoDoImperio();
@@ -52,9 +54,9 @@ public:
 
 	static Tecnologias* getTec(tec t);
 
-	static int getTurno();
+	int getTurno();
 
-	static int getAno();
+	int getAno();
 
 	bool ExecutaComando(menuOpt opt, vector<string>& menuValues);
 
@@ -70,4 +72,3 @@ public:
 
 	void RelatorioFinal(bool ganhou);
 };
-

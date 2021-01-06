@@ -28,8 +28,9 @@ enum class menuOpt {
 	Ativa,
 	Apaga,
 
-	AvancarTurno,
-	AvancarFase,
+	ListaGravacoes,
+
+	Avanca,
 	Invalido
 };
 

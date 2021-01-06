@@ -14,8 +14,22 @@ class GameState
 
 
 public:
-	GameState(string nome, faseTurno fase, int anos, int turnos, Mundo mundo, Imperio imperio);
+	GameState(string nome, faseTurno fase, int anos, int turnos, Mundo& mundo, Imperio& imperio);
 	//getters
 	string getNome();
+
+	int getTurno();
+
+	int getAno();
+	
+	Mundo& getMundo();
+	
+	Imperio& getImperio();
+	
+	faseTurno getfaseAtual();
+
+
+	void mostraGravacao();
+
 };
 

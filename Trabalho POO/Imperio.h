@@ -61,6 +61,8 @@ public:
 
 	void RemoveUltimoConquistado();
 
+	void addT(Territorio* t);
+
 	void listaConquistados();
 
 	int pesquisaTerritorio(string nome)const;

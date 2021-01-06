@@ -151,11 +151,11 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 				return menuOpt::Lista;
 			}
 		}
-		else if (*ptr == "avancaFase") {
-			return menuOpt::AvancarFase;
-		}
+		//else if (*ptr == "avancaFase") {
+		//	return menuOpt::AvancarFase;
+		//}
 		else if (*ptr == "avanca") {
-			return menuOpt::AvancarTurno;
+			return menuOpt::Avanca;
 		}
 		else if (*ptr == "toma") {
 			ptr++;
@@ -253,6 +253,9 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 			values.push_back(*ptr);
 			return menuOpt::Apaga;
 		}
+		else if (*ptr == "listag") {
+		return menuOpt::ListaGravacoes;
+		}
 		else {
 			cout << "Comando Invalido." << endl;
 			return menuOpt::Invalido;
@@ -293,6 +296,8 @@ menuOpt Menu::ComandosConfig(vector<string>& values) {
 bool Menu::isDebugComand(menuOpt opt) {
 	return opt == menuOpt::Lista || opt == menuOpt::ModificaOuro ||
 		opt == menuOpt::ModificaProd || opt == menuOpt::TomaTec ||
+		opt == menuOpt::Grava || opt == menuOpt::Ativa ||
+		opt == menuOpt::Apaga ||
 		opt == menuOpt::TomaTerr;
 }
 
@@ -353,11 +358,12 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "grava <nome>" << endl;
 		cout << "ativa <nome>" << endl;
 		cout << "apaga <nome>" << endl;
+		cout << "listag" << endl;
 		cout << "lista " << endl;
 		cout << "toma <qual> <nome> " << endl;
 		cout << "modifica <ouro|prod> N " << endl;
 		cout << "fevento <nome-evento>" << endl;
-		cout << "avancaFase" << endl;
+		cout << "avanca" << endl;
 		cout << "avancarTurno" << endl;
 		cout << "comando: ";
 	}
@@ -374,7 +380,7 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "Alterar valores -> modifica <ouro|prod> N " << endl;
 		cout << "--------------------------------------------" << endl;
 
-		cout << "Terminar fase de comandos ->  avancaFase" << endl;
+		cout << "Proxima fase ->  avanca" << endl;
 		cout << "Turno seguinte ->  avancarTurno" << endl;
 		cout << "fevento <nome-evento>" << endl;
 

@@ -20,10 +20,7 @@
 #include "AliancaDiplomatica.h"
 
 #include "Menu.h"
-
-int App::turnos = 1;
-int App::anos = 1;
-bool App::jogoTerminou = false;
+#include "GameState.h"
 
 vector<Tecnologias*> App::CreateTecnoList()
 {
@@ -51,7 +48,10 @@ vector<Eventos* > App::eventos = CreateEventosList();
 App::App(string mode) {
 	mundo = Mundo();
 	menu = Menu(mode);
-	
+	turnos = 1;
+	anos = 1;
+	jogoTerminou = false;
+
 	faseAtual = faseTurno::Config;
 
 	srand((unsigned)time(0));
@@ -120,7 +120,7 @@ void App::Jogo() {
 			if (opt == menuOpt::Invalido) {
 				cout << "Comando Invalido." << endl;
 			}
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno ) {
+			if (opt != menuOpt::Invalido) {
 				if (ExecutaComando(opt, menuValues)) { 
 					// se comando foi executado com sucesso
 					if (!Menu::isDebugComand(opt)) {
@@ -141,11 +141,11 @@ void App::Jogo() {
 			if (opt == menuOpt::Terminar) {
 				break;
 			}
-			if (opt == menuOpt::AvancarFase) {
+			if (opt == menuOpt::Avanca) {
 				FaseSeguinte(&fase);
 				break;
 			}
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
+			if (opt != menuOpt::Invalido) {
 				if (ExecutaComando(opt, menuValues)) {
 					FaseSeguinte(&fase);
 					break;
@@ -162,7 +162,7 @@ void App::Jogo() {
 
 			menuOpt opt = Menu::RecebeComandosJogo(menuValues, faseAtual, imperio, turnos, anos);
 	
-			if (opt == menuOpt::AvancarFase) {
+			if (opt == menuOpt::Avanca) {
 				FaseSeguinte(&fase);
 				break;
 			}
@@ -174,7 +174,7 @@ void App::Jogo() {
 			}
 
 	
-			if (opt != menuOpt::Invalido && opt != menuOpt::AvancarTurno) {
+			if (opt != menuOpt::Invalido) {
 				if (ExecutaComando(opt, menuValues)) {
 					if (opt == menuOpt::MaisMilitar) {
 						nComprasMaisMilitar++;
@@ -526,6 +526,7 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		if (i > -1) {
 			return imperio.forceConquistaTerritorio(mundo.getTerritorios()[i]);
 		}
+		cout << "Territorio nao existe" << endl;
 		return false;
 		break;
 	}
@@ -581,12 +582,14 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 	}
 	case menuOpt::Ativa: {
 		string nome = menuValues[0];
+		cout << "nome grav  " << nome << endl;
 		int index = ValidaGravacao(nome);
 		if (index > -1) {
-			saves[index].getNome();
-		//load
+			LoadGameState(saves[index]);
+			cout << "Retomou: ["<< saves[index].getNome() << "]"<< endl;
 		}
 		else {
+			cout << "nao foi possivel carregar gravacao" << endl;
 			return false;
 		}
 		break;
@@ -606,13 +609,32 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		int index = ValidaGravacao(nome);
 		if (index == -1) {
 			GameState a = GameState(nome, faseAtual, anos, turnos, mundo, imperio);
+			saves.push_back(a);
+			saves[0].mostraGravacao();
+			return true;
 		}
 		else {
+			cout << "Nao foi possivel gravar" << endl;
 			return false;
 		}
 		break;
 	}
+	case menuOpt::ListaGravacoes: {
+		for (size_t i = 0; i < saves.size(); i++)
+		{
+			saves[i].mostraGravacao();
+		}
+		break;
 	}
+	}
+}
+
+void App::LoadGameState(GameState & state) {
+	anos = state.getAno();
+	turnos = state.getAno();
+	faseAtual = state.getfaseAtual();
+	mundo = state.getMundo();
+	imperio = state.getImperio();
 }
 
 int App::ValidaGravacao(string nome) {

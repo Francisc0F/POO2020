@@ -150,8 +150,12 @@ bool Imperio::forceConquistaTerritorio(Territorio* t) {
 		cout << "Este territorio ja foi conquistado." << endl;
 		return false;
 	}
-	conquistados.push_back(t);
+	addT(t);
 	return true;
+}
+
+void Imperio::addT(Territorio* t) {
+	conquistados.push_back(t);
 }
 
 
