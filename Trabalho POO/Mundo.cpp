@@ -15,9 +15,10 @@
 using namespace std;
 
 Mundo::Mundo() {
-
+	cout << "Construiu MUNDO" << endl;
 }
 Mundo::~Mundo() {
+	cout << "destruir territorios" << endl;
 	for (int i = 0; i < territorios.size(); i++)
 	{
 		delete territorios[i];
@@ -32,6 +33,10 @@ vector<Territorio*> & Mundo::getTerritorios() {
 void Mundo::adicionarTerritorio(Territorio* t) {
 
 	territorios.push_back(t);
+}
+
+Mundo* clone(Mundo& ref) {
+	return new Mundo();
 }
 
 Territorio*  Mundo::copiaTerritorio(Territorio* t) {

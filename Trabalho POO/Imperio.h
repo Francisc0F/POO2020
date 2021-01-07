@@ -39,8 +39,6 @@ public:
 
 	Imperio();
 
-	Imperio(Territorio*, Armazem& Produtos, Armazem& Ouro);
-
 	Armazem& getProdutos();
 
 	Armazem& getCofre();

@@ -8,13 +8,13 @@ class GameState
 
 	int turno;
 	int ano;
-	Mundo mundo;
+	Mundo*  mundo;
 	faseTurno faseAtual;
-	Imperio imperio;
+	Imperio* imperio;
 
 
 public:
-	GameState(string nome, faseTurno fase, int anos, int turnos, Mundo& mundo, Imperio& imperio);
+	GameState(string nome, faseTurno fase, int anos, int turnos, Mundo* mundo, Imperio* imperio);
 	//getters
 	string getNome();
 
@@ -22,9 +22,9 @@ public:
 
 	int getAno();
 	
-	Mundo& getMundo();
-	
-	Imperio& getImperio();
+	//Mundo& getMundo();
+	//
+	//Imperio& getImperio();
 	
 	faseTurno getfaseAtual();
 

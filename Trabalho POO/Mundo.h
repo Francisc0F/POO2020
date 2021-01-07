@@ -42,6 +42,8 @@ public:
 	//getters
 	vector<Territorio*>& getTerritorios();
 
+	Mundo* clone(Mundo & ref);
+
 	~Mundo();
 
 };

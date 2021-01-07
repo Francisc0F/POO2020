@@ -21,8 +21,8 @@ using namespace std;
 
 int main(){
 	App jogo = App("test");
-	jogo.Carrega("config3.txt");
-	jogo.ConfigMundo();
-	jogo.Jogo();
+	//jogo.Carrega("config3.txt");
+	//jogo.ConfigMundo();
+	//jogo.Jogo();
 
 }

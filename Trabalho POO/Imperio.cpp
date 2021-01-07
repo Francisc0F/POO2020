@@ -4,14 +4,11 @@
 using namespace std;
 
 
-Imperio::Imperio() {
+Imperio::Imperio() :forcaMilitar(0), capacidadeForcaMilitar(3), armazensAumentados(false),
+podeConquistarIlhas(false), defesasTerritoriais(false) {
+	cout << "Construiu Imperio" << endl;
 }
 
-Imperio::Imperio( Territorio * inicial, Armazem & Produtos, Armazem & Ouro)
-: Produtos(Produtos), Cofre(Ouro), forcaMilitar(0),
-capacidadeForcaMilitar(3), podeConquistarIlhas(false), defesasTerritoriais(false){
-	conquistados.push_back(inicial);
-}
 
 bool Imperio::getTemtrocasComerciais() {
 	return trocasComerciais;

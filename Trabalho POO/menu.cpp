@@ -15,7 +15,7 @@ using namespace std;
 string Menu::mode;
 
 Menu::Menu() {
-
+	cout << "Construiu Menu" << endl;
 }
 Menu::Menu(string mode) {
 	Menu::mode = mode;

@@ -46,24 +46,17 @@ vector<Eventos* > App::eventos = CreateEventosList();
 
 
 App::App(string mode) {
-	mundo = Mundo();
-	menu = Menu(mode);
 	turnos = 1;
 	anos = 1;
 	jogoTerminou = false;
-
 	faseAtual = faseTurno::Config;
 
 	srand((unsigned)time(0));
 
 	Territorio* inicial = new TerritorioInicial();
+
 	mundo.adicionarTerritorio(inicial);
-
-	Armazem cofre = Armazem(0);
-	Armazem produtos = Armazem(0);
-
-	imperio = Imperio(inicial, produtos, cofre);
-	
+	imperio.addT(inicial);
 }
 
 Tecnologias* App::getTec(tec t) {
@@ -425,16 +418,16 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 
 	case menuOpt::Lista: {
 		if (menuValues.empty()) {
-			//m.listaTerritorios();
-			cout << "\t\t Imperio " << endl;
+			mundo.listaTerritorios();
+			//cout << "\t\t Imperio " << endl;
 
-			imperio.mostraRecursos();
+			//imperio.mostraRecursos();
 
-			//cout << I.getForcaMilitar() << endl;
+			////cout << I.getForcaMilitar() << endl;
 
-			//I.verTecnologias();
+			////I.verTecnologias();
 
-			imperio.listaConquistados();
+			//imperio.listaConquistados();
 		}
 		else {
 			int index = mundo.pesquisaTerritorio(menuValues[0]);
@@ -586,7 +579,7 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		int index = ValidaGravacao(nome);
 		if (index > -1) {
 			LoadGameState(saves[index]);
-			cout << "Retomou: ["<< saves[index].getNome() << "]"<< endl;
+			cout << "Retomou: ["<< saves[index]->getNome() << "]"<< endl;
 		}
 		else {
 			cout << "nao foi possivel carregar gravacao" << endl;
@@ -598,7 +591,7 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		string nome = menuValues[0];
 		int index = ValidaGravacao(nome);
 		if (index > -1) {
-			saves[index].getNome();
+			saves[index]->getNome();
 			//apaga
 		}
 		
@@ -608,9 +601,9 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		string nome = menuValues[0];
 		int index = ValidaGravacao(nome);
 		if (index == -1) {
-			GameState a = GameState(nome, faseAtual, anos, turnos, mundo, imperio);
-			saves.push_back(a);
-			saves[0].mostraGravacao();
+			//GameState * a = new GameState(nome, faseAtual, anos, turnos, mundo, imperio);
+			/*saves.push_back(a);
+			saves[0]->mostraGravacao();*/
 			return true;
 		}
 		else {
@@ -622,25 +615,25 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 	case menuOpt::ListaGravacoes: {
 		for (size_t i = 0; i < saves.size(); i++)
 		{
-			saves[i].mostraGravacao();
+			saves[i]->mostraGravacao();
 		}
 		break;
 	}
 	}
 }
 
-void App::LoadGameState(GameState & state) {
-	anos = state.getAno();
-	turnos = state.getAno();
-	faseAtual = state.getfaseAtual();
-	mundo = state.getMundo();
-	imperio = state.getImperio();
+void App::LoadGameState(GameState* state) {
+	anos = state->getAno();
+	turnos = state->getAno();
+	faseAtual = state->getfaseAtual();
+	//mundo = state->getMundo();
+	//imperio = state->getImperio();
 }
 
 int App::ValidaGravacao(string nome) {
 	for (size_t i = 0; i < saves.size(); i++)
 	{
-		if (nome == saves[i].getNome()) {
+		if (nome == saves[i]->getNome()) {
 			return i;
 		}
 	}

@@ -20,7 +20,7 @@ class App
 	static vector<Eventos*> CreateEventosList();
 	static vector<Eventos* > eventos;
 
-	vector<GameState> saves;
+	vector<GameState*> saves;
 
 	faseTurno faseAtual;
 	Menu menu;
@@ -30,11 +30,9 @@ class App
 public:
 	App(string mode);
 
-	App(Mundo& m, Imperio& I, Menu& menu);
-
 	void Jogo();
 
-	void LoadGameState(GameState& state);
+	void LoadGameState(GameState * state);
 
 	menuOpt FaseRecolha(vector<string>& values, int  turno);
 
