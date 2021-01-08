@@ -12,9 +12,7 @@ public:
 	
 	Duna(string nome , int resistencia, int nProdutos , int nOuro , int pontos );
 
-	// get
-	int getnProdutos();
-	int getnOuro();
+	Duna* clone()const;
 
 	tipoTerritorio getType()const;
 };

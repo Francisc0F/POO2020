@@ -7,6 +7,5 @@ public :
 	Ilha();
 
 	categoria getCategoria()const;
-
 };
 

@@ -44,8 +44,9 @@ enum class faseTurno {
 
 class Menu
 {
-	static string mode;
+	
 public:
+	static string mode;
 	Menu();
 
 	Menu(string mode);

@@ -11,6 +11,9 @@ public:
 	Planicie(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 
 
+
+	Planicie* clone()const;
+
 	tipoTerritorio getType()const;
 };
 

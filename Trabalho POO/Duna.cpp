@@ -15,6 +15,11 @@ Duna::Duna() {
 	numTerr++;
 }
 
+
+Duna* Duna::clone() const {
+	return new Duna(*this);
+}
+
 Duna::Duna(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	this->nome = nome;
 	this->resistencia = resistencia;

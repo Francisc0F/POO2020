@@ -8,6 +8,8 @@ public:
 
 	tipoTerritorio getType()const;
 
+	TerritorioInicial* clone()const;
+
 	categoria getCategoria()const;
 };
 

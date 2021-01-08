@@ -8,13 +8,13 @@ class GameState
 
 	int turno;
 	int ano;
-	Mundo*  mundo;
+	Mundo  mundo;
 	faseTurno faseAtual;
-	Imperio* imperio;
+	Imperio imperio;
 
 
 public:
-	GameState(string nome, faseTurno fase, int anos, int turnos, Mundo* mundo, Imperio* imperio);
+	GameState(string nome, faseTurno fase, int anos, int turnos, Mundo mundo, Imperio imperio);
 	//getters
 	string getNome();
 
@@ -29,7 +29,11 @@ public:
 	faseTurno getfaseAtual();
 
 
-	void mostraGravacao();
+	string mostraGravacao();
 
 };
 
+
+ostream& operator<<(ostream& os, GameState& i);
+
+ostream& operator<<(ostream& os, GameState* i);

@@ -15,6 +15,11 @@ Fortaleza::Fortaleza() {
 	numTerr++;
 }
 
+Fortaleza* Fortaleza::clone() const {
+	return new Fortaleza(*this);
+}
+
+
 Fortaleza::Fortaleza(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	this->nome = nome;
 	this->resistencia = resistencia;

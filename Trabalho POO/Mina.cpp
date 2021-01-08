@@ -16,6 +16,10 @@ Mina::Mina() {
 	numTerr++;
 }
 
+Mina* Mina::clone() const {
+	return new Mina(*this);
+}
+
 Mina::Mina(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	this->nome = nome;
 	this->resistencia = resistencia;

@@ -14,6 +14,11 @@ Castelo::Castelo() {
 	numTerr++;
 }
 
+Castelo* Castelo::clone() const {
+	return new Castelo(*this);
+}
+
+
 Castelo::Castelo(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	this->nome = nome;
 	this->resistencia = resistencia;

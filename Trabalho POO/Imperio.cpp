@@ -23,24 +23,48 @@ vector<Territorio*>& Imperio::getConquistados() {
 	return conquistados;
 }
 
-void Imperio::mostraRecursos()const {
-	cout << "\t\t Recursos Materiais" << endl;
-	cout << "Produtos: " << Produtos.info() << endl;
-	cout << "Cofre: " << Cofre.info()  << endl;
+
+
+string Imperio::getAsString() {
+	ostringstream oss;
+	oss << "----------------------------------------------------" << endl;
+	oss << "\t\t Imperio " << endl;
+	oss << mostraRecursos();
+	oss << getForcaMilitar();
+	oss << verTecnologias();
+	oss << listaConquistados();
+	oss << "----------------------------------------------------" << endl;
+	return oss.str();
 }
 
-void Imperio::verTecnologias()const {
-	
-	cout << "\t\t Tecnologias" << endl;
+ostream& operator<< (ostream& os, Imperio& i) {
+	return os << i.getAsString();
+}
+
+ostream& operator<< (ostream& os, Imperio* i) {
+	return os << i->getAsString();
+}
+
+string Imperio::mostraRecursos()const {
+	ostringstream oss;
+	oss << "\t\t Recursos Materiais" << endl;
+	oss << "Produtos: " << Produtos.info() << endl;
+	oss << "Cofre: " << Cofre.info()  << endl;
+	return oss.str();
+}
+
+string Imperio::verTecnologias()const {
+	ostringstream oss;
+	oss << "\t\t Tecnologias" << endl;
 	if (tecnologias.size() == 0) {
-		cout << "Sem tecnologias." << endl;
+		oss << "Sem tecnologias." << endl;
 	}
 	for (size_t i = 0; i < tecnologias.size(); i++)
 	{
-		 cout << tecnologias[i]->getDescricao() << endl;
-		 cout << tecnologias[i]->getCustoAsString();
+		oss << tecnologias[i]->getDescricao() << endl;
+		oss << tecnologias[i]->getCustoAsString();
 	}
-
+	return oss.str();
 }
 
 string Imperio::getForcaMilitar()const {
@@ -86,19 +110,21 @@ void Imperio::addForcaMilitar(int v) {
 	setForcaMilitar(forcaMilitar + v);
 }
 
-void Imperio::listaConquistados()  {
-	cout << "\t\t Conquistados " << endl;
+string Imperio::listaConquistados()   {
+	ostringstream oss;
+	oss << "\t\t Conquistados " << endl;
 
 	vector<Territorio* >::iterator ptr;
 	ptr = conquistados.begin();
 
 	if (conquistados.empty()) {
-		cout << "Ainda nao foram conquistados Territorios." << endl;
-		return;
+		oss << "Ainda nao foram conquistados Territorios." << endl;
+		return oss.str();
 	}
 	for (ptr = conquistados.begin(); ptr < conquistados.end(); ptr++) {
-		cout << endl <<(*ptr)->getAsString() << endl;
+		oss << endl <<(*ptr)->getAsString() << endl;
 	}
+	return oss.str();
 }
 
 int Imperio::pesquisaTerritorio(string nome)const {

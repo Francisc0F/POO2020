@@ -30,6 +30,7 @@ string Territorio::getAsString() const {
 }
 
 
+
 string Territorio::getNome()const {
 	return nome;
 }

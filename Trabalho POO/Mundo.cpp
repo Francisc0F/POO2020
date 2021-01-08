@@ -17,14 +17,33 @@ using namespace std;
 Mundo::Mundo() {
 	cout << "Construiu MUNDO" << endl;
 }
+
+Mundo::Mundo(const Mundo& other) {
+	*this = other;
+}
 Mundo::~Mundo() {
-	cout << "destruir territorios" << endl;
+	cout << "destruir Mundo e territorios" << endl;
 	for (int i = 0; i < territorios.size(); i++)
 	{
 		delete territorios[i];
 	}
 	territorios.clear();
 }
+
+Mundo& Mundo::operator=(const Mundo& other) {
+
+	if (this != &other) {
+		for (auto t : territorios) {
+			delete t;
+		}
+		territorios.clear();
+	}
+	for (auto t : other.territorios) {
+		territorios.push_back(t->clone());
+	}
+	return *this;
+}
+
 
 vector<Territorio*> & Mundo::getTerritorios() {
 	return territorios;
@@ -39,45 +58,12 @@ Mundo* clone(Mundo& ref) {
 	return new Mundo();
 }
 
-Territorio*  Mundo::copiaTerritorio(Territorio* t) {
-	switch (t->getType())
-	{
-	case tipoTerritorio::Duna: {
-		return new Duna(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-	}
-	case tipoTerritorio::Castelo: {
-		return new Castelo(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-	}
-	case tipoTerritorio::Fortaleza: {
-		return new Fortaleza(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-	}
-	case tipoTerritorio::Inicial: {
-		return new TerritorioInicial(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-	}
-	case tipoTerritorio::Mina: {
-		return new Mina(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-	}
-	case tipoTerritorio::Montanha: {
-		return new Montanha(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-	}
-	case tipoTerritorio::Pescaria: {
-		return new Pescaria(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-		break;
-	}
-	case tipoTerritorio::Planicie: {
-		return new Planicie(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-		break;
-	}
-	case tipoTerritorio::Refugio: {
-		return new Refugio(t->getNome(), t->getResistencia(), t->getnProdutos(), t->getnOuro(), t->getpontos());
-		break;
-	}
-	default:
-		break;
-	}
-	
+ostream& operator<< (ostream& os, Mundo& i) {
+	return os << i.listaTerritorios();
+}
 
-
+ostream& operator<< (ostream& os, Mundo* i) {
+	return os << i->listaTerritorios();
 }
 
 //void Mundo::adicionarTerritorio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
@@ -105,16 +91,17 @@ int Mundo::pesquisaTerritorio(string nome) {
 	return -1;
 }
 
-void Mundo::listaTerritorios() {
-
+string Mundo::listaTerritorios() {
+	ostringstream oss;
 	vector<Territorio* >::iterator ptr;
 	if (territorios.size() == 0) {
-		cout << "Nao ha territorios no Mundo." << endl;
-		return;
+		oss << "Nao ha territorios no Mundo." << endl;
+		return oss.str();
 	}
 	for (ptr = territorios.begin(); ptr < territorios.end(); ptr++) {
-		cout << (*ptr)->getAsString() << endl;
+		oss << (*ptr)->getAsString() << endl;
 	}
+	return oss.str();
 }
 
 //bool Mundo::LerFich(string nomef) {

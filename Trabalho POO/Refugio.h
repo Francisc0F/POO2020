@@ -9,6 +9,8 @@ public:
 
 	Refugio(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 
+	Refugio* clone()const;
+
 	tipoTerritorio getType()const;
 };
 

@@ -8,6 +8,10 @@ TerritorioInicial::TerritorioInicial() {
 	pontos = 0;
 }
 
+TerritorioInicial* TerritorioInicial::clone() const {
+	return new TerritorioInicial(*this);
+}
+
 TerritorioInicial::TerritorioInicial(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	this->nome = nome;
 	this->resistencia = resistencia;

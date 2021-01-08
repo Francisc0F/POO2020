@@ -1,36 +1,38 @@
 #include <string>
 #include "GameState.h"
 
-GameState::GameState(string nome, faseTurno fase, int anos, int turnos, Mundo* mundo, Imperio* imperio)
-	:nome(nome), faseAtual(fase), ano(anos), turno(turnos){
+GameState::GameState(string nome, faseTurno fase, int anos, int turnos, Mundo mundo, Imperio imperio)
+	:mundo(mundo), imperio(imperio), nome(nome), faseAtual(fase), ano(anos), turno(turnos){
 
-	
-	//if()
-	/*for (size_t i = 0; i < mundo.getTerritorios().size(); i++)
+	this->imperio.getConquistados().clear();
+	for (size_t i = 0; i < imperio.getConquistados().size(); i++)
 	{
-		this->mundo.adicionarTerritorio(Mundo::copiaTerritorio(mundo.getTerritorios()[i]));
-	}*/
-
-	//this->imperio = Imperio(this->mundo.getTerritorios()[0], imperio.getProdutos(), imperio.getCofre());
-
-	//for (size_t i = 0; i < imperio.getConquistados().size(); i++)
-	//{
-	//	for (size_t j = 0; j < this->mundo.getTerritorios().size(); j++)
-	//	{
-	//		if (imperio.getConquistados()[i]->getNome() == this->mundo.getTerritorios()[j]->getNome()) {
-	//			this->imperio.addT(this->mundo.getTerritorios()[j]);
-	//		}
-	//	}
-	//}
+		for (size_t j = 0; j < this->mundo.getTerritorios().size(); j++)
+		{
+			if (imperio.getConquistados()[i]->getNome() == this->mundo.getTerritorios()[j]->getNome()) {
+				this->imperio.addT(this->mundo.getTerritorios()[j]);
+			}
+		}
+	}
 	
 }
 
-void GameState::mostraGravacao() {
-	cout << "GRAVACAO ------------------" << endl;
-	mundo->listaTerritorios();
-	//imperio.listaConquistados();
-	cout << "FIM -----------------------" << endl;
+string GameState::mostraGravacao() {
+	ostringstream oss;
+	oss << "--------------------------  GRAVACAO  -----------------" 
+	<<  mundo.listaTerritorios() << imperio.listaConquistados() <<
+	       "---------------------------   FIM   -------------------" << endl;
+	return oss.str();
 }
+
+ostream& operator<< (ostream& os, GameState& i) {
+	return os << i.mostraGravacao();
+}
+
+ostream& operator<< (ostream& os, GameState* i) {
+	return os << i->mostraGravacao();
+}
+
 
 // getters
 string GameState::getNome() {

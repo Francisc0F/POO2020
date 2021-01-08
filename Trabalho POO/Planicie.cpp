@@ -16,6 +16,10 @@ Planicie::Planicie() {
 	numTerr++;
 }
 
+Planicie* Planicie::clone() const {
+	return new Planicie(*this);
+}
+
 Planicie::Planicie(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	this->nome = nome;
 	this->resistencia = resistencia;

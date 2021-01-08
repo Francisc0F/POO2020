@@ -16,6 +16,12 @@ Refugio::Refugio() {
 	nOuro = 1;
 	numTerr++;
 }
+
+Refugio* Refugio::clone() const {
+	return new Refugio(*this);
+}
+
+
 Refugio::Refugio(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
 	this->nome = nome;
 	this->resistencia = resistencia;

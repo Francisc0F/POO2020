@@ -3,8 +3,6 @@
 #include "App.h"
 #include "Pescaria.h"
 
-
-
 int Pescaria::numTerr = 1;
 
 Pescaria::Pescaria() {
@@ -16,6 +14,10 @@ Pescaria::Pescaria() {
 	nProdutos = 2;
 	nOuro = 0;
 	numTerr++;
+}
+
+Pescaria* Pescaria::clone() const {
+	return new Pescaria(*this);
 }
 
 Pescaria::Pescaria(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {

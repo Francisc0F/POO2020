@@ -53,6 +53,8 @@ public:
 
 	virtual categoria getCategoria()const = 0;
 
+	virtual Territorio * clone()const = 0;
+
 	int getpontos()const;
 	int getResistencia()const;
 	string getAsString() const;
@@ -64,6 +66,8 @@ public:
 	void setpontos(int n);
 
 	static Territorio* mapper(tipoTerritorio t);
+
+
 
 	static tipoTerritorio  validaTipoTerritorio(string tipo);
 };

@@ -16,6 +16,8 @@ public:
 
 	tipoTerritorio getType()const;
 
+	Montanha* clone()const;
+
 	void addTurno();
 };
 

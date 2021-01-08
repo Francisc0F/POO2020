@@ -71,6 +71,7 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 				}
 
 			}
+			
 			break;
 		}
 
@@ -273,9 +274,11 @@ menuOpt Menu::ComandosConfig(vector<string>& values) {
 	cout << "Cria n Territorios ->  cria <tipo> <n>" << endl;
 	cout << "Terminar config -> seguir" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
-	cout << "comando: ";
+	do  {
+		cout << "comando: ";
+		getline(cin, cmd);
+	} while (cmd == "");
 
-	getline(cin, cmd);
 
 	vector<string> comand_tokens;
 	istringstream iss(cmd);
@@ -286,6 +289,8 @@ menuOpt Menu::ComandosConfig(vector<string>& values) {
 
 	vector<string>::iterator ptr;
 	ptr = comand_tokens.begin();
+
+
 	if (*ptr == "seguir") {
 		return menuOpt::Terminar;
 	}
@@ -365,7 +370,6 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "fevento <nome-evento>" << endl;
 		cout << "avanca" << endl;
 		cout << "avancarTurno" << endl;
-		cout << "comando: ";
 	}
 	else {
 
@@ -386,14 +390,17 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 
 		cout << "Sair -> x" << endl;
 		cout << "----------------------------------------------------------------------" << endl;
-		cout << "comando: ";
 
 	}
 
 	// usar para nao apanhar ultimo '\n'
 	//cin.ignore(numeric_limits<streamsize> ::max(), '\n');
 
-	getline(cin, cmd);
+	do {
+		cout << "comando: ";
+		getline(cin, cmd);
+	} while (cmd == "");
+
 
 	vector<string> comand_tokens;
 	istringstream iss(cmd);

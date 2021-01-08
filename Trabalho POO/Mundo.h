@@ -23,7 +23,9 @@ public:
 
 	Mundo();
 
-	void listaTerritorios();
+	Mundo(const Mundo& other);
+
+	string listaTerritorios();
 
 	void adicionarTerritorio(Territorio* t);
 
@@ -35,16 +37,21 @@ public:
 
 	bool LerFich(string nomef);
 	
-	static Territorio* copiaTerritorio(Territorio* t);
 
 //	bool LerComandosFich(string nomef, Mundo & m, Imperio & I, vector<Tecnologias* >& tecnologias);
 
 	//getters
 	vector<Territorio*>& getTerritorios();
 
-	Mundo* clone(Mundo & ref);
+	Mundo* clone(const Mundo & other);
+	
+	Mundo& operator=(const Mundo& other);
 
 	~Mundo();
 
 };
 
+
+ostream& operator<<(ostream& os, Mundo& i);
+
+ostream& operator<<(ostream& os, Mundo* i);

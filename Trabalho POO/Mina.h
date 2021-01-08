@@ -11,6 +11,8 @@ public:
 	Mina();
 	Mina(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
 
+	Mina* clone() const;
+
 	tipoTerritorio getType()const;
 };
 

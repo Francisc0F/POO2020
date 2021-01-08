@@ -1,19 +1,18 @@
 ﻿  App.cpp
 C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(385,32): warning C4101: 'e': unreferenced local variable
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(534,32): warning C4101: 'e': unreferenced local variable
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(526,32): warning C4101: 'e': unreferenced local variable
   Duna.cpp
   GameState.cpp
   Imperio.cpp
   Menu.cpp
   Mina.cpp
   Mundo.cpp
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(22,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(26,20): warning C4018: '<': signed/unsigned mismatch
   Pescaria.cpp
   Planicie.cpp
   Refugio.cpp
   Trabalho POO.cpp
   Generating Code...
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(81): warning C4715: 'Mundo::copiaTerritorio': not all control paths return a value
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(266): warning C4715: 'Menu::ProcessaComando': not all control paths return a value
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(623): warning C4715: 'App::ExecutaComando': not all control paths return a value
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(267): warning C4715: 'Menu::ProcessaComando': not all control paths return a value
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(614): warning C4715: 'App::ExecutaComando': not all control paths return a value
   Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

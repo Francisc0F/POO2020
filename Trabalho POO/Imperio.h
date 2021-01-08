@@ -61,13 +61,15 @@ public:
 
 	void addT(Territorio* t);
 
-	void listaConquistados();
+	string listaConquistados();
 
 	int pesquisaTerritorio(string nome)const;
 
-	void mostraRecursos()const;
+	string mostraRecursos()const;
 
-	void verTecnologias()const;
+	string verTecnologias()const;
+
+	string getAsString();
 
 	bool maisOuro();
 	
@@ -94,3 +96,6 @@ public:
 	~Imperio();
 };
 
+ostream& operator<<(ostream& os, Imperio& i);
+
+ostream& operator<<(ostream& os, Imperio* i);
