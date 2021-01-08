@@ -28,6 +28,6 @@ int Tecnologias::getCusto()const {
 }
 string Tecnologias::getCustoAsString()const {
 		ostringstream oss;
-		oss << "custo :" << custo << endl;
+		oss << "custo :" << custo;
 		return oss.str();
 }

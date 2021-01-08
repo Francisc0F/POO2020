@@ -583,9 +583,16 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 		string nome = menuValues[0];
 		int index = ValidaGravacao(nome);
 		if (index > -1) {
-			saves[index]->getNome();
-			//apaga
+			if (saves[index] != nullptr) {
+				delete saves[index];
+			}
+			saves.erase(saves.begin() + index);
+			cout << "Gravacao Apagada." << endl;
+
+			return true;
 		}
+		cout << "Nao foi possivel apagar." << endl;
+		return false;
 		
 		break;
 	}
@@ -616,8 +623,8 @@ void App::LoadGameState(GameState* state) {
 	anos = state->getAno();
 	turnos = state->getAno();
 	faseAtual = state->getfaseAtual();
-	//mundo = state->getMundo();
-	//imperio = state->getImperio();
+	mundo = state->getMundo();
+	imperio = state->getImperio();
 }
 
 int App::ValidaGravacao(string nome) {

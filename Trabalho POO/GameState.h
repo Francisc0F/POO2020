@@ -22,9 +22,9 @@ public:
 
 	int getAno();
 	
-	//Mundo& getMundo();
-	//
-	//Imperio& getImperio();
+	Mundo getMundo();
+	
+	Imperio getImperio();
 	
 	faseTurno getfaseAtual();
 

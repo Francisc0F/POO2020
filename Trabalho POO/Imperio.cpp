@@ -27,13 +27,13 @@ vector<Territorio*>& Imperio::getConquistados() {
 
 string Imperio::getAsString() {
 	ostringstream oss;
-	oss << "----------------------------------------------------" << endl;
+	//oss << "----------------------------------------------------" << endl;
 	oss << "\t\t Imperio " << endl;
 	oss << mostraRecursos();
-	oss << getForcaMilitar();
+	oss << getForcaMilitar() << endl;
 	oss << verTecnologias();
 	oss << listaConquistados();
-	oss << "----------------------------------------------------" << endl;
+	//oss << "----------------------------------------------------" << endl;
 	return oss.str();
 }
 
@@ -62,7 +62,7 @@ string Imperio::verTecnologias()const {
 	for (size_t i = 0; i < tecnologias.size(); i++)
 	{
 		oss << tecnologias[i]->getDescricao() << endl;
-		oss << tecnologias[i]->getCustoAsString();
+		oss << tecnologias[i]->getCustoAsString() << endl;
 	}
 	return oss.str();
 }

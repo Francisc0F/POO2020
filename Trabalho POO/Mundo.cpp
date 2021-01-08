@@ -22,7 +22,7 @@ Mundo::Mundo(const Mundo& other) {
 	*this = other;
 }
 Mundo::~Mundo() {
-	cout << "destruir Mundo e territorios" << endl;
+	cout << "~Mundo Destruir Mundo e territorios" << endl;
 	for (int i = 0; i < territorios.size(); i++)
 	{
 		delete territorios[i];

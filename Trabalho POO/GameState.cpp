@@ -19,9 +19,10 @@ GameState::GameState(string nome, faseTurno fase, int anos, int turnos, Mundo mu
 
 string GameState::mostraGravacao() {
 	ostringstream oss;
-	oss << "--------------------------  GRAVACAO  -----------------" 
-	<<  mundo.listaTerritorios() << imperio.listaConquistados() <<
-	       "---------------------------   FIM   -------------------" << endl;
+	oss << "----------------------------------------- GRAVACAO: "<< nome << endl
+	<<  //mundo << 
+		imperio <<
+		   "-----------------------------------------   FIM   " << endl;
 	return oss.str();
 }
 
@@ -44,13 +45,13 @@ int GameState::getTurno() {
 int GameState::getAno() {
 	return ano;
 }
-//Mundo& GameState::getMundo() {
-//	return mundo;
-//}
-//
-//Imperio& GameState::getImperio() {
-//	return imperio;
-//}
+Mundo GameState::getMundo() {
+	return mundo;
+}
+
+Imperio GameState::getImperio() {
+	return imperio;
+}
 
 faseTurno GameState::getfaseAtual() {
 	return faseAtual;
