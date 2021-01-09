@@ -118,6 +118,7 @@ Territorio* Territorio::mapper(tipoTerritorio t) {
 		break;
 	}
 	default:
+		return nullptr;
 		break;
 	}
 }

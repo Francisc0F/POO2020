@@ -8,7 +8,6 @@ class Planicie : public Continente
 
 public:
 	Planicie();
-	Planicie(string nome, int resistencia, int nProdutos, int nOuro);
 
 
 	Planicie* clone()const;

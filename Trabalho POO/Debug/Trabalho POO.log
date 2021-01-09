@@ -1,7 +1,5 @@
-﻿  App.cpp
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(410,32): warning C4101: 'e': unreferenced local variable
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(551,32): warning C4101: 'e': unreferenced local variable
-  Tecnologias.cpp
+﻿  Mundo.cpp
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(33,20): warning C4018: '<': signed/unsigned mismatch
+  Territorio.cpp
   Generating Code...
-C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(645): warning C4715: 'App::ExecutaComando': not all control paths return a value
   Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

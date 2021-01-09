@@ -7,7 +7,6 @@ class Pescaria : public Ilha
 public:
 
 	Pescaria();
-	Pescaria(string nome, int resistencia, int nProdutos, int nOuro);
 
 	tipoTerritorio getType()const;
 

@@ -19,14 +19,6 @@ Fortaleza* Fortaleza::clone() const {
 	return new Fortaleza(*this);
 }
 
-
-Fortaleza::Fortaleza(string nome, int resistencia, int nProdutos, int nOuro) {
-	this->nome = nome;
-	this->resistencia = resistencia;
-	this->nProdutos = nProdutos;
-	this->nOuro = nOuro;
-}
-
 tipoTerritorio Fortaleza::getType()const {
 	return tipoTerritorio::Fortaleza;
 }

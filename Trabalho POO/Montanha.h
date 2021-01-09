@@ -12,7 +12,6 @@ class Montanha : public Continente
 public:
 	Montanha();
 
-	Montanha(string nome, int resistencia, int nProdutos, int nOuro);
 
 	tipoTerritorio getType()const;
 

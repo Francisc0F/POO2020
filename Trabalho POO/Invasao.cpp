@@ -4,10 +4,6 @@
 #include "Invasao.h"
 using namespace std;
 
-
-Invasao::Invasao() {
-
-}
 tipoEvento Invasao::getType()const {
 	return tipoEvento::Invasao;
 }

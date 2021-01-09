@@ -19,13 +19,6 @@ Castelo* Castelo::clone() const {
 }
 
 
-Castelo::Castelo(string nome, int resistencia, int nProdutos, int nOuro) {
-	this->nome = nome;
-	this->resistencia = resistencia;
-	this->nProdutos = nProdutos;
-	this->nOuro = nOuro;
-}
-
 tipoTerritorio Castelo::getType()const {
 	return tipoTerritorio::Castelo;
 }

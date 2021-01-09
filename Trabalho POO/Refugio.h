@@ -7,8 +7,6 @@ class Refugio : public Ilha
 public:
 	Refugio();
 
-	Refugio(string nome, int resistencia, int nProdutos, int nOuro);
-
 	Refugio* clone()const;
 
 	tipoTerritorio getType()const;

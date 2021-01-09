@@ -18,12 +18,6 @@ Refugio::Refugio() {
 
 }
 
-Refugio::Refugio(string nome, int resistencia, int nProdutos, int nOuro) {
-	this->nome = nome;
-	this->resistencia = resistencia;
-	this->nProdutos = nProdutos;
-	this->nOuro = nOuro;
-}
 
 
 

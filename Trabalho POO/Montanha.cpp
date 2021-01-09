@@ -20,14 +20,6 @@ Montanha* Montanha::clone() const {
 	return new Montanha(*this);
 }
 
-
-Montanha::Montanha(string nome, int resistencia, int nProdutos, int nOuro) {
-	this->nome = nome;
-	this->resistencia = resistencia;
-	this->nProdutos = nProdutos;
-	this->nOuro = nOuro;
-}
-
 void Montanha::addTurno() {
 	turnosAposConquista++;
 }
