@@ -1,8 +1,4 @@
 #include "Tecnologias.h"
-//Tecnologias::Tecnologias() {
-//
-//}
-
 
 tec Tecnologias::tecValida(string n) {
 	if (n == "missil") {

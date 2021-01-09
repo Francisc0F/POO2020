@@ -20,12 +20,11 @@ Fortaleza* Fortaleza::clone() const {
 }
 
 
-Fortaleza::Fortaleza(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+Fortaleza::Fortaleza(string nome, int resistencia, int nProdutos, int nOuro) {
 	this->nome = nome;
 	this->resistencia = resistencia;
 	this->nProdutos = nProdutos;
 	this->nOuro = nOuro;
-	this->pontos = pontos;
 }
 
 tipoTerritorio Fortaleza::getType()const {

@@ -9,7 +9,7 @@ class Castelo : public Continente
 
 public:
 	Castelo();
-	Castelo(string nome, int resistencia, int nProdutos , int nOuro , int pontos);
+	Castelo(string nome, int resistencia, int nProdutos , int nOuro);
 
 	tipoTerritorio getType()const;
 

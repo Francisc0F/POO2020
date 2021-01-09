@@ -19,12 +19,11 @@ Castelo* Castelo::clone() const {
 }
 
 
-Castelo::Castelo(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+Castelo::Castelo(string nome, int resistencia, int nProdutos, int nOuro) {
 	this->nome = nome;
 	this->resistencia = resistencia;
 	this->nProdutos = nProdutos;
 	this->nOuro = nOuro;
-	this->pontos = pontos;
 }
 
 tipoTerritorio Castelo::getType()const {

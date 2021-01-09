@@ -10,19 +10,26 @@
 #include "Pescaria.h"
 #include "Planicie.h"
 #include "Refugio.h"
+#include "App.h"
 #include "TerritorioInicial.h"
 
 using namespace std;
 
 Mundo::Mundo() {
-	cout << "Construiu MUNDO" << endl;
+	if (App::debugMode) {
+		cout << "Construiu MUNDO" << endl;
+	}
+	
 }
 
 Mundo::Mundo(const Mundo& other) {
 	*this = other;
 }
 Mundo::~Mundo() {
-	cout << "~Mundo Destruir Mundo e territorios" << endl;
+	if (App::debugMode) {
+		cout << "~Mundo() Destruiu MUNDO e TERRITORIOS" << endl;
+	}
+
 	for (int i = 0; i < territorios.size(); i++)
 	{
 		delete territorios[i];
@@ -93,6 +100,7 @@ int Mundo::pesquisaTerritorio(string nome) {
 
 string Mundo::listaTerritorios() {
 	ostringstream oss;
+	oss << "\t\t Mundo" << endl;
 	vector<Territorio* >::iterator ptr;
 	if (territorios.size() == 0) {
 		oss << "Nao ha territorios no Mundo." << endl;
@@ -104,83 +112,3 @@ string Mundo::listaTerritorios() {
 	return oss.str();
 }
 
-//bool Mundo::LerFich(string nomef) {
-//
-//	ifstream dados(nomef);
-//	if (!dados.is_open()) {
-//		cout << "error: abrir ficheiro" << endl;
-//		return false;
-//	}
-//	string line;
-//
-//	string nome;
-//	int resistencia, nProdutos, nOuro, pontos;
-//
-//	// apanhar primeira linha 
-//	getline(dados, line);
-//
-//	while (!dados.eof()) {
-//
-//		getline(dados, line);
-//
-//		istringstream iss(line);
-//		iss >> resistencia >> nProdutos >> nOuro >> pontos;
-//		getline(iss, nome);
-//
-//		// remove inicial space
-//		 nome = nome.substr(1, nome.size());
-//
-//		//cout << "\""<< nome <<"\"" << endl;
-//		if (iss) {
-//			adicionarTerritorio(nome, resistencia, nProdutos, nOuro, pontos);
-//		}
-//		else {
-//			cout << "error: iss leitura" << endl;
-//			return false;
-//		}
-//	}
-//	dados.close();
-//
-//	return true;
-//}
-
-//bool Mundo::LerComandosFich(string nomef, Mundo & m, Imperio & I,  vector<Tecnologias* > & tecnologias) {
-//	ifstream dados(nomef);
-//	if (!dados.is_open()) {
-//		cout << "error abrir ficheiro: " << nomef << endl;
-//		return false;
-//	}
-//	string line;
-//	string comando;
-//
-//	// cria planicie 2
-//
-//	while (!dados.eof()) {
-//
-//		getline(dados, line);
-//		cout << line << endl;
-//
-//		istringstream iss(line);
-//		vector<string> comand_tokens;
-//
-//
-//		if (line == "") {
-//			cout << "error leitura: " << nomef;
-//			return false;
-//		}
-//
-//		copy(istream_iterator<string>(iss),
-//			istream_iterator<string>(),
-//			back_inserter(comand_tokens));
-//		vector<string> values;
-//		values.clear();
-//
-//		menuOpt opt =  Menu::ProcessaComando(values, faseTurno::Config,  comand_tokens);
-//		Menu::ExecutaComando(opt, values, m, I, tecnologias);
-//
-//	}
-//	dados.close();
-//
-//	return true;
-//
-//}

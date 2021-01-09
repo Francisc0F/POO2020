@@ -15,17 +15,24 @@
 #include "Castelo.h"
 #include "Refugio.h"
 #include "Pescaria.h"
-
+#include "App.h"
 
 
 //getters
 string Territorio::getAsString() const {
 	ostringstream oss;
-	oss << "nome: " << nome
+	oss << "N: ";
+	if (nome.size() < 5) {
+		oss  << nome << "\t";
+	}
+	else {
+		oss << nome;
+	}
+	
 		//<< "; resistencia: " << resistencia
-		<< "; nProdutos: " << nProdutos 
-		<< "; nOuro: " << nOuro <<
-		"; pontos: " << pontos;
+	oss	<< "\tP: [" << nProdutos << "]"
+		<< "\tO: [" << nProdutos << "]"
+		"\tPontos: " << pontos;
 	return oss.str();
 }
 
@@ -143,5 +150,12 @@ tipoTerritorio Territorio::validaTipoTerritorio(string tipo) {
 	}
 	else {
 		return tipoTerritorio::Invalido;
+	}
+}
+
+
+Territorio::~Territorio() {
+	if (App::debugMode) {
+		cout << "Destruiu TERRITORIO" << endl;
 	}
 }

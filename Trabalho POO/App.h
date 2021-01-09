@@ -10,9 +10,8 @@ class App
 {
 	int turnos;
 	int anos;
-	bool jogoTerminou;
 
-	static bool debugMode;
+
 
 	static vector<Tecnologias*> CreateTecnoList();
 	static vector<Tecnologias* > tecnologias;
@@ -28,6 +27,9 @@ class App
 	Imperio imperio;
 
 public:
+
+	const static bool debugMode;
+
 	App(string mode);
 
 	void Jogo();
@@ -68,5 +70,7 @@ public:
 
 	int ValidaGravacao(string nome);
 
-	void RelatorioFinal(bool ganhou);
+	int calculaPontuacaoFinal(bool * bonusCientifico, bool * bonusImperadorSupremo);
+
+	string RelatorioFinal(bool ganhou);
 };

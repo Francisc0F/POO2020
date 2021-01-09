@@ -9,7 +9,7 @@ class Mina : public Continente
 
 public:
 	Mina();
-	Mina(string nome, int resistencia, int nProdutos, int nOuro, int pontos);
+	Mina(string nome, int resistencia, int nProdutos, int nOuro);
 
 	Mina* clone() const;
 

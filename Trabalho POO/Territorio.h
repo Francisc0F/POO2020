@@ -67,8 +67,8 @@ public:
 
 	static Territorio* mapper(tipoTerritorio t);
 
-
-
 	static tipoTerritorio  validaTipoTerritorio(string tipo);
+
+	virtual ~Territorio();
 };
 

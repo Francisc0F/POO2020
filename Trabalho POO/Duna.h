@@ -10,7 +10,7 @@ class Duna : public Continente
 public:
 	Duna();
 	
-	Duna(string nome , int resistencia, int nProdutos , int nOuro , int pontos );
+	Duna(string nome , int resistencia, int nProdutos , int nOuro);
 
 	Duna* clone()const;
 

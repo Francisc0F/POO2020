@@ -22,13 +22,13 @@ class Imperio
 
 	int forcaMilitar, capacidadeForcaMilitar;
 
-	bool podeConquistarIlhas;
+	//bool podeConquistarIlhas;
 
-	bool armazensAumentados;
+	//bool armazensAumentados;
 
-	bool defesasTerritoriais;
+	//bool defesasTerritoriais;
 
-	bool trocasComerciais;
+	//bool trocasComerciais;
 
 	vector<Territorio *> conquistados;
 
@@ -59,6 +59,8 @@ public:
 
 	void RemoveUltimoConquistado();
 
+	vector<Tecnologias*>& getTecs();
+
 	void addT(Territorio* t);
 
 	string listaConquistados();
@@ -83,11 +85,11 @@ public:
 
 	bool temTec(tec n);
 
-	bool getTemDefesasTerritoriais();
-
 	void RecolherRecursos();
 
-	bool getTemtrocasComerciais();
+	//bool getTemDefesasTerritoriais();
+
+	//bool getTemtrocasComerciais();
 
 	vector<Territorio*>& getConquistados();
 	

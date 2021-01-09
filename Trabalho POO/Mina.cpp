@@ -20,12 +20,11 @@ Mina* Mina::clone() const {
 	return new Mina(*this);
 }
 
-Mina::Mina(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+Mina::Mina(string nome, int resistencia, int nProdutos, int nOuro) {
 	this->nome = nome;
 	this->resistencia = resistencia;
 	this->nProdutos = nProdutos;
 	this->nOuro = nOuro;
-	this->pontos = pontos;
 }
 
 tipoTerritorio Mina::getType()const {

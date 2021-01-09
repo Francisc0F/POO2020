@@ -22,6 +22,8 @@
 #include "Menu.h"
 #include "GameState.h"
 
+const bool App::debugMode = true;
+
 vector<Tecnologias*> App::CreateTecnoList()
 {
 	vector<Tecnologias*> v;
@@ -48,7 +50,6 @@ vector<Eventos* > App::eventos = CreateEventosList();
 App::App(string mode) {
 	turnos = 1;
 	anos = 1;
-	jogoTerminou = false;
 	faseAtual = faseTurno::Config;
 
 	srand((unsigned)time(0));
@@ -190,13 +191,19 @@ void App::Jogo() {
 		string acontecimento;
 		GerarEvento(acontecimento);
 		if (acontecimento == "InicialConquistado") {
-			cout << "Terreno inicial conquista numa invasao. Perdeu " << endl;
+			cout << "Terreno inicial conquistado numa invasao. Perdeu " << endl;
+			RelatorioFinal(false);
 			break;
 		}
 		fase = 0;
 		FaseSeguinte(&fase);
-
+		
 		TurnoSeguinte();
+		if(anos > 2){
+			cout << endl << RelatorioFinal(true);
+			break;
+		}
+		AtualizarProducoes();
 	}
 	/*if (opt == menuOpt::Invalido) {
 		cout << "apagar territorios" << endl;
@@ -212,20 +219,22 @@ void App::EventoAlianca() {
 void App::EventoInvasao( string & evento) {
 	Territorio* t = imperio.getUltimoConquistado();
 
-	int ataque = (rand() % 6) + 1;
+	int rnd = (rand() % 6) + 1;
 	int forcaAtaque = anos == 1 ? 2 : 3;
 
-	bool temDefesas = imperio.getTemDefesasTerritoriais();
+	bool temDefesas = imperio.temTec(tec::DefesasTerritoriais);
 
 	int resistencia = temDefesas ? t->getResistencia() + 1 : t->getResistencia();
 
-	cout << "ataque : " << (ataque + forcaAtaque) << " defesa: " << resistencia << endl;
+	cout << "Random: "<< rnd << " ataque : " << (rnd + forcaAtaque) << " defesa: " << resistencia << endl;
 
-	if ((ataque + forcaAtaque) >= resistencia) {
-		imperio.RemoveUltimoConquistado();
+	if ((rnd + forcaAtaque) >= resistencia) {
 		evento = "Conquistado";
+		cout << "Conquistou: "<< imperio.getUltimoConquistado()->getNome() << endl;
+		imperio.RemoveUltimoConquistado();
 		if (t->getType() == tipoTerritorio::Inicial) {
 			evento = "InicialConquistado";
+			cout << "Inicial Conquistado" << endl;
 		}
 	}
 	else {
@@ -280,22 +289,38 @@ void App::AtualizarProducoes(){
 	for (vector<Territorio*>::iterator it = t.begin(); it != t.end(); ++it) {
 		switch ((*it)->getType())
 		{
-		case tipoTerritorio::Planicie:
+		case tipoTerritorio::Planicie: {
 			if (anos > 1) {
 				(*it)->setnProdutos(2);
 			}
+			else {
+				(*it)->setnProdutos(1);
+			}
 			break;
-
-		case tipoTerritorio::Montanha:
-		/*	if (imperio.pesquisaTerritorio((*it)->getNome()) > -1) {
-				Montanha* m = (*it);
-				
-			}*/
+		}
+		case tipoTerritorio::Montanha: {
+			if (imperio.pesquisaTerritorio((*it)->getNome()) > -1) {
+				Montanha* m = dynamic_cast<Montanha *>(*it);
+				m->addTurno();
+				if (m->getTurnosAposConquista() < 3) {
+					(*it)->setnProdutos(0);
+				}
+				else {
+					(*it)->setnProdutos(1);
+				}
+			}
+			else {
+				(*it)->setnProdutos(0);
+			}
 
 			break;
+		}
 		case tipoTerritorio::Castelo:
 			if (turnos <= 2) {
-				(*it)->setnProdutos(2);
+				(*it)->setnProdutos(3);
+			}
+			else {
+				(*it)->setnProdutos(0);
 			}
 			break;
 		//case tipoTerritorio::Duna:
@@ -418,7 +443,7 @@ bool App::ExecutaComando(menuOpt opt, vector<string>& menuValues) {
 
 	case menuOpt::Lista: {
 		if (menuValues.empty()) {
-			//mundo.listaTerritorios();
+			cout << mundo;
 			cout << imperio;
 		}
 		else {
@@ -644,13 +669,52 @@ void App::Carrega(string fich) {
 	cout << "-------------------------------------------" << endl;
 }
 
-void App::RelatorioFinal(bool ganhou) {
+
+
+int App::calculaPontuacaoFinal(bool* bonusCientifico, bool* bonusImperadorSupremo) {
 	int pontos = 0;
+	for (auto t : imperio.getConquistados()) {
+		pontos += t->getpontos();
+	}
+	pontos += imperio.getTecs().size();
+	if (imperio.getTecs().size() == 5) {
+		pontos++;
+		*bonusCientifico = true;
+	}
+
+	if (imperio.getConquistados().size() == mundo.getTerritorios().size()) {
+		pontos+= 3;
+		*bonusImperadorSupremo = true;
+	}
+
+	return pontos;
+}
+
+
+
+
+string App::RelatorioFinal(bool ganhou) {
+	ostringstream oss;
+	int pontos = 0;
+	bool bonusCientifico = false;
+	bool bonusImperadorSupremo = false;
+	oss << "------------------------------------------------------------" << endl;
 	if (ganhou) {
-		cout << "\t\tGANHOU! " << endl;
+		oss << "\t\tGANHOU! " << endl;
 	}
 	else {
-		cout << "\t\tPERDEU! " << endl;
+		oss << "\t\tPERDEU! " << endl;
 	}
-	cout << "Pontos: " << pontos << endl;
+	pontos = calculaPontuacaoFinal(&bonusCientifico, &bonusImperadorSupremo);
+
+	if (bonusCientifico) {
+		oss << "- Bonus Cientifico -" << endl;
+	}
+
+	if (bonusImperadorSupremo) {
+		oss << "- Bonus Imperador Supremo -" << endl;
+	}
+	oss << "Pontos: " << pontos << endl;
+	oss << "------------------------------------------------------------" << endl;
+	return oss.str();
 }

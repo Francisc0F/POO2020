@@ -20,12 +20,11 @@ Duna* Duna::clone() const {
 	return new Duna(*this);
 }
 
-Duna::Duna(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+Duna::Duna(string nome, int resistencia, int nProdutos, int nOuro) {
 	this->nome = nome;
 	this->resistencia = resistencia;
 	this->nProdutos = nProdutos;
 	this->nOuro = nOuro;
-	this->pontos = pontos;
 }
 
 tipoTerritorio Duna::getType()const {

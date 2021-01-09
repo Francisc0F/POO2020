@@ -21,12 +21,11 @@ Montanha* Montanha::clone() const {
 }
 
 
-Montanha::Montanha(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+Montanha::Montanha(string nome, int resistencia, int nProdutos, int nOuro) {
 	this->nome = nome;
 	this->resistencia = resistencia;
 	this->nProdutos = nProdutos;
 	this->nOuro = nOuro;
-	this->pontos = pontos;
 }
 
 void Montanha::addTurno() {
@@ -35,4 +34,10 @@ void Montanha::addTurno() {
 
 tipoTerritorio Montanha::getType()const {
 	return tipoTerritorio::Montanha;
+}
+\
+
+
+int Montanha::getTurnosAposConquista() {
+	return turnosAposConquista;
 }

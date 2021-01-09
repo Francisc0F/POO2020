@@ -1,22 +1,27 @@
 #include "Imperio.h"
 #include "Territorio.h"
+#include "Tecnologias.h"
+#include "App.h"
 
 using namespace std;
 
 
-Imperio::Imperio() :forcaMilitar(0), capacidadeForcaMilitar(3), armazensAumentados(false),
-podeConquistarIlhas(false), defesasTerritoriais(false) {
-	cout << "Construiu Imperio" << endl;
+Imperio::Imperio() :forcaMilitar(0), capacidadeForcaMilitar(3)/*, armazensAumentados(false),
+podeConquistarIlhas(false), defesasTerritoriais(false)*/ {
+	if (App::debugMode) {
+		cout << "Construiu IMPERIO" << endl;
+	}
+	
 }
 
 
-bool Imperio::getTemtrocasComerciais() {
-	return trocasComerciais;
-}
-
-bool Imperio::getTemDefesasTerritoriais() {
-	return defesasTerritoriais;
-}
+//bool Imperio::getTemtrocasComerciais() {
+//	return trocasComerciais;
+//}
+//
+//bool Imperio::getTemDefesasTerritoriais() {
+//	return defesasTerritoriais;
+//}
 
 
 vector<Territorio*>& Imperio::getConquistados() {
@@ -122,7 +127,7 @@ string Imperio::listaConquistados()   {
 		return oss.str();
 	}
 	for (ptr = conquistados.begin(); ptr < conquistados.end(); ptr++) {
-		oss << endl <<(*ptr)->getAsString() << endl;
+		oss <<(*ptr)->getAsString() << endl;
 	}
 	return oss.str();
 }
@@ -139,7 +144,7 @@ int Imperio::pesquisaTerritorio(string nome)const {
 
 bool Imperio::conquistaTerritorio(Territorio * t) {
 	
-	if (t->getCategoria() == categoria::Ilha && !podeConquistarIlhas) {
+	if (t->getCategoria() == categoria::Ilha && temTec(tec::MisseisTeleguiados)) {
 		cout << "Necessita tec Misseis para conquistar este territorio." << endl;
 		return false;
 	}
@@ -214,6 +219,10 @@ bool Imperio::maisMilitar() {
 	return false;
 }
 
+vector<Tecnologias*>& Imperio::getTecs() {
+	return tecnologias;
+}
+
 bool Imperio::comprarTec(tec t, Tecnologias* pt){
 	for (size_t i = 0; i < tecnologias.size(); i++)
 	{
@@ -236,19 +245,19 @@ void Imperio::addTec(Tecnologias* pt) {
 	switch (pt->getType())
 	{
 	case tec::BancoCentral:
-		armazensAumentados = true;
+		//armazensAumentados = true;
 		Cofre.setQuantidadeMax(5);
 		Produtos.setQuantidadeMax(5);
 		break;
-	case tec::BolsaDeValores:
-		trocasComerciais = true;
-		break;
-	case tec::DefesasTerritoriais:
-		defesasTerritoriais = true;
-		break;
-	case tec::MisseisTeleguiados:
-		podeConquistarIlhas = true;
-		break;
+	//case tec::BolsaDeValores:
+	//	trocasComerciais = true;
+	//	break;
+	//case tec::DefesasTerritoriais:
+	//	defesasTerritoriais = true;
+	//	break;
+	//case tec::MisseisTeleguiados:
+	//	podeConquistarIlhas = true;
+	//	break;
 	case tec::DronesMilitares:
 		setCapacidadeForcaMilitar(5);
 		break;

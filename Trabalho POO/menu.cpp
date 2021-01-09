@@ -15,7 +15,9 @@ using namespace std;
 string Menu::mode;
 
 Menu::Menu() {
-	cout << "Construiu Menu" << endl;
+	if (App::debugMode) {
+		cout << "Construiu MENU" << endl;
+	}
 }
 Menu::Menu(string mode) {
 	Menu::mode = mode;
@@ -326,14 +328,14 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 	case faseTurno::Recolha:
 		// adicionar recursos
 		if (Menu::isModeTest()) {
-			if (I.getTemtrocasComerciais()) {
+			if (I.temTec(tec::BolsaDeValores)) {
 				cout << "maisprod" << endl;
 				cout << "maisouro" << endl;
 			}
 
 		}
 		else {
-			if (I.getTemtrocasComerciais()) {
+			if (I.temTec(tec::BolsaDeValores)) {
 				cout << "Obter mais produtos ->  maisprod" << endl;
 				cout << "Obter mais ouro ->  maisouro" << endl;
 			}

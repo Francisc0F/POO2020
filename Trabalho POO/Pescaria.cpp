@@ -20,12 +20,11 @@ Pescaria* Pescaria::clone() const {
 	return new Pescaria(*this);
 }
 
-Pescaria::Pescaria(string nome, int resistencia, int nProdutos, int nOuro, int pontos) {
+Pescaria::Pescaria(string nome, int resistencia, int nProdutos, int nOuro) {
 	this->nome = nome;
 	this->resistencia = resistencia;
 	this->nProdutos = nProdutos;
 	this->nOuro = nOuro;
-	this->pontos = pontos;
 }
 
 tipoTerritorio Pescaria::getType()const {
