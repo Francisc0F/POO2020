@@ -22,7 +22,7 @@
 #include "Menu.h"
 #include "GameState.h"
 
-const bool App::debugMode = true;
+const bool App::debugMode = false;
 
 vector<Tecnologias*> App::CreateTecnoList()
 {
@@ -55,7 +55,8 @@ App::App(string mode) {
 	srand((unsigned)time(0));
 
 	Territorio* inicial = new TerritorioInicial();
-	Menu::mode = "test";
+	//Menu::mode = "test";
+	Menu::mode = "x";
 	mundo.adicionarTerritorio(inicial);
 	imperio.addT(inicial);
 }
@@ -205,11 +206,6 @@ void App::Jogo() {
 		}
 		AtualizarProducoes();
 	}
-	/*if (opt == menuOpt::Invalido) {
-		cout << "apagar territorios" << endl;
-		m.~Mundo();
-		I.~Imperio();
-	}*/
 }
 
 void App::EventoAlianca() {

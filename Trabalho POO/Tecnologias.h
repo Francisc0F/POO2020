@@ -18,6 +18,7 @@ protected:
 	int custo;
 public:
 	virtual tec getType()const = 0;
+
 	virtual string getDescricao()const = 0;
 
 	tec static tecValida(string n);

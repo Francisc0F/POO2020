@@ -5,7 +5,8 @@ class BolsaDeValores : public Tecnologias
 public:
 	BolsaDeValores();
 
-	tec getType() const;
-	string getDescricao()const;
+	virtual string getDescricao() const;
+
+	virtual tec getType() const;
 };
 

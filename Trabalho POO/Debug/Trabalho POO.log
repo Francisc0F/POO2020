@@ -1,5 +1,25 @@
-﻿  Mundo.cpp
+﻿  App.cpp
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(406,32): warning C4101: 'e': unreferenced local variable
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(547,32): warning C4101: 'e': unreferenced local variable
+  BancoCentral.cpp
+  BolsaDeValores.cpp
+  DefesasTerritoriais.cpp
+  DronesMilitares.cpp
+  Duna.cpp
+  GameState.cpp
+  Imperio.cpp
+  Menu.cpp
+  Mina.cpp
+  MisseisTeleguiados.cpp
+  Mundo.cpp
 C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Mundo.cpp(33,20): warning C4018: '<': signed/unsigned mismatch
+  Pescaria.cpp
+  Planicie.cpp
+  Refugio.cpp
+  Tecnologias.cpp
   Territorio.cpp
+  Trabalho POO.cpp
   Generating Code...
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\Menu.cpp(266): warning C4715: 'Menu::ProcessaComando': not all control paths return a value
+C:\Users\Francisco\source\repos\Trabalho POO\Trabalho POO\App.cpp(641): warning C4715: 'App::ExecutaComando': not all control paths return a value
   Trabalho POO.vcxproj -> C:\Users\Francisco\source\repos\Trabalho POO\Debug\Trabalho POO.exe

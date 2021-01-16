@@ -31,7 +31,6 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 	vector<string>::iterator ptr;
 
 	for (ptr = comand_tokens.begin(); ptr < comand_tokens.end(); ptr++) {
-		//cout << "elem: " << *ptr << endl;
 		if (*ptr == "x") {
 			return menuOpt::Terminar;
 		}
@@ -154,9 +153,7 @@ menuOpt Menu::ProcessaComando(vector<string>& values, faseTurno fase, vector<str
 				return menuOpt::Lista;
 			}
 		}
-		//else if (*ptr == "avancaFase") {
-		//	return menuOpt::AvancarFase;
-		//}
+	
 		else if (*ptr == "avanca") {
 			return menuOpt::Avanca;
 		}
@@ -371,7 +368,6 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "modifica <ouro|prod> N " << endl;
 		cout << "fevento <nome-evento>" << endl;
 		cout << "avanca" << endl;
-		cout << "avancarTurno" << endl;
 	}
 	else {
 
@@ -387,7 +383,6 @@ menuOpt Menu::RecebeComandosJogo(vector<string>& values, faseTurno fase, Imperio
 		cout << "--------------------------------------------" << endl;
 
 		cout << "Proxima fase ->  avanca" << endl;
-		cout << "Turno seguinte ->  avancarTurno" << endl;
 		cout << "fevento <nome-evento>" << endl;
 
 		cout << "Sair -> x" << endl;

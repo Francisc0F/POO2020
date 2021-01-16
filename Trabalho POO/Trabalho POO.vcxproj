@@ -168,7 +168,6 @@
     <ClCompile Include="Imperio.cpp" />
     <ClCompile Include="Invasao.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Militar.cpp" />
     <ClCompile Include="Mina.cpp" />
     <ClCompile Include="MisseisTeleguiados.cpp" />
     <ClCompile Include="Montanha.cpp" />
@@ -200,7 +199,6 @@
     <ClInclude Include="Imperio.h" />
     <ClInclude Include="Invasao.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="Militar.h" />
     <ClInclude Include="Mina.h" />
     <ClInclude Include="MisseisTeleguiados.h" />
     <ClInclude Include="Montanha.h" />

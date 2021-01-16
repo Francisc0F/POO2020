@@ -19,8 +19,6 @@ Refugio::Refugio() {
 }
 
 
-
-
 Refugio* Refugio::clone() const {
 	return new Refugio(*this);
 }
